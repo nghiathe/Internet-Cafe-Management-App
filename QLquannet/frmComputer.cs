@@ -16,45 +16,73 @@ namespace QLquannet
     {
         #region ---------- Code cua HungTuLenh 
         Computer com = new Computer();
-        byte zid;
+        byte cid;
         public frmComputer()
         {
             InitializeComponent();
+            LoadZone(1);
 
         }
 
+        #region Event
         private void btnZone1_Click(object sender, EventArgs e)
         {
             LoadZone(1);
-            lblZone.Text = "Zone1";
-            ComputerZone.zoneId = 1;
+
         }
 
         private void btnZone2_Click(object sender, EventArgs e)
         {
             LoadZone(2);
-            lblZone.Text = "Zone2";
-            ComputerZone.zoneId = 2;
 
         }
 
         private void btnZone3_Click(object sender, EventArgs e)
         {
             LoadZone(3);
-            lblZone.Text = "Zone3";
-            ComputerZone.zoneId = 3;
 
         }
 
         private void btnZone4_Click(object sender, EventArgs e)
         {
             LoadZone(4);
-            lblZone.Text = "Zone4";
-            ComputerZone.zoneId = 4;
 
         }
 
-        void LoadZone(byte zoneid )
+        private void btn_Click(object sender, EventArgs e)
+        {
+            LoadZone(ComputerZone.zoneId);
+
+            cid = ((sender as Button).Tag as Computer).ComId;
+            LoadUsageSession(cid);
+            LoadFoodDetail(cid);
+
+        }
+
+        private void btnBatmay_Click(object sender, EventArgs e)
+        {
+            if (txtTT.Text == "Online")
+            {
+                MessageBox.Show("Máy đang online!");
+            }
+            else if (txtTT.Text == "Error")
+            {
+                MessageBox.Show("Máy đang bảo trì!");
+            }
+            else if (gbMay.Text == "")
+            {
+                MessageBox.Show("Chưa chọn máy!");
+            }
+            else
+            {
+                ComputerDAL.Instance.Online(cid);
+                LoadZone(ComputerZone.zoneId);
+            }
+        }
+        #endregion
+
+        #region Method
+        void LoadZone(byte zoneid)
         {
             flpCom.Controls.Clear();
             List<Computer> listCom = ComputerDAL.Instance.loadCom(zoneid);
@@ -90,24 +118,34 @@ namespace QLquannet
                         btn.Text = com.ComName + Environment.NewLine + "Error";
                         break;*/
                 }
-                
+
+                gbZone.Text = com.ZoneName;
+                txtPrice.Text = com.PricePh.ToString();
                 txtAvailable.Text = offline.ToString();
                 txtUsing.Text = online.ToString();
-                flpCom.Controls.Add(btn);
+                txtCPU.Text = com.CpuModel;
+                txtGPU.Text = com.Gpumodel;
+                txtHDD.Text = com.HddModel;
+                txtSSD.Text = com.SsdModel;
+                txtMouse.Text = com.MouseModel;
+                txtKey.Text = com.KeyboardModel;
+                txtMonitor.Text = com.MonitorModel;
 
+                ComputerZone.zoneId = zoneid;
+
+                flpCom.Controls.Add(btn);
+                
             }
         }
-        private void btn_Click(object sender, EventArgs e)
+        
+        void LoadUsageSession(byte comid)
         {
-            LoadZone(ComputerZone.zoneId);
-            Button btn = (Button)sender;
-            Computer com = btn.Tag as Computer;
+            UsageSession us = UsageSessionDAL.Instance.GetUsageSessionDetails(comid);
 
-            gbMay.Text = com.ComName;
-            txtPrice.Text = com.PricePh.ToString();
-            if (com.STime.HasValue)
+            gbMay.Text = us.ComName;
+            if (us.STime.HasValue)
             {
-                tpStime.Value = com.STime.Value;
+                tpStime.Value = us.STime.Value;
             }
             else
             {
@@ -119,12 +157,10 @@ namespace QLquannet
 
             int hours = int.Parse(formatDuration.Split(':')[0]);
             int minutes = int.Parse(formatDuration.Split(':')[1]);
-            decimal tamTinh = (hours + (minutes / 60.0m)) * com.PricePh;
-
+            decimal tamTinh = (hours + (minutes / 60.0m)) * decimal.Parse(txtPrice.Text);
             txtTamtinh.Text = Math.Round(tamTinh, 2).ToString();
 
-            zid = com.ComId;
-            if(com.ComStatus == 0)
+            if (us.ComStatus == 0)
             {
                 txtTT.Text = "Offline";
             }
@@ -132,28 +168,25 @@ namespace QLquannet
             {
                 txtTT.Text = "Online";
             }
-
         }
-        private void btnBatmay_Click(object sender, EventArgs e)
+        void LoadFoodDetail(byte comid)
         {
-            if (txtTT.Text == "Online")
+            lvFood.Items.Clear();
+            List<FoodPerCom> fl = FoodPerComDAL.Instance.GetFoodDetail(comid);
+            decimal fcost = 0m;
+            foreach (FoodPerCom f in fl)
             {
-                MessageBox.Show("Máy đang online!");
+                ListViewItem lvi = new ListViewItem(f.FoodName.ToString());
+                lvi.SubItems.Add(f.Count.ToString());
+                lvi.SubItems.Add(f.Price.ToString());
+                lvi.SubItems.Add(f.Cost.ToString());
+                fcost += f.Cost;
+                lvFood.Items.Add(lvi);
             }
-            else if (txtTT.Text == "Error")
-            {
-                MessageBox.Show("Máy đang bảo trì!");
-            }
-            else if (gbMay.Text == "")
-            {
-                MessageBox.Show("Chưa chọn máy!");
-            }
-            else
-            {
-                ComputerDAL.Instance.Online(zid);
-                LoadZone(ComputerZone.zoneId);
-            }
+            txtFcost.Text = fcost.ToString();
         }
+        #endregion
+
         #endregion
 
     }
