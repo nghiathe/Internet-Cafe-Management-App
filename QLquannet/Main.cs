@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +27,12 @@ namespace QLquannet
 
         private void Main_Load(object sender, EventArgs e)
         {
+            //string imagePath = "C:\\Users\\theng\\Downloads\\imgbtl\\banhmiruoc.jpg"; // Đường dẫn tới tệp ảnh
+            //byte[] imageBytes = ImageToByteArray(imagePath);
 
+            //SaveImageToDatabase("Bánh mì ruốc", 10000, 6000, 200, 3, imageBytes);
+
+            Console.WriteLine("Image saved to database successfully.");
         }
         private void loadform(object Form)
         {
@@ -85,6 +93,41 @@ namespace QLquannet
             pnlMain.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
+        }
+
+        public static byte[] ImageToByteArray(string imagePath)
+        {
+            using (Image image = Image.FromFile(imagePath))
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    image.Save(ms, ImageFormat.Jpeg); 
+                    return ms.ToArray();
+                }
+            }
+        }
+        public static void SaveImageToDatabase(string productName, decimal productPrice, decimal productIntakePrice, int Inventory, int CategoryID,  byte[] imageBytes)
+        {
+            string connectionString = "Data Source=DESKTOP-N234E7R\\SQLEXPRESS01;Initial Catalog=Qlquannet;Integrated Security=True";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "INSERT INTO Food (FoodName, Price, IntakePrice, Inventory, CategoryID, Image) VALUES (@Name, @Price, @IntakePrice, @Inventory, @CategoryID, @Image)";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+               
+                    cmd.Parameters.AddWithValue("@Name", productName);
+                    cmd.Parameters.AddWithValue("@Price", productPrice);
+                    cmd.Parameters.AddWithValue("@IntakePrice", productIntakePrice);
+                    cmd.Parameters.AddWithValue("@Inventory", Inventory);
+                    cmd.Parameters.AddWithValue("@CategoryID", CategoryID);
+                    cmd.Parameters.AddWithValue("@Image", imageBytes);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

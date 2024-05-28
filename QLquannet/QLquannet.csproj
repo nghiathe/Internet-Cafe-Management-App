@@ -102,6 +102,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ucProduct.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucProduct.Designer.cs">
+      <DependentUpon>ucProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Zone1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,6 +148,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ucProduct.resx">
+      <DependentUpon>ucProduct.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Zone1.resx">
       <DependentUpon>Zone1.cs</DependentUpon>
     </EmbeddedResource>
@@ -218,6 +227,18 @@
       <Project>{86d1afe9-33db-4fb0-be07-92fb56f83396}</Project>
       <Name>DTO</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\combinhdan.jpg" />
+    <Content Include="Resources\comga.jpg" />
+    <Content Include="Resources\comrang.jpg" />
+    <Content Include="Resources\comtron.jpg" />
+    <Content Include="Resources\mitom.jpg" />
+    <Content Include="Resources\mixao.jpg" />
+    <Content Include="Resources\phobo.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
