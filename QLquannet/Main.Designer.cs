@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.panel1 = new System.Windows.Forms.Panel();
             this.pnlStatus = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -38,6 +39,7 @@
             this.btnFood = new System.Windows.Forms.Button();
             this.btnComputer = new System.Windows.Forms.Button();
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.pnlMenubar.SuspendLayout();
             this.SuspendLayout();
@@ -83,6 +85,7 @@
             // pnlMenubar
             // 
             this.pnlMenubar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
+            this.pnlMenubar.Controls.Add(this.button1);
             this.pnlMenubar.Controls.Add(this.bthLogout);
             this.pnlMenubar.Controls.Add(this.btnBill);
             this.pnlMenubar.Controls.Add(this.btnFood);
@@ -99,9 +102,11 @@
             this.bthLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bthLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bthLogout.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.bthLogout.Location = new System.Drawing.Point(0, 578);
+            this.bthLogout.Image = ((System.Drawing.Image)(resources.GetObject("bthLogout.Image")));
+            this.bthLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bthLogout.Location = new System.Drawing.Point(0, 568);
             this.bthLogout.Name = "bthLogout";
-            this.bthLogout.Size = new System.Drawing.Size(128, 40);
+            this.bthLogout.Size = new System.Drawing.Size(128, 50);
             this.bthLogout.TabIndex = 3;
             this.bthLogout.Text = "Đăng xuất";
             this.bthLogout.UseVisualStyleBackColor = true;
@@ -113,13 +118,13 @@
             this.btnBill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBill.ForeColor = System.Drawing.Color.White;
-            this.btnBill.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBill.Location = new System.Drawing.Point(0, 320);
+            this.btnBill.Image = ((System.Drawing.Image)(resources.GetObject("btnBill.Image")));
+            this.btnBill.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBill.Location = new System.Drawing.Point(0, 281);
             this.btnBill.Name = "btnBill";
-            this.btnBill.Size = new System.Drawing.Size(128, 40);
+            this.btnBill.Size = new System.Drawing.Size(128, 50);
             this.btnBill.TabIndex = 2;
             this.btnBill.Text = "Hóa đơn";
-            this.btnBill.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnBill.UseVisualStyleBackColor = true;
             this.btnBill.Click += new System.EventHandler(this.btnBill_Click);
             // 
@@ -129,13 +134,13 @@
             this.btnFood.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFood.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFood.ForeColor = System.Drawing.Color.White;
-            this.btnFood.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnFood.Location = new System.Drawing.Point(0, 232);
+            this.btnFood.Image = ((System.Drawing.Image)(resources.GetObject("btnFood.Image")));
+            this.btnFood.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnFood.Location = new System.Drawing.Point(0, 191);
             this.btnFood.Name = "btnFood";
-            this.btnFood.Size = new System.Drawing.Size(128, 40);
+            this.btnFood.Size = new System.Drawing.Size(128, 50);
             this.btnFood.TabIndex = 1;
-            this.btnFood.Text = "Thục đơn";
-            this.btnFood.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnFood.Text = "Thực đơn";
             this.btnFood.UseVisualStyleBackColor = true;
             this.btnFood.Click += new System.EventHandler(this.btnFood_Click);
             // 
@@ -145,13 +150,13 @@
             this.btnComputer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnComputer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnComputer.ForeColor = System.Drawing.Color.White;
-            this.btnComputer.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnComputer.Location = new System.Drawing.Point(0, 140);
+            this.btnComputer.Image = ((System.Drawing.Image)(resources.GetObject("btnComputer.Image")));
+            this.btnComputer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnComputer.Location = new System.Drawing.Point(0, 101);
             this.btnComputer.Name = "btnComputer";
-            this.btnComputer.Size = new System.Drawing.Size(128, 40);
+            this.btnComputer.Size = new System.Drawing.Size(128, 50);
             this.btnComputer.TabIndex = 0;
             this.btnComputer.Text = "Đặt máy";
-            this.btnComputer.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnComputer.UseVisualStyleBackColor = true;
             this.btnComputer.Click += new System.EventHandler(this.btnComputer_Click);
             // 
@@ -162,6 +167,21 @@
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Size = new System.Drawing.Size(1065, 618);
             this.pnlMain.TabIndex = 4;
+            // 
+            // button1
+            // 
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(0, 371);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(128, 50);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Bảo trì";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
@@ -186,7 +206,6 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel pnlMenubar;
-        private System.Windows.Forms.Button btnComputer;
         private System.Windows.Forms.Button btnFood;
         private System.Windows.Forms.Button btnBill;
         private System.Windows.Forms.Button bthLogout;
@@ -194,5 +213,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel pnlStatus;
         private System.Windows.Forms.Panel pnlMain;
+        private System.Windows.Forms.Button btnComputer;
+        private System.Windows.Forms.Button button1;
     }
 }

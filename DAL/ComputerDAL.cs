@@ -34,7 +34,7 @@ namespace DAL
         public List<Computer> loadCom(byte zoneid)
         {
             List<Computer> lc = new List<Computer>();
-            string query = "GetComputerUsageByZoneID @zoneid";
+            string query = "GetComputerDetailsByZone @zoneid";
             DataTable dt = Database.Instance.ExecuteQuery(query , new object[] {zoneid});
             foreach (DataRow dr in dt.Rows)
             {
