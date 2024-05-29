@@ -1,6 +1,6 @@
 ﻿namespace QLquannet
 {
-    partial class frmHoaDon
+    partial class frmBilling
     {
         /// <summary>
         /// Required designer variable.
@@ -35,7 +35,6 @@
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.txtOut = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -59,7 +58,6 @@
             this.columnHeader4,
             this.columnHeader5,
             this.columnHeader6,
-            this.columnHeader7,
             this.columnHeader8});
             this.lvBill.HideSelection = false;
             this.lvBill.Location = new System.Drawing.Point(0, 0);
@@ -72,7 +70,7 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Billing Date";
-            this.columnHeader1.Width = 133;
+            this.columnHeader1.Width = 146;
             // 
             // columnHeader2
             // 
@@ -87,22 +85,17 @@
             // columnHeader4
             // 
             this.columnHeader4.Text = "Sesion Cost";
-            this.columnHeader4.Width = 63;
+            this.columnHeader4.Width = 80;
             // 
             // columnHeader5
             // 
             this.columnHeader5.Text = "Maintaining Fee";
-            this.columnHeader5.Width = 83;
+            this.columnHeader5.Width = 102;
             // 
             // columnHeader6
             // 
             this.columnHeader6.Text = "Food Value";
             this.columnHeader6.Width = 69;
-            // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "Drink Value";
-            this.columnHeader7.Width = 65;
             // 
             // columnHeader8
             // 
@@ -266,7 +259,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
-        private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.ColumnHeader columnHeader8;
         private System.Windows.Forms.TextBox txtOut;
         private System.Windows.Forms.Label label5;

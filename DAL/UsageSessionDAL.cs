@@ -34,5 +34,26 @@ namespace DAL
             return new UsageSession(row);
 
         }
+        public int GetUnCheckOutSession(byte comid)
+        {
+            DataTable dt = Database.Instance.ExecuteQuery("GetUnCheckOutSession @comid", new object[] { comid });
+            if (dt.Rows.Count > 0)
+            {
+                UsageSession us = new UsageSession(dt.Rows[0]);
+                return us.BillId;
+            }
+            return -1;
+        }
+        public void StartSession(byte comId)
+        {
+            Database.Instance.ExecuteNonQuery("ProcBillingINIT @Billingtype", new object[] { 1 });
+            Database.Instance.ExecuteNonQuery("ProcUsageSessionINIT @ComputerID", new object[] { comId });
+
+        }        
+        public void EndSesion(int billid)
+        {
+            string query = string.Format("ProcEndSession @billingid ");
+            Database.Instance.ExecuteNonQuery(query, new object[] { billid });
+        }
     }
 }
