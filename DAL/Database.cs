@@ -8,18 +8,11 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class Database
+    class Database
     {
-        //SQL Connection
-        public class SqlConnectionData
-        {
-            public static SqlConnection Connect()
-            {
-                string Strconn = "Data Source=DESKTOP-N234E7R\\SQLEXPRESS01;Initial Catalog=QuanNet;Integrated Security=True;Encrypt=True";
-                SqlConnection conn = new SqlConnection(Strconn);
-                return conn;
-            }
-        }
+         //public static readonly string Strconn = "Data Source=DESKTOP-N234E7R\\SQLEXPRESS01;Initial Catalog=Qlquannet;Integrated Security=True";
+         //public static SqlConnection conn = new SqlConnection(Strconn);
+         
 
         #region ---------- Code cua HungTuLenh 
         private static Database instance;
