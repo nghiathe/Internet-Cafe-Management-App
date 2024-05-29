@@ -45,12 +45,7 @@ namespace DAL
             return lc;
         }
 
-        public void Online(byte comId)
-        {
-            Database.Instance.ExecuteNonQuery("ProcBillingINIT @Billingtype", new object[] {1});
-            Database.Instance.ExecuteNonQuery("ProcUsageSessionINIT @ComputerID", new object[] { comId });
-
-        }
+        
         #endregion
     }
 }
