@@ -10,7 +10,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace QLquannet
 {
@@ -78,6 +77,7 @@ namespace QLquannet
             else
             {
                 UsageSessionDAL.Instance.StartSession(cid);
+                LoadUsageSession(cid);
                 LoadZone(ComputerZone.zoneId);
             }
         }
@@ -134,12 +134,14 @@ namespace QLquannet
                 switch (com.ComStatus)
                 {
                     case 0:
+                        btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(200, 200, 100);
                         btn.BackColor = Color.LightGray;
                         btn.Text = com.ComName + Environment.NewLine + "Offline";
                         offline++;
                         break;
                         
                     case 1:
+                        btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(100, 228, 178);
                         btn.BackColor = Color.Aqua;
                         btn.Text = com.ComName + Environment.NewLine + "Online";
                         online++;
