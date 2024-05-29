@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace QLquannet
 {
@@ -18,6 +18,7 @@ namespace QLquannet
         #region ---------- Code cua HungTuLenh 
 
         byte cid;
+        int bid;
         public frmComputer()
         {
             InitializeComponent();
@@ -36,14 +37,12 @@ namespace QLquannet
         {
             LoadZone(2);
             ChangeColorZoneBtn(btnZone2, null);
-
         }
 
         private void btnZone3_Click(object sender, EventArgs e)
         {
             LoadZone(3);
             ChangeColorZoneBtn(btnZone3, null);
-
         }
 
         private void btnZone4_Click(object sender, EventArgs e)
@@ -61,7 +60,6 @@ namespace QLquannet
             LoadFoodDetail(cid);
 
         }
-
         private void btnBatmay_Click(object sender, EventArgs e)
         {
             if (txtTT.Text == "Online")
@@ -78,8 +76,35 @@ namespace QLquannet
             }
             else
             {
-                ComputerDAL.Instance.Online(cid);
+                UsageSessionDAL.Instance.StartSession(cid);
+                LoadUsageSession(cid);
                 LoadZone(ComputerZone.zoneId);
+            }
+        }
+        private void btnThanhtoan_Click(object sender, EventArgs e)
+        {
+            int billid = UsageSessionDAL.Instance.GetUnCheckOutSession(cid); 
+            if (txtTT.Text == "Offline")
+            {
+                MessageBox.Show(gbMay.Text + " đang offline!");
+            }
+            else if (gbMay.Text == "")
+            {
+                MessageBox.Show("Chưa chọn máy!");
+            }
+            else
+            {
+                if (billid != -1)
+                {   
+                    UsageSessionDAL.Instance.EndSesion(billid);
+                    BillingDAL.Instance.CheckOut(billid, 1);
+                    LoadZone(ComputerZone.zoneId);
+                    MessageBox.Show("Thanh toán thành công cho " + gbMay.Text);
+                    LoadUsageSession(cid);
+                    LoadFoodDetail(cid);
+
+                }
+                
             }
         }
         #endregion
@@ -109,12 +134,14 @@ namespace QLquannet
                 switch (com.ComStatus)
                 {
                     case 0:
+                        btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(200, 200, 100);
                         btn.BackColor = Color.LightGray;
                         btn.Text = com.ComName + Environment.NewLine + "Offline";
                         offline++;
                         break;
                         
                     case 1:
+                        btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(100, 228, 178);
                         btn.BackColor = Color.Aqua;
                         btn.Text = com.ComName + Environment.NewLine + "Online";
                         online++;
@@ -140,7 +167,57 @@ namespace QLquannet
 
             }
         }
-        
+        void LoadUsageSession(byte comid)
+        {
+            UsageSession us = UsageSessionDAL.Instance.GetUsageSessionDetails(comid);
+
+            gbMay.Text = us.ComName;
+            if (us.STime.HasValue)
+            {
+                tpStime.Value = us.STime.Value;
+            }
+            else
+            {
+                tpStime.Value = DateTime.Now;
+            }
+            TimeSpan duration = DateTime.Now - tpStime.Value;
+            string formatDuration = string.Format("{0:D2}:{1:D2}", (int)duration.TotalHours, duration.Minutes);
+            txtTime.Text = formatDuration;
+
+            int hours = int.Parse(formatDuration.Split(':')[0]);
+            int minutes = int.Parse(formatDuration.Split(':')[1]);
+            decimal tamTinh = (hours + (minutes / 60.0m)) * decimal.Parse(txtPrice.Text);
+            txtTamtinh.Text = Math.Round(tamTinh, 2).ToString();
+
+            if (us.ComStatus == 0)
+            {
+                txtTT.Text = "Offline";
+            }
+            else
+            {
+                txtTT.Text = "Online";
+            }
+            bid = us.BillId;
+        }
+        void LoadFoodDetail(byte comid)
+        {
+            lvFood.Items.Clear();
+            List<FoodPerCom> fl = FoodPerComDAL.Instance.GetFoodDetail(comid);
+            decimal fcost = 0m;
+            foreach (FoodPerCom f in fl)
+            {
+                ListViewItem lvi = new ListViewItem(f.FoodName.ToString());
+                lvi.SubItems.Add(f.Price.ToString());
+                lvi.SubItems.Add(f.Count.ToString());
+                lvi.SubItems.Add(f.Cost.ToString());
+
+                fcost += f.Cost;
+                lvFood.Items.Add(lvi);
+            }
+            txtFcost.Text = fcost.ToString();
+            CultureInfo ct = new CultureInfo("vi-VN");
+            txtTotal.Text = (decimal.Parse(txtTamtinh.Text) + decimal.Parse(txtFcost.Text)).ToString("c", ct);
+        }
         void ChangeColorZoneBtn(object sender, EventArgs e )
         {
             foreach(Control c in pnlZone.Controls)
@@ -176,56 +253,11 @@ namespace QLquannet
             }
 
         }
-        void LoadUsageSession(byte comid)
-        {
-            UsageSession us = UsageSessionDAL.Instance.GetUsageSessionDetails(comid);
-
-            gbMay.Text = us.ComName;
-            if (us.STime.HasValue)
-            {
-                tpStime.Value = us.STime.Value;
-            }
-            else
-            {
-                tpStime.Value = DateTime.Now;
-            }
-            TimeSpan duration = DateTime.Now - tpStime.Value;
-            string formatDuration = string.Format("{0:D2}:{1:D2}", (int)duration.TotalHours, duration.Minutes);
-            txtTime.Text = formatDuration;
-
-            int hours = int.Parse(formatDuration.Split(':')[0]);
-            int minutes = int.Parse(formatDuration.Split(':')[1]);
-            decimal tamTinh = (hours + (minutes / 60.0m)) * decimal.Parse(txtPrice.Text);
-            txtTamtinh.Text = Math.Round(tamTinh, 2).ToString();
-
-            if (us.ComStatus == 0)
-            {
-                txtTT.Text = "Offline";
-            }
-            else
-            {
-                txtTT.Text = "Online";
-            }
-        }
-        void LoadFoodDetail(byte comid)
-        {
-            lvFood.Items.Clear();
-            List<FoodPerCom> fl = FoodPerComDAL.Instance.GetFoodDetail(comid);
-            decimal fcost = 0m;
-            foreach (FoodPerCom f in fl)
-            {
-                ListViewItem lvi = new ListViewItem(f.FoodName.ToString());
-                lvi.SubItems.Add(f.Price.ToString());
-                lvi.SubItems.Add(f.Count.ToString());
-                lvi.SubItems.Add(f.Cost.ToString());
-                fcost += f.Cost;
-                lvFood.Items.Add(lvi);
-            }
-            txtFcost.Text = fcost.ToString();
-        }
+        
         #endregion
 
         #endregion
 
+        
     }
 }

@@ -55,7 +55,7 @@ namespace QLquannet
         
         private void btnBill_Click(object sender, EventArgs e)
         {
-            LoadFormCon(new frmHoaDon());
+            LoadFormCon(new frmBilling());
             ChangeColorMainBtn(btnBill, null);
         }
         private Form curentChildForm;

@@ -56,7 +56,7 @@
             this.gbMay = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtTotal = new System.Windows.Forms.TextBox();
             this.txtTamtinh = new System.Windows.Forms.TextBox();
             this.gbDichvu = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -301,7 +301,7 @@
             this.btnBatmay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBatmay.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBatmay.ForeColor = System.Drawing.Color.White;
-            this.btnBatmay.Location = new System.Drawing.Point(326, 33);
+            this.btnBatmay.Location = new System.Drawing.Point(301, 32);
             this.btnBatmay.Name = "btnBatmay";
             this.btnBatmay.Size = new System.Drawing.Size(94, 58);
             this.btnBatmay.TabIndex = 4;
@@ -317,27 +317,29 @@
             this.btnThanhtoan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnThanhtoan.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThanhtoan.ForeColor = System.Drawing.Color.White;
-            this.btnThanhtoan.Location = new System.Drawing.Point(326, 543);
+            this.btnThanhtoan.Location = new System.Drawing.Point(301, 543);
             this.btnThanhtoan.Name = "btnThanhtoan";
             this.btnThanhtoan.Size = new System.Drawing.Size(94, 67);
             this.btnThanhtoan.TabIndex = 15;
             this.btnThanhtoan.Text = "Thanh toán";
             this.btnThanhtoan.UseVisualStyleBackColor = true;
+            this.btnThanhtoan.Click += new System.EventHandler(this.btnThanhtoan_Click);
             // 
             // txtTime
             // 
             this.txtTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTime.Location = new System.Drawing.Point(156, 98);
+            this.txtTime.Location = new System.Drawing.Point(153, 96);
             this.txtTime.Name = "txtTime";
-            this.txtTime.Size = new System.Drawing.Size(157, 22);
+            this.txtTime.Size = new System.Drawing.Size(140, 22);
             this.txtTime.TabIndex = 33;
+            this.txtTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.label15.Location = new System.Drawing.Point(16, 98);
+            this.label15.Location = new System.Drawing.Point(13, 96);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(124, 18);
             this.label15.TabIndex = 32;
@@ -348,7 +350,7 @@
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.label14.Location = new System.Drawing.Point(16, 66);
+            this.label14.Location = new System.Drawing.Point(13, 64);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(125, 18);
             this.label14.TabIndex = 30;
@@ -360,28 +362,29 @@
             this.tpStime.Enabled = false;
             this.tpStime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tpStime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.tpStime.Location = new System.Drawing.Point(156, 66);
+            this.tpStime.Location = new System.Drawing.Point(153, 64);
             this.tpStime.Name = "tpStime";
             this.tpStime.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tpStime.Size = new System.Drawing.Size(157, 22);
+            this.tpStime.Size = new System.Drawing.Size(140, 22);
             this.tpStime.TabIndex = 56;
             this.tpStime.Value = new System.DateTime(2024, 5, 25, 19, 10, 0, 0);
             // 
             // txtTT
             // 
             this.txtTT.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTT.Location = new System.Drawing.Point(156, 34);
+            this.txtTT.Location = new System.Drawing.Point(153, 32);
             this.txtTT.Name = "txtTT";
             this.txtTT.ReadOnly = true;
-            this.txtTT.Size = new System.Drawing.Size(157, 22);
+            this.txtTT.Size = new System.Drawing.Size(140, 22);
             this.txtTT.TabIndex = 58;
+            this.txtTT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.label4.Location = new System.Drawing.Point(16, 34);
+            this.label4.Location = new System.Drawing.Point(13, 32);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(73, 18);
             this.label4.TabIndex = 57;
@@ -389,14 +392,14 @@
             // 
             // gbMay
             // 
-            this.gbMay.Controls.Add(this.label8);
-            this.gbMay.Controls.Add(this.label10);
-            this.gbMay.Controls.Add(this.textBox2);
             this.gbMay.Controls.Add(this.btnThanhtoan);
+            this.gbMay.Controls.Add(this.label8);
+            this.gbMay.Controls.Add(this.btnBatmay);
+            this.gbMay.Controls.Add(this.label10);
+            this.gbMay.Controls.Add(this.txtTotal);
             this.gbMay.Controls.Add(this.txtTamtinh);
             this.gbMay.Controls.Add(this.gbDichvu);
             this.gbMay.Controls.Add(this.label4);
-            this.gbMay.Controls.Add(this.btnBatmay);
             this.gbMay.Controls.Add(this.txtTT);
             this.gbMay.Controls.Add(this.label14);
             this.gbMay.Controls.Add(this.label15);
@@ -404,9 +407,9 @@
             this.gbMay.Controls.Add(this.txtTime);
             this.gbMay.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbMay.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.gbMay.Location = new System.Drawing.Point(639, 2);
+            this.gbMay.Location = new System.Drawing.Point(659, -1);
             this.gbMay.Name = "gbMay";
-            this.gbMay.Size = new System.Drawing.Size(423, 616);
+            this.gbMay.Size = new System.Drawing.Size(401, 619);
             this.gbMay.TabIndex = 59;
             this.gbMay.TabStop = false;
             // 
@@ -415,7 +418,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.label8.Location = new System.Drawing.Point(16, 564);
+            this.label8.Location = new System.Drawing.Point(14, 563);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(131, 24);
             this.label8.TabIndex = 72;
@@ -426,29 +429,31 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.label10.Location = new System.Drawing.Point(16, 130);
+            this.label10.Location = new System.Drawing.Point(13, 128);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(65, 18);
             this.label10.TabIndex = 68;
             this.label10.Text = "Tạm tính";
             // 
-            // textBox2
+            // txtTotal
             // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(156, 564);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(157, 22);
-            this.textBox2.TabIndex = 73;
+            this.txtTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTotal.Location = new System.Drawing.Point(154, 563);
+            this.txtTotal.Name = "txtTotal";
+            this.txtTotal.ReadOnly = true;
+            this.txtTotal.Size = new System.Drawing.Size(141, 26);
+            this.txtTotal.TabIndex = 73;
+            this.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtTamtinh
             // 
             this.txtTamtinh.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTamtinh.Location = new System.Drawing.Point(156, 130);
+            this.txtTamtinh.Location = new System.Drawing.Point(153, 128);
             this.txtTamtinh.Name = "txtTamtinh";
             this.txtTamtinh.ReadOnly = true;
-            this.txtTamtinh.Size = new System.Drawing.Size(157, 22);
+            this.txtTamtinh.Size = new System.Drawing.Size(140, 22);
             this.txtTamtinh.TabIndex = 69;
+            this.txtTamtinh.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // gbDichvu
             // 
@@ -457,19 +462,19 @@
             this.gbDichvu.Controls.Add(this.txtFcost);
             this.gbDichvu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbDichvu.ForeColor = System.Drawing.SystemColors.Info;
-            this.gbDichvu.Location = new System.Drawing.Point(3, 171);
+            this.gbDichvu.Location = new System.Drawing.Point(6, 170);
             this.gbDichvu.Name = "gbDichvu";
-            this.gbDichvu.Size = new System.Drawing.Size(417, 366);
+            this.gbDichvu.Size = new System.Drawing.Size(389, 366);
             this.gbDichvu.TabIndex = 67;
             this.gbDichvu.TabStop = false;
-            this.gbDichvu.Text = "Food ";
+            this.gbDichvu.Text = "Food";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.label7.Location = new System.Drawing.Point(13, 332);
+            this.label7.Location = new System.Drawing.Point(7, 328);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(76, 18);
             this.label7.TabIndex = 70;
@@ -486,7 +491,8 @@
             this.lvFood.HideSelection = false;
             this.lvFood.Location = new System.Drawing.Point(3, 25);
             this.lvFood.Name = "lvFood";
-            this.lvFood.Size = new System.Drawing.Size(411, 300);
+            this.lvFood.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lvFood.Size = new System.Drawing.Size(380, 300);
             this.lvFood.TabIndex = 67;
             this.lvFood.UseCompatibleStateImageBehavior = false;
             this.lvFood.View = System.Windows.Forms.View.Details;
@@ -494,31 +500,35 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Tên";
-            this.columnHeader1.Width = 103;
+            this.columnHeader1.Width = 118;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "Đơn giá";
-            this.columnHeader2.Width = 103;
+            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.columnHeader2.Width = 88;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "Số lượng";
+            this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.columnHeader3.Width = 66;
             // 
             // columnHeader4
             // 
             this.columnHeader4.Text = "Thành tiền";
-            this.columnHeader4.Width = 134;
+            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.columnHeader4.Width = 103;
             // 
             // txtFcost
             // 
             this.txtFcost.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFcost.Location = new System.Drawing.Point(153, 331);
+            this.txtFcost.Location = new System.Drawing.Point(147, 327);
             this.txtFcost.Name = "txtFcost";
             this.txtFcost.ReadOnly = true;
-            this.txtFcost.Size = new System.Drawing.Size(157, 22);
+            this.txtFcost.Size = new System.Drawing.Size(142, 22);
             this.txtFcost.TabIndex = 71;
+            this.txtFcost.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // gbZone
             // 
@@ -705,7 +715,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtFcost;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtTotal;
         private System.Windows.Forms.GroupBox gbZone;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtCPU;

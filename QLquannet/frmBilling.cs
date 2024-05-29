@@ -13,9 +13,9 @@ using System.Windows.Forms;
 
 namespace QLquannet
 {
-    public partial class frmHoaDon : Form
+    public partial class frmBilling : Form
     {
-        public frmHoaDon()
+        public frmBilling()
         {
             InitializeComponent();
             LoadDate();
@@ -49,7 +49,6 @@ namespace QLquannet
                 lvi.SubItems.Add(b.SCost.ToString());
                 lvi.SubItems.Add(b.MCost.ToString());
                 lvi.SubItems.Add(b.FCost.ToString());
-                lvi.SubItems.Add(b.DCost.ToString());
                 lvi.SubItems.Add(b.Amount.ToString());
                 if(b.BType == 1)
                 {

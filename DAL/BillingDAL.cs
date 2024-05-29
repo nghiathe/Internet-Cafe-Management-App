@@ -40,6 +40,11 @@ namespace DAL
             return bl;
         }
 
+        public void CheckOut(int billid, byte emid)
+        {
+            string query = string.Format("ProcCheckOut @billingid , @employeeid");
+            Database.Instance.ExecuteNonQuery(query, new object[] {billid , emid});
+        }
         #endregion
     }
 }
