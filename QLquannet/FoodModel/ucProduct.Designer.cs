@@ -29,15 +29,16 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lbPrice = new System.Windows.Forms.Label();
             this.lbPname = new System.Windows.Forms.Label();
             this.txtImage = new System.Windows.Forms.PictureBox();
-            this.lbPrice = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtImage)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.lbPrice);
             this.panel1.Controls.Add(this.lbPname);
             this.panel1.Controls.Add(this.txtImage);
@@ -45,6 +46,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(250, 176);
             this.panel1.TabIndex = 0;
+            // 
+            // lbPrice
+            // 
+            this.lbPrice.AutoSize = true;
+            this.lbPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPrice.Location = new System.Drawing.Point(3, 117);
+            this.lbPrice.Name = "lbPrice";
+            this.lbPrice.Size = new System.Drawing.Size(77, 24);
+            this.lbPrice.TabIndex = 2;
+            this.lbPrice.Text = "30000 đ";
             // 
             // lbPname
             // 
@@ -66,16 +77,6 @@
             this.txtImage.TabIndex = 0;
             this.txtImage.TabStop = false;
             this.txtImage.Click += new System.EventHandler(this.txtImage_Click);
-            // 
-            // lbPrice
-            // 
-            this.lbPrice.AutoSize = true;
-            this.lbPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbPrice.Location = new System.Drawing.Point(3, 117);
-            this.lbPrice.Name = "lbPrice";
-            this.lbPrice.Size = new System.Drawing.Size(77, 24);
-            this.lbPrice.TabIndex = 2;
-            this.lbPrice.Text = "30000 đ";
             // 
             // ucProduct
             // 

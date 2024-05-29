@@ -157,7 +157,16 @@ namespace QLquannet
             lbTongtien.Text = total.ToString("N2");
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FoodModel.AddFood AF = new FoodModel.AddFood();
+            AF.Show();
+        }
 
-
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            FoodModel.EditFood EF = new FoodModel.EditFood();
+            EF.Show();
+        }
     }
 }

@@ -34,7 +34,7 @@ namespace QLquannet
 
             Console.WriteLine("Image saved to database successfully.");
         }
-        private void loadform(object Form)
+        public void loadform(object Form)
         {
             if(this.pnlMain.Controls.Count > 0)
             {

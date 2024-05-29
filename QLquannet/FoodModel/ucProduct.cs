@@ -15,11 +15,15 @@ namespace QLquannet
         public ucProduct()
         {
             InitializeComponent();
+            DrawCustomBorder();
         }
 
         public event EventHandler onSelect = null;
         public int id {  get; set; }
-        public string PPrice {  get; set; }
+        public string PPrice {
+            get { return lbPrice.Text; }
+            set { lbPrice.Text = value; }
+        }
         public string PCategory {  get; set; }
         public string PName
         {
@@ -35,6 +39,18 @@ namespace QLquannet
         private void txtImage_Click(object sender, EventArgs e)
         {
             onSelect?.Invoke(this, e);
+        }
+
+        private void DrawCustomBorder()
+        {
+            // Tạo màu sáng hơn hoặc tối hơn cho viền
+            Color borderColor = ControlPaint.Dark(panel1.BackColor);
+
+            // Vẽ viền cho Panel
+            panel1.Paint += (sender, e) =>
+            {
+                ControlPaint.DrawBorder(e.Graphics, panel1.ClientRectangle, borderColor, ButtonBorderStyle.Solid);
+            };
         }
     }
 }
