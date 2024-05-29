@@ -31,6 +31,7 @@ namespace DAL
         public static int ComWidth = 150;
         public static int ComHeight = 100;
 
+
         public List<Computer> loadCom(byte zoneid)
         {
             List<Computer> lc = new List<Computer>();

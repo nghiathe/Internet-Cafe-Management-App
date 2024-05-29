@@ -9,51 +9,54 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace QLquannet
 {
     public partial class frmComputer : Form
     {
         #region ---------- Code cua HungTuLenh 
-        Computer com = new Computer();
+
         byte cid;
         public frmComputer()
         {
             InitializeComponent();
             LoadZone(1);
-
+            ChangeColorZoneBtn(btnZone1, null);
         }
 
         #region Event
         private void btnZone1_Click(object sender, EventArgs e)
         {
             LoadZone(1);
-
+            ChangeColorZoneBtn(btnZone1, null);
         }
 
         private void btnZone2_Click(object sender, EventArgs e)
         {
             LoadZone(2);
+            ChangeColorZoneBtn(btnZone2, null);
 
         }
 
         private void btnZone3_Click(object sender, EventArgs e)
         {
             LoadZone(3);
+            ChangeColorZoneBtn(btnZone3, null);
 
         }
 
         private void btnZone4_Click(object sender, EventArgs e)
         {
             LoadZone(4);
-
+            ChangeColorZoneBtn(btnZone4, null);
         }
 
         private void btn_Click(object sender, EventArgs e)
         {
-            LoadZone(ComputerZone.zoneId);
-
             cid = ((sender as Button).Tag as Computer).ComId;
+
+            ChangeColorComBtn((sender as Button), null);
             LoadUsageSession(cid);
             LoadFoodDetail(cid);
 
@@ -85,6 +88,7 @@ namespace QLquannet
         void LoadZone(byte zoneid)
         {
             flpCom.Controls.Clear();
+            ComputerZone.zoneId = zoneid;
             List<Computer> listCom = ComputerDAL.Instance.loadCom(zoneid);
             int online = 0;
             int offline = 0;
@@ -98,8 +102,10 @@ namespace QLquannet
                 
                 btn.Click += btn_Click;
 
+                btn.FlatStyle = FlatStyle.Flat;
+
                 btn.Tag = com;
-                
+
                 switch (com.ComStatus)
                 {
                     case 0:
@@ -118,6 +124,7 @@ namespace QLquannet
                         btn.Text = com.ComName + Environment.NewLine + "Error";
                         break;*/
                 }
+                flpCom.Controls.Add(btn);
 
                 gbZone.Text = com.ZoneName;
                 txtPrice.Text = com.PricePh.ToString();
@@ -131,13 +138,44 @@ namespace QLquannet
                 txtKey.Text = com.KeyboardModel;
                 txtMonitor.Text = com.MonitorModel;
 
-                ComputerZone.zoneId = zoneid;
-
-                flpCom.Controls.Add(btn);
-                
             }
         }
         
+        void ChangeColorZoneBtn(object sender, EventArgs e )
+        {
+            foreach(Control c in pnlZone.Controls)
+            {
+                c.BackColor = Color.FromArgb(37, 42, 64);
+            }
+            Control cl = (Control)sender;
+            cl.BackColor = Color.FromArgb(0, 126, 249);
+
+        }
+        void ChangeColorComBtn(object sender, EventArgs e)
+        {
+            foreach (Control c in flpCom.Controls)
+            {
+                if (c.Text.Contains("Online"))
+                {
+                    c.BackColor = Color.Aqua;
+                }
+                if (c.Text.Contains("Offline"))
+                {
+                    c.BackColor = Color.LightGray;
+                }
+
+            }
+            Control cl = (Control)sender;
+            if (cl.Text.Contains("Online"))
+            {
+                cl.BackColor = Color.FromArgb(100, 228, 178);
+            }
+            if (cl.Text.Contains("Offline"))
+            {
+                cl.BackColor = Color.FromArgb(200, 200, 100);
+            }
+
+        }
         void LoadUsageSession(byte comid)
         {
             UsageSession us = UsageSessionDAL.Instance.GetUsageSessionDetails(comid);
@@ -177,8 +215,8 @@ namespace QLquannet
             foreach (FoodPerCom f in fl)
             {
                 ListViewItem lvi = new ListViewItem(f.FoodName.ToString());
-                lvi.SubItems.Add(f.Count.ToString());
                 lvi.SubItems.Add(f.Price.ToString());
+                lvi.SubItems.Add(f.Count.ToString());
                 lvi.SubItems.Add(f.Cost.ToString());
                 fcost += f.Cost;
                 lvFood.Items.Add(lvi);

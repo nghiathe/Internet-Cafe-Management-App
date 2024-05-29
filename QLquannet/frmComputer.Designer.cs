@@ -499,12 +499,12 @@
             // columnHeader2
             // 
             this.columnHeader2.Text = "Đơn giá";
-            this.columnHeader2.Width = 78;
+            this.columnHeader2.Width = 103;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "Số lượng";
-            this.columnHeader3.Width = 92;
+            this.columnHeader3.Width = 66;
             // 
             // columnHeader4
             // 
@@ -529,6 +529,7 @@
             this.gbZone.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.gbZone.Location = new System.Drawing.Point(4, 82);
             this.gbZone.Name = "gbZone";
+            this.gbZone.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.gbZone.Size = new System.Drawing.Size(632, 536);
             this.gbZone.TabIndex = 60;
             this.gbZone.TabStop = false;
@@ -545,9 +546,9 @@
             this.groupBox1.Controls.Add(this.txtHDD);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.groupBox1.Location = new System.Drawing.Point(3, 381);
+            this.groupBox1.Location = new System.Drawing.Point(6, 381);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(626, 155);
+            this.groupBox1.Size = new System.Drawing.Size(620, 149);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cấu hình";
