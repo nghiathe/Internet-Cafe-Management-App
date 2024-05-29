@@ -9,54 +9,86 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace QLquannet
 {
     public partial class frmComputer : Form
     {
         #region ---------- Code cua HungTuLenh 
-        Computer com = new Computer();
-        byte zid;
+
+        byte cid;
         public frmComputer()
         {
             InitializeComponent();
-
+            LoadZone(1);
+            ChangeColorZoneBtn(btnZone1, null);
         }
 
+        #region Event
         private void btnZone1_Click(object sender, EventArgs e)
         {
             LoadZone(1);
-            lblZone.Text = "Zone1";
-            ComputerZone.zoneId = 1;
+            ChangeColorZoneBtn(btnZone1, null);
         }
 
         private void btnZone2_Click(object sender, EventArgs e)
         {
             LoadZone(2);
-            lblZone.Text = "Zone2";
-            ComputerZone.zoneId = 2;
+            ChangeColorZoneBtn(btnZone2, null);
 
         }
 
         private void btnZone3_Click(object sender, EventArgs e)
         {
             LoadZone(3);
-            lblZone.Text = "Zone3";
-            ComputerZone.zoneId = 3;
+            ChangeColorZoneBtn(btnZone3, null);
 
         }
 
         private void btnZone4_Click(object sender, EventArgs e)
         {
             LoadZone(4);
-            lblZone.Text = "Zone4";
-            ComputerZone.zoneId = 4;
+            ChangeColorZoneBtn(btnZone4, null);
+        }
+
+        private void btn_Click(object sender, EventArgs e)
+        {
+            cid = ((sender as Button).Tag as Computer).ComId;
+
+            ChangeColorComBtn((sender as Button), null);
+            LoadUsageSession(cid);
+            LoadFoodDetail(cid);
 
         }
 
-        void LoadZone(byte zoneid )
+        private void btnBatmay_Click(object sender, EventArgs e)
+        {
+            if (txtTT.Text == "Online")
+            {
+                MessageBox.Show("Máy đang online!");
+            }
+            else if (txtTT.Text == "Error")
+            {
+                MessageBox.Show("Máy đang bảo trì!");
+            }
+            else if (gbMay.Text == "")
+            {
+                MessageBox.Show("Chưa chọn máy!");
+            }
+            else
+            {
+                ComputerDAL.Instance.Online(cid);
+                LoadZone(ComputerZone.zoneId);
+            }
+        }
+        #endregion
+
+        #region Method
+        void LoadZone(byte zoneid)
         {
             flpCom.Controls.Clear();
+            ComputerZone.zoneId = zoneid;
             List<Computer> listCom = ComputerDAL.Instance.loadCom(zoneid);
             int online = 0;
             int offline = 0;
@@ -70,8 +102,10 @@ namespace QLquannet
                 
                 btn.Click += btn_Click;
 
+                btn.FlatStyle = FlatStyle.Flat;
+
                 btn.Tag = com;
-                
+
                 switch (com.ComStatus)
                 {
                     case 0:
@@ -90,24 +124,66 @@ namespace QLquannet
                         btn.Text = com.ComName + Environment.NewLine + "Error";
                         break;*/
                 }
-                
+                flpCom.Controls.Add(btn);
+
+                gbZone.Text = com.ZoneName;
+                txtPrice.Text = com.PricePh.ToString();
                 txtAvailable.Text = offline.ToString();
                 txtUsing.Text = online.ToString();
-                flpCom.Controls.Add(btn);
+                txtCPU.Text = com.CpuModel;
+                txtGPU.Text = com.Gpumodel;
+                txtHDD.Text = com.HddModel;
+                txtSSD.Text = com.SsdModel;
+                txtMouse.Text = com.MouseModel;
+                txtKey.Text = com.KeyboardModel;
+                txtMonitor.Text = com.MonitorModel;
 
             }
         }
-        private void btn_Click(object sender, EventArgs e)
+        
+        void ChangeColorZoneBtn(object sender, EventArgs e )
         {
-            LoadZone(ComputerZone.zoneId);
-            Button btn = (Button)sender;
-            Computer com = btn.Tag as Computer;
-
-            gbMay.Text = com.ComName;
-            txtPrice.Text = com.PricePh.ToString();
-            if (com.STime.HasValue)
+            foreach(Control c in pnlZone.Controls)
             {
-                tpStime.Value = com.STime.Value;
+                c.BackColor = Color.FromArgb(37, 42, 64);
+            }
+            Control cl = (Control)sender;
+            cl.BackColor = Color.FromArgb(0, 126, 249);
+
+        }
+        void ChangeColorComBtn(object sender, EventArgs e)
+        {
+            foreach (Control c in flpCom.Controls)
+            {
+                if (c.Text.Contains("Online"))
+                {
+                    c.BackColor = Color.Aqua;
+                }
+                if (c.Text.Contains("Offline"))
+                {
+                    c.BackColor = Color.LightGray;
+                }
+
+            }
+            Control cl = (Control)sender;
+            if (cl.Text.Contains("Online"))
+            {
+                cl.BackColor = Color.FromArgb(100, 228, 178);
+            }
+            if (cl.Text.Contains("Offline"))
+            {
+                cl.BackColor = Color.FromArgb(200, 200, 100);
+            }
+
+        }
+        void LoadUsageSession(byte comid)
+        {
+            UsageSession us = UsageSessionDAL.Instance.GetUsageSessionDetails(comid);
+
+            gbMay.Text = us.ComName;
+            if (us.STime.HasValue)
+            {
+                tpStime.Value = us.STime.Value;
             }
             else
             {
@@ -119,12 +195,10 @@ namespace QLquannet
 
             int hours = int.Parse(formatDuration.Split(':')[0]);
             int minutes = int.Parse(formatDuration.Split(':')[1]);
-            decimal tamTinh = (hours + (minutes / 60.0m)) * com.PricePh;
-
+            decimal tamTinh = (hours + (minutes / 60.0m)) * decimal.Parse(txtPrice.Text);
             txtTamtinh.Text = Math.Round(tamTinh, 2).ToString();
 
-            zid = com.ComId;
-            if(com.ComStatus == 0)
+            if (us.ComStatus == 0)
             {
                 txtTT.Text = "Offline";
             }
@@ -132,28 +206,25 @@ namespace QLquannet
             {
                 txtTT.Text = "Online";
             }
-
         }
-        private void btnBatmay_Click(object sender, EventArgs e)
+        void LoadFoodDetail(byte comid)
         {
-            if (txtTT.Text == "Online")
+            lvFood.Items.Clear();
+            List<FoodPerCom> fl = FoodPerComDAL.Instance.GetFoodDetail(comid);
+            decimal fcost = 0m;
+            foreach (FoodPerCom f in fl)
             {
-                MessageBox.Show("Máy đang online!");
+                ListViewItem lvi = new ListViewItem(f.FoodName.ToString());
+                lvi.SubItems.Add(f.Price.ToString());
+                lvi.SubItems.Add(f.Count.ToString());
+                lvi.SubItems.Add(f.Cost.ToString());
+                fcost += f.Cost;
+                lvFood.Items.Add(lvi);
             }
-            else if (txtTT.Text == "Error")
-            {
-                MessageBox.Show("Máy đang bảo trì!");
-            }
-            else if (gbMay.Text == "")
-            {
-                MessageBox.Show("Chưa chọn máy!");
-            }
-            else
-            {
-                ComputerDAL.Instance.Online(zid);
-                LoadZone(ComputerZone.zoneId);
-            }
+            txtFcost.Text = fcost.ToString();
         }
+        #endregion
+
         #endregion
 
     }

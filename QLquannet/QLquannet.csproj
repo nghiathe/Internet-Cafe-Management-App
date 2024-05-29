@@ -58,29 +58,11 @@
     <Compile Include="CategoryAdd.Designer.cs">
       <DependentUpon>CategoryAdd.cs</DependentUpon>
     </Compile>
-    <Compile Include="Computers.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Computers.Designer.cs">
-      <DependentUpon>Computers.cs</DependentUpon>
-    </Compile>
     <Compile Include="Food.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Food.Designer.cs">
       <DependentUpon>Food.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FoodModel\AddFood.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FoodModel\AddFood.Designer.cs">
-      <DependentUpon>AddFood.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FoodModel\EditFood.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FoodModel\EditFood.Designer.cs">
-      <DependentUpon>EditFood.cs</DependentUpon>
     </Compile>
     <Compile Include="frmComputer.cs">
       <SubType>Form</SubType>
@@ -114,35 +96,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FoodModel\ucProduct.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="FoodModel\ucProduct.Designer.cs">
-      <DependentUpon>ucProduct.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Zone1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Zone1.Designer.cs">
-      <DependentUpon>Zone1.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Category.resx">
       <DependentUpon>Category.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CategoryAdd.resx">
       <DependentUpon>CategoryAdd.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Computers.resx">
-      <DependentUpon>Computers.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Food.resx">
       <DependentUpon>Food.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FoodModel\AddFood.resx">
-      <DependentUpon>AddFood.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FoodModel\EditFood.resx">
-      <DependentUpon>EditFood.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmComputer.resx">
       <DependentUpon>frmComputer.cs</DependentUpon>
@@ -166,12 +127,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="FoodModel\ucProduct.resx">
-      <DependentUpon>ucProduct.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Zone1.resx">
-      <DependentUpon>Zone1.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -245,18 +200,6 @@
       <Project>{86d1afe9-33db-4fb0-be07-92fb56f83396}</Project>
       <Name>DTO</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\images.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\combinhdan.jpg" />
-    <Content Include="Resources\comga.jpg" />
-    <Content Include="Resources\comrang.jpg" />
-    <Content Include="Resources\comtron.jpg" />
-    <Content Include="Resources\mitom.jpg" />
-    <Content Include="Resources\mixao.jpg" />
-    <Content Include="Resources\phobo.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,9 +24,9 @@ namespace QLquannet
 
         private void Main_Load(object sender, EventArgs e)
         {
-            
+
         }
-        public void loadform(object Form)
+        private void loadform(object Form)
         {
             if(this.pnlMain.Controls.Count > 0)
             {
@@ -45,34 +42,21 @@ namespace QLquannet
 
         private void btnComputer_Click(object sender, EventArgs e)
         {
-            btnComputer.BackColor = Color.Gray;
-            btnFood.BackColor = Color.FromArgb(24, 30, 54);
+
             LoadFormCon(new frmComputer());
+            ChangeColorMainBtn(btnComputer, null);
         }
 
         private void btnFood_Click(object sender, EventArgs e)
         {
             loadform(new Food());
-            btnFood.BackColor = Color.Gray;
-            btnComputer.BackColor = Color.FromArgb(24, 30, 54);
+            ChangeColorMainBtn(btnFood, null);
         }
-
-        private void bthLogout_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
+        
         private void btnBill_Click(object sender, EventArgs e)
         {
-            btnBill.BackColor = Color.Gray;
-            btnComputer.BackColor = Color.FromArgb(24, 30, 54);
-            btnFood.BackColor = Color.FromArgb(24, 30, 54);
             LoadFormCon(new frmHoaDon());
+            ChangeColorMainBtn(btnBill, null);
         }
         private Form curentChildForm;
         private void LoadFormCon (Form childForm)
@@ -89,7 +73,15 @@ namespace QLquannet
             childForm.BringToFront();
             childForm.Show();
         }
+        void ChangeColorMainBtn(object sender, EventArgs e)
+        {
+            foreach (Control c in pnlMenubar.Controls)
+            {
+                c.BackColor = Color.FromArgb(24, 30, 54);
+            }
+            Control cl = (Control)sender;
+            cl.BackColor = Color.Gray;
 
-        
+        }
     }
 }
