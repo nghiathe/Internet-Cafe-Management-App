@@ -29,8 +29,17 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cboCom = new System.Windows.Forms.ComboBox();
+            this.cboZone = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lbStaff = new System.Windows.Forms.Label();
+            this.lbCom = new System.Windows.Forms.Label();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnThem = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.lbTongtien = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.CategoryPanel = new System.Windows.Forms.FlowLayoutPanel();
@@ -43,9 +52,6 @@
             this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtSearchFood = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnThem = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -54,6 +60,12 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
+            this.panel1.Controls.Add(this.cboCom);
+            this.panel1.Controls.Add(this.cboZone);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.lbStaff);
+            this.panel1.Controls.Add(this.lbCom);
             this.panel1.Controls.Add(this.btnEdit);
             this.panel1.Controls.Add(this.btnThem);
             this.panel1.Controls.Add(this.label3);
@@ -62,6 +74,87 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1065, 85);
             this.panel1.TabIndex = 0;
+            // 
+            // cboCom
+            // 
+            this.cboCom.FormattingEnabled = true;
+            this.cboCom.Location = new System.Drawing.Point(952, 32);
+            this.cboCom.Name = "cboCom";
+            this.cboCom.Size = new System.Drawing.Size(101, 21);
+            this.cboCom.TabIndex = 9;
+            this.cboCom.Click += new System.EventHandler(this.cboCom_Click);
+            // 
+            // cboZone
+            // 
+            this.cboZone.FormattingEnabled = true;
+            this.cboZone.Location = new System.Drawing.Point(741, 32);
+            this.cboZone.Name = "cboZone";
+            this.cboZone.Size = new System.Drawing.Size(101, 21);
+            this.cboZone.TabIndex = 8;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(860, 33);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(80, 20);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Chọn máy";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(636, 33);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(88, 20);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Chọn Zone";
+            // 
+            // lbStaff
+            // 
+            this.lbStaff.AutoSize = true;
+            this.lbStaff.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbStaff.ForeColor = System.Drawing.Color.White;
+            this.lbStaff.Location = new System.Drawing.Point(1053, 33);
+            this.lbStaff.Name = "lbStaff";
+            this.lbStaff.Size = new System.Drawing.Size(0, 20);
+            this.lbStaff.TabIndex = 5;
+            this.lbStaff.Visible = false;
+            // 
+            // lbCom
+            // 
+            this.lbCom.AutoSize = true;
+            this.lbCom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCom.ForeColor = System.Drawing.Color.White;
+            this.lbCom.Location = new System.Drawing.Point(630, 36);
+            this.lbCom.Name = "lbCom";
+            this.lbCom.Size = new System.Drawing.Size(0, 20);
+            this.lbCom.TabIndex = 4;
+            this.lbCom.Visible = false;
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(304, 14);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(112, 60);
+            this.btnEdit.TabIndex = 2;
+            this.btnEdit.Text = "Sửa";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // btnThem
+            // 
+            this.btnThem.Location = new System.Drawing.Point(186, 14);
+            this.btnThem.Name = "btnThem";
+            this.btnThem.Size = new System.Drawing.Size(112, 60);
+            this.btnThem.TabIndex = 1;
+            this.btnThem.Text = "Thêm";
+            this.btnThem.UseVisualStyleBackColor = true;
+            this.btnThem.Click += new System.EventHandler(this.button1_Click);
             // 
             // label3
             // 
@@ -78,6 +171,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
+            this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.lbTongtien);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -85,6 +179,16 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1065, 75);
             this.panel2.TabIndex = 1;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(633, 11);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(112, 52);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Xác nhận";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // lbTongtien
             // 
@@ -216,42 +320,12 @@
             this.txtSearchFood.Click += new System.EventHandler(this.txtSearchFood_Click);
             this.txtSearchFood.TextChanged += new System.EventHandler(this.txtSearchFood_TextChanged);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(634, 109);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "label1";
-            // 
-            // btnThem
-            // 
-            this.btnThem.Location = new System.Drawing.Point(186, 14);
-            this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(112, 60);
-            this.btnThem.TabIndex = 1;
-            this.btnThem.Text = "Thêm";
-            this.btnThem.UseVisualStyleBackColor = true;
-            this.btnThem.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.Location = new System.Drawing.Point(304, 14);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(112, 60);
-            this.btnEdit.TabIndex = 2;
-            this.btnEdit.Text = "Sửa";
-            this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
             // Food
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1065, 660);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.txtSearchFood);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.ProductPanel);
@@ -289,9 +363,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
         private System.Windows.Forms.Label lbTongtien;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnThem;
         private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label lbStaff;
+        private System.Windows.Forms.Label lbCom;
+        private System.Windows.Forms.ComboBox cboCom;
+        private System.Windows.Forms.ComboBox cboZone;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label1;
     }
 }

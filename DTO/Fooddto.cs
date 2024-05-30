@@ -6,10 +6,20 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    public class Fooddto
+    public class FoodDTO
     {
+        public int FoodID { get; set; }
         public string FoodName { get; set; }
-        public int Quantity { get; set; }
+        public string CategoryName { get; set; }
+        public decimal IntakePrice { get; set; }
+        public int Inventory { get; set; }
+        public int CategoryID { get; set; }
         public decimal Price { get; set; }
+        public byte[] Image { get; set; }
+    }
+
+    public class CategoryDTO
+    {
+        public string CategoryName { get; set; }
     }
 }

@@ -34,12 +34,12 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.button5 = new System.Windows.Forms.Button();
             this.pnlMenubar = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.bthLogout = new System.Windows.Forms.Button();
             this.btnBill = new System.Windows.Forms.Button();
             this.btnFood = new System.Windows.Forms.Button();
             this.btnComputer = new System.Windows.Forms.Button();
             this.pnlMain = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.pnlMenubar.SuspendLayout();
             this.SuspendLayout();
@@ -95,6 +95,21 @@
             this.pnlMenubar.Name = "pnlMenubar";
             this.pnlMenubar.Size = new System.Drawing.Size(128, 618);
             this.pnlMenubar.TabIndex = 1;
+            // 
+            // button1
+            // 
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(0, 371);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(128, 50);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Bảo trì";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // bthLogout
             // 
@@ -166,21 +181,6 @@
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Size = new System.Drawing.Size(1065, 618);
             this.pnlMain.TabIndex = 4;
-            // 
-            // button1
-            // 
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(0, 371);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(128, 50);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Bảo trì";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // Main
             // 

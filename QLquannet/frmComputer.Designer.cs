@@ -496,6 +496,7 @@
             this.lvFood.TabIndex = 67;
             this.lvFood.UseCompatibleStateImageBehavior = false;
             this.lvFood.View = System.Windows.Forms.View.Details;
+            
             // 
             // columnHeader1
             // 
