@@ -254,9 +254,7 @@ namespace QLquannet
             }
 
         }
-
-
-
+        
         #endregion
 
         #endregion
