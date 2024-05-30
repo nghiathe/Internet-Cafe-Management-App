@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DAL;
+using DTO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,9 +12,10 @@ using System.Windows.Forms;
 
 namespace QLquannet
 {
-    public partial class Login : Form
+    public partial class frmLogin : Form
     {
-        public Login()
+        Login lg = new Login();
+        public frmLogin()
         {
             InitializeComponent();
         }
@@ -30,12 +33,26 @@ namespace QLquannet
 
         private void btnlogin_Click(object sender, EventArgs e)
         {
-            btnlogin.ForeColor = Color.Blue;
-            this.Hide();
-            Main main = new Main();
-            main.Show();
+            lg.username = txtusername.Text;
+            lg.password = txtpassword.Text;
+            string rs = (string)LoginDAL.Instance.Login(lg);
+            if(rs != null)
+            {
+                Employee.emId = (byte)LoginDAL.Instance.GetEmployeeId(lg);
+                Employee.fullName = rs;
+                btnlogin.ForeColor = Color.Blue;
+                this.Hide();
+                Main main = new Main();
+                main.Show();
+            
+            }
+            else
+            {
+                MessageBox.Show("Tài khoản hoặc mật khẩu không đúng!");
+            }
             
         }
+
 
         private void button1_Click(object sender, EventArgs e)
         {

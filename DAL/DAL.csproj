@@ -45,6 +45,7 @@
     <Compile Include="ComputerDAL.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="FoodPerComDAL.cs" />
+    <Compile Include="LoginDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UsageSessionDAL.cs" />
   </ItemGroup>

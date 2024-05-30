@@ -45,6 +45,7 @@
     <Compile Include="Computer.cs" />
     <Compile Include="Fooddto.cs" />
     <Compile Include="FoodPerCom.cs" />
+    <Compile Include="Login.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UsageSession.cs" />
   </ItemGroup>
