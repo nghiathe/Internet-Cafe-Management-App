@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddCategoryDAL.cs" />
     <Compile Include="AddFoodDAL.cs" />
     <Compile Include="BillingDAL.cs" />
     <Compile Include="ComputerDAL.cs" />

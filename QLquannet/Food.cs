@@ -159,12 +159,6 @@ namespace QLquannet
             EF.Show();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Model.ComSelect CS = new Model.ComSelect(); 
-            CS.Show();
-        }
-
         private void button1_Click_1(object sender, EventArgs e)
         {
             int computerID = foodDAL.GetComputerID(cboCom.Text);
@@ -240,6 +234,10 @@ namespace QLquannet
             return BillingID;
         }
 
-
+        private void btnAddCategory_Click(object sender, EventArgs e)
+        {
+            Model.AddCategory AC = new Model.AddCategory();
+            AC.Show();
+        }
     }
 }
