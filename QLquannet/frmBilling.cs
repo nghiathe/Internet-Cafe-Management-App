@@ -15,6 +15,9 @@ namespace QLquannet
 {
     public partial class frmBilling : Form
     {
+        decimal profit = 0;
+
+        CultureInfo ct = new CultureInfo("vi-VN");
         public frmBilling()
         {
             InitializeComponent();
@@ -26,6 +29,8 @@ namespace QLquannet
             DateTime today = DateTime.Now;
             tpBd.Value = new DateTime(today.Year, today.Month, 1);
             tpKt.Value = tpBd.Value.AddMonths(1).AddDays(-1);
+            tpTs.Value = new DateTime(today.Year, today.Month, 1);
+            tpTe.Value = tpTs.Value.AddMonths(-1);
         }
         void ShowBill(DateTime ngaybd, DateTime ngaykt)
         {
@@ -45,31 +50,79 @@ namespace QLquannet
                 {
                     lvi.SubItems.Add("Chi");
                 }
-                
+
                 lvi.SubItems.Add(b.SCost.ToString());
                 lvi.SubItems.Add(b.MCost.ToString());
                 lvi.SubItems.Add(b.FCost.ToString());
                 lvi.SubItems.Add(b.Amount.ToString());
-                if(b.BType == 1)
+                if (b.BType == 1)
                 {
                     income += b.Amount;
                 }
                 else
-                { 
-                    outcome += b.Amount; 
+                {
+                    outcome += b.Amount;
                 }
-                
+
                 lvBill.Items.Add(lvi);
             }
-            CultureInfo ct = new CultureInfo("vi-VN");
+            profit = income - outcome;
             txtIn.Text = income.ToString("c", ct);
             txtOut.Text = outcome.ToString("c", ct);
-            txtProfit.Text = (income - outcome).ToString("c", ct);
+            txtProfit.Text = (profit).ToString("c", ct);
+
+        }
+   
+
+        private void rbKhoang_CheckedChanged(object sender, EventArgs e)
+        {
+            if(rbKhoang.Checked)
+            {
+                gbKhoang.Enabled = true;
+                ShowBill(tpBd.Value, tpKt.Value);
+            }
+            else
+            {
+                gbKhoang.Enabled = false;
+            }
         }
 
-        private void btnThongke_Click(object sender, EventArgs e)
+        private void tpKt_ValueChanged(object sender, EventArgs e)
         {
             ShowBill(tpBd.Value, tpKt.Value);
+        }
+
+        private void tpBd_ValueChanged(object sender, EventArgs e)
+        {
+            ShowBill(tpBd.Value, tpKt.Value);
+            
+        }
+
+        private void rbHai_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbHai.Checked)
+            {
+                gbHai.Enabled = true;
+            }
+            else
+            {
+                gbHai.Enabled = false;
+            }
+        }
+        private void tpTs_ValueChanged(object sender, EventArgs e)
+        {
+            DateTime fday = new DateTime(tpTs.Value.Year, tpTs.Value.Month, 1);
+            DateTime lday = fday.AddMonths(1).AddDays(-1);
+            ShowBill(fday, lday);
+            txtProfitMonth.Text = (profit).ToString("c", ct);
+        }
+
+        private void tpTe_ValueChanged(object sender, EventArgs e)
+        {
+            DateTime fday = new DateTime(tpTe.Value.Year, tpTe.Value.Month, 1);
+            DateTime lday = fday.AddMonths(1).AddDays(-1);
+            ShowBill(fday, lday);
+            txtProfitOtherMonth.Text = (profit).ToString("c", ct);
         }
     }
 }

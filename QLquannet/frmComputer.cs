@@ -22,6 +22,7 @@ namespace QLquannet
         public frmComputer()
         {
             InitializeComponent();
+            txtNhanvien.Text = Employee.fullName;
             LoadZone(1);
             ChangeColorZoneBtn(btnZone1, null);
         }
@@ -97,7 +98,7 @@ namespace QLquannet
                 if (billid != -1)
                 {   
                     UsageSessionDAL.Instance.EndSesion(billid);
-                    BillingDAL.Instance.CheckOut(billid, 1);
+                    BillingDAL.Instance.CheckOut(billid, Employee.emId);
                     LoadZone(ComputerZone.zoneId);
                     MessageBox.Show("Thanh toán thành công cho " + gbMay.Text);
                     LoadUsageSession(cid);
@@ -253,12 +254,10 @@ namespace QLquannet
             }
 
         }
-
-
-        #endregion
-
-        #endregion
-
         
+        #endregion
+
+        #endregion
+
     }
 }
