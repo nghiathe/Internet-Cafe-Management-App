@@ -18,5 +18,7 @@ namespace QLquannet
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmLogin());
         }
+
+
     }
 }
