@@ -10,9 +10,6 @@ namespace DAL
 {
     class Database
     {
-         //public static readonly string Strconn = "Data Source=DESKTOP-N234E7R\\SQLEXPRESS01;Initial Catalog=Qlquannet;Integrated Security=True";
-         //public static SqlConnection conn = new SqlConnection(Strconn);
-         
 
         #region ---------- Code cua HungTuLenh 
         private static Database instance;
@@ -30,7 +27,7 @@ namespace DAL
             private set { Database.instance = value; }
         }
 
-        private string connectionSTR = "Data Source=LAPTOP-KKNF42CS\\SQLEXPRESS;Initial Catalog=QLyCafeInternet;Integrated Security=True";
+        private string connectionSTR = "Data Source=DESKTOP-N234E7R\\SQLEXPRESS01;Initial Catalog=Qlquannet;Integrated Security=True";
 
         public DataTable ExecuteQuery(string query, object[] parameter = null)
         {

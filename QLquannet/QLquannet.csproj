@@ -82,17 +82,17 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\AddCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Model\AddCategory.Designer.cs">
+      <DependentUpon>AddCategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\AddFood.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Model\AddFood.Designer.cs">
       <DependentUpon>AddFood.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ComSelect.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Model\ComSelect.Designer.cs">
-      <DependentUpon>ComSelect.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\EditFood.cs">
       <SubType>Form</SubType>
@@ -126,11 +126,11 @@
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Model\AddCategory.resx">
+      <DependentUpon>AddCategory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Model\AddFood.resx">
       <DependentUpon>AddFood.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Model\ComSelect.resx">
-      <DependentUpon>ComSelect.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Model\EditFood.resx">
       <DependentUpon>EditFood.cs</DependentUpon>

@@ -129,6 +129,7 @@
             this.bthLogout.TabIndex = 3;
             this.bthLogout.Text = "Đăng xuất";
             this.bthLogout.UseVisualStyleBackColor = true;
+            this.bthLogout.Click += new System.EventHandler(this.bthLogout_Click);
             // 
             // btnBill
             // 

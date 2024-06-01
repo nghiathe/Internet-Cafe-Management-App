@@ -107,6 +107,15 @@ namespace QLquannet
 
         }
 
-
+        private void bthLogout_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Bạn có muốn đăng xuất?", "Đăng xuất", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                this.Close();
+                frmLogin login = new frmLogin();
+                login.Show();
+            }
+        }
     }
 }
