@@ -45,6 +45,8 @@
     <Compile Include="AddFoodDAL.cs" />
     <Compile Include="BillingDAL.cs" />
     <Compile Include="ComputerDAL.cs" />
+    <Compile Include="MaintainanceDAL.cs" />
+    <Compile Include="ZoneDAL.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="EditFoodDAL.cs" />
     <Compile Include="FoodDAL.cs" />

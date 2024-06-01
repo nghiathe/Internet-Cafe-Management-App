@@ -28,7 +28,7 @@ namespace QLquannet
         {
             DateTime today = DateTime.Now;
             tpBd.Value = new DateTime(today.Year, today.Month, 1);
-            tpKt.Value = tpBd.Value.AddMonths(1).AddDays(-1);
+            tpKt.Value = tpBd.Value.AddMonths(1);
             tpTs.Value = new DateTime(today.Year, today.Month, 1);
             tpTe.Value = tpTs.Value.AddMonths(-1);
         }
@@ -112,7 +112,7 @@ namespace QLquannet
         private void tpTs_ValueChanged(object sender, EventArgs e)
         {
             DateTime fday = new DateTime(tpTs.Value.Year, tpTs.Value.Month, 1);
-            DateTime lday = fday.AddMonths(1).AddDays(-1);
+            DateTime lday = fday.AddMonths(1);
             ShowBill(fday, lday);
             txtProfitMonth.Text = (profit).ToString("c", ct);
         }
@@ -120,7 +120,7 @@ namespace QLquannet
         private void tpTe_ValueChanged(object sender, EventArgs e)
         {
             DateTime fday = new DateTime(tpTe.Value.Year, tpTe.Value.Month, 1);
-            DateTime lday = fday.AddMonths(1).AddDays(-1);
+            DateTime lday = fday.AddMonths(1);
             ShowBill(fday, lday);
             txtProfitOtherMonth.Text = (profit).ToString("c", ct);
         }

@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="BillingHis.cs" />
     <Compile Include="Computer.cs" />
+    <Compile Include="Maintainance.cs" />
+    <Compile Include="Zone.cs" />
     <Compile Include="FoodDTO.cs" />
     <Compile Include="FoodPerCom.cs" />
     <Compile Include="Login.cs" />

@@ -239,6 +239,7 @@
             this.txtError.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
             this.txtError.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtError.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtError.ForeColor = System.Drawing.SystemColors.Info;
             this.txtError.Location = new System.Drawing.Point(461, 4);
             this.txtError.Name = "txtError";
             this.txtError.Size = new System.Drawing.Size(19, 20);
@@ -514,7 +515,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.label7.Location = new System.Drawing.Point(7, 328);
+            this.label7.Location = new System.Drawing.Point(9, 330);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(76, 18);
             this.label7.TabIndex = 70;
@@ -532,11 +533,10 @@
             this.lvFood.Location = new System.Drawing.Point(3, 25);
             this.lvFood.Name = "lvFood";
             this.lvFood.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lvFood.Size = new System.Drawing.Size(380, 300);
+            this.lvFood.Size = new System.Drawing.Size(380, 287);
             this.lvFood.TabIndex = 67;
             this.lvFood.UseCompatibleStateImageBehavior = false;
             this.lvFood.View = System.Windows.Forms.View.Details;
-            
             // 
             // columnHeader1
             // 
@@ -564,7 +564,7 @@
             // txtFcost
             // 
             this.txtFcost.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFcost.Location = new System.Drawing.Point(147, 327);
+            this.txtFcost.Location = new System.Drawing.Point(149, 329);
             this.txtFcost.Name = "txtFcost";
             this.txtFcost.ReadOnly = true;
             this.txtFcost.Size = new System.Drawing.Size(142, 22);

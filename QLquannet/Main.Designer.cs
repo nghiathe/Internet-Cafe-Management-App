@@ -29,32 +29,35 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlMovable = new System.Windows.Forms.Panel();
             this.pnlStatus = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.button5 = new System.Windows.Forms.Button();
             this.pnlMenubar = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnMaintain = new System.Windows.Forms.Button();
             this.bthLogout = new System.Windows.Forms.Button();
             this.btnBill = new System.Windows.Forms.Button();
             this.btnFood = new System.Windows.Forms.Button();
             this.btnComputer = new System.Windows.Forms.Button();
             this.pnlMain = new System.Windows.Forms.Panel();
-            this.panel1.SuspendLayout();
+            this.pnlMovable.SuspendLayout();
             this.pnlMenubar.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // pnlMovable
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel1.Controls.Add(this.pnlStatus);
-            this.panel1.Controls.Add(this.panel2);
-            this.panel1.Controls.Add(this.button5);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1193, 30);
-            this.panel1.TabIndex = 0;
+            this.pnlMovable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.pnlMovable.Controls.Add(this.pnlStatus);
+            this.pnlMovable.Controls.Add(this.panel2);
+            this.pnlMovable.Controls.Add(this.button5);
+            this.pnlMovable.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlMovable.Location = new System.Drawing.Point(0, 0);
+            this.pnlMovable.Name = "pnlMovable";
+            this.pnlMovable.Size = new System.Drawing.Size(1193, 30);
+            this.pnlMovable.TabIndex = 0;
+            this.pnlMovable.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlMovable_MouseDown);
+            this.pnlMovable.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlMovable_MouseMove);
+            this.pnlMovable.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnlMovable_MouseUp);
             // 
             // pnlStatus
             // 
@@ -85,7 +88,7 @@
             // pnlMenubar
             // 
             this.pnlMenubar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
-            this.pnlMenubar.Controls.Add(this.button1);
+            this.pnlMenubar.Controls.Add(this.btnMaintain);
             this.pnlMenubar.Controls.Add(this.bthLogout);
             this.pnlMenubar.Controls.Add(this.btnBill);
             this.pnlMenubar.Controls.Add(this.btnFood);
@@ -96,20 +99,21 @@
             this.pnlMenubar.Size = new System.Drawing.Size(128, 618);
             this.pnlMenubar.TabIndex = 1;
             // 
-            // button1
+            // btnMaintain
             // 
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(0, 371);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(128, 50);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Bảo trì";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnMaintain.FlatAppearance.BorderSize = 0;
+            this.btnMaintain.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMaintain.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMaintain.ForeColor = System.Drawing.Color.White;
+            this.btnMaintain.Image = ((System.Drawing.Image)(resources.GetObject("btnMaintain.Image")));
+            this.btnMaintain.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMaintain.Location = new System.Drawing.Point(0, 371);
+            this.btnMaintain.Name = "btnMaintain";
+            this.btnMaintain.Size = new System.Drawing.Size(128, 50);
+            this.btnMaintain.TabIndex = 4;
+            this.btnMaintain.Text = "Bảo trì";
+            this.btnMaintain.UseVisualStyleBackColor = true;
+            this.btnMaintain.Click += new System.EventHandler(this.button1_Click);
             // 
             // bthLogout
             // 
@@ -190,13 +194,12 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.ClientSize = new System.Drawing.Size(1193, 648);
             this.Controls.Add(this.pnlMenubar);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlMovable);
             this.Controls.Add(this.pnlMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Main";
             this.Text = "Main";
-            this.Load += new System.EventHandler(this.Main_Load);
-            this.panel1.ResumeLayout(false);
+            this.pnlMovable.ResumeLayout(false);
             this.pnlMenubar.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -204,7 +207,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlMovable;
         private System.Windows.Forms.Panel pnlMenubar;
         private System.Windows.Forms.Button btnFood;
         private System.Windows.Forms.Button btnBill;
@@ -214,6 +217,6 @@
         private System.Windows.Forms.Panel pnlStatus;
         private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.Button btnComputer;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnMaintain;
     }
 }

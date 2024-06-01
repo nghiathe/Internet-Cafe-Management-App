@@ -27,7 +27,7 @@ namespace QLquannet
             ChangeColorZoneBtn(btnZone1, null);
         }
 
-        #region Event
+        #region Events
         private void btnZone1_Click(object sender, EventArgs e)
         {
             LoadZone(1);
@@ -54,7 +54,7 @@ namespace QLquannet
 
         private void btn_Click(object sender, EventArgs e)
         {
-            cid = ((sender as Button).Tag as Computer).ComId;
+            cid = ((sender as Button).Tag as Zone).ComId;
 
             ChangeColorComBtn((sender as Button), null);
             LoadUsageSession(cid);
@@ -85,7 +85,7 @@ namespace QLquannet
         private void btnThanhtoan_Click(object sender, EventArgs e)
         {
             int billid = UsageSessionDAL.Instance.GetUnCheckOutSession(cid); 
-            if (txtTT.Text == "Offline")
+            if (txtTT.Text == "Offline" || txtTT.Text == "Error")
             {
                 MessageBox.Show(gbMay.Text + " đang offline!");
             }
@@ -110,20 +110,21 @@ namespace QLquannet
         }
         #endregion
 
-        #region Method
+        #region Methods
         void LoadZone(byte zoneid)
         {
             flpCom.Controls.Clear();
             ComputerZone.zoneId = zoneid;
-            List<Computer> listCom = ComputerDAL.Instance.loadCom(zoneid);
+            List<Zone> listCom = ZoneDAL.Instance.loadCom(zoneid);
             int online = 0;
             int offline = 0;
-            foreach (Computer com in listCom)
+            int error = 0;
+            foreach (Zone com in listCom)
             {
                 Button btn = new Button()
                 {
-                    Width = ComputerDAL.ComWidth,
-                    Height = ComputerDAL.ComHeight,
+                    Width = ZoneDAL.ComWidth,
+                    Height = ZoneDAL.ComHeight,
                 };
                 
                 btn.Click += btn_Click;
@@ -147,10 +148,12 @@ namespace QLquannet
                         btn.Text = com.ComName + Environment.NewLine + "Online";
                         online++;
                         break;
-                    /*default:
+                    default:
+                        btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(228, 135, 50);
                         btn.BackColor = Color.OrangeRed;
                         btn.Text = com.ComName + Environment.NewLine + "Error";
-                        break;*/
+                        error++;
+                        break;
                 }
                 flpCom.Controls.Add(btn);
 
@@ -158,6 +161,7 @@ namespace QLquannet
                 txtPrice.Text = com.PricePh.ToString();
                 txtAvailable.Text = offline.ToString();
                 txtUsing.Text = online.ToString();
+                txtError.Text = error.ToString();
                 txtCPU.Text = com.CpuModel;
                 txtGPU.Text = com.Gpumodel;
                 txtHDD.Text = com.HddModel;
@@ -194,9 +198,13 @@ namespace QLquannet
             {
                 txtTT.Text = "Offline";
             }
-            else
+            else if (us.ComStatus == 1)
             {
                 txtTT.Text = "Online";
+            }
+            else
+            {
+                txtTT.Text = "Error";
             }
             bid = us.BillId;
         }
@@ -241,6 +249,10 @@ namespace QLquannet
                 {
                     c.BackColor = Color.LightGray;
                 }
+                if (c.Text.Contains("Error"))
+                {
+                    c.BackColor = Color.OrangeRed;
+                }
 
             }
             Control cl = (Control)sender;
@@ -252,7 +264,10 @@ namespace QLquannet
             {
                 cl.BackColor = Color.FromArgb(200, 200, 100);
             }
-
+            if (cl.Text.Contains("Error"))
+            {
+                cl.BackColor = Color.FromArgb(228, 135, 50);
+            }
         }
         
         #endregion

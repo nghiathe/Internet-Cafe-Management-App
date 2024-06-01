@@ -22,23 +22,28 @@ namespace QLquannet
             Application.Exit();
         }
 
-        private void Main_Load(object sender, EventArgs e)
-        {
+        bool drag = false;
+        Point start_point = new Point();
 
-        }
-        private void loadform(object Form)
+        private void pnlMovable_MouseDown(object sender, MouseEventArgs e)
         {
-            if(this.pnlMain.Controls.Count > 0)
-            {
-                this.pnlMain.Controls.RemoveAt(0);
-            }
-            Form f = Form as Form;
-            f.TopLevel = false;
-            f.Dock = DockStyle.Fill;
-            this.pnlMain.Controls.Add(f);
-            this.pnlMain.Tag = f;
-            f.Show();
+            drag = true;
+            start_point = new Point(e.X, e.Y);
         }
+
+        private void pnlMovable_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (drag)
+            {
+                Point p = PointToScreen(e.Location);
+                this.Location = new Point(p.X - start_point.X, p.Y - start_point.Y);            }
+        }
+
+        private void pnlMovable_MouseUp(object sender, MouseEventArgs e)
+        {
+            drag = false;
+        }
+
 
         private void btnComputer_Click(object sender, EventArgs e)
         {
@@ -58,8 +63,26 @@ namespace QLquannet
             LoadFormCon(new frmBilling());
             ChangeColorMainBtn(btnBill, null);
         }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            LoadFormCon(new frmMaintainance());
+            ChangeColorMainBtn(btnMaintain, null);
+        }
+        private void loadform(object Form)
+        {
+            if (this.pnlMain.Controls.Count > 0)
+            {
+                this.pnlMain.Controls.RemoveAt(0);
+            }
+            Form f = Form as Form;
+            f.TopLevel = false;
+            f.Dock = DockStyle.Fill;
+            this.pnlMain.Controls.Add(f);
+            this.pnlMain.Tag = f;
+            f.Show();
+        }
         private Form curentChildForm;
-        private void LoadFormCon (Form childForm)
+        void LoadFormCon (Form childForm)
         {
             if(curentChildForm != null)
             {
