@@ -371,6 +371,7 @@
             this.txtTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTime.Location = new System.Drawing.Point(153, 96);
             this.txtTime.Name = "txtTime";
+            this.txtTime.ReadOnly = true;
             this.txtTime.Size = new System.Drawing.Size(140, 22);
             this.txtTime.TabIndex = 33;
             this.txtTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
