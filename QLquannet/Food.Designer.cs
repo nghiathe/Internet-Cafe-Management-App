@@ -254,6 +254,7 @@
             this.dataGridView1.Size = new System.Drawing.Size(420, 478);
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
+            this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             // 
             // No
             // 

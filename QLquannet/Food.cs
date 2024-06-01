@@ -81,10 +81,12 @@ namespace QLquannet
                         item.Cells["Qty"].Value = int.Parse(item.Cells["Qty"].Value.ToString()) + 1;
                         item.Cells["Amount"].Value = int.Parse(item.Cells["Qty"].Value.ToString()) * double.Parse(item.Cells["Price"].Value.ToString());
                         return;
+                        
                     }
+                    
                 }
                 dataGridView1.Rows.Add(new object[] { 0, wdg.id, wdg.PName, 1, wdg.PPrice, wdg.PPrice });
-                GetTotal();
+                
             };
         }
 
@@ -146,6 +148,30 @@ namespace QLquannet
 
             lbTongtien.Text = total.ToString("N2");
         }
+        private decimal TinhTongTien(DataGridView datagridView)
+        {
+            decimal totalAmount = 0;
+
+            foreach (DataGridViewRow row in datagridView.Rows)
+            {
+                if (row.IsNewRow) continue;
+                var cellValue = row.Cells["Amount"].Value;
+
+                if (decimal.TryParse(cellValue.ToString(), out decimal amount))
+                {
+                    totalAmount += amount;
+                }
+            }
+
+            return totalAmount;
+        }
+
+
+        private void UpdateTongTien(DataGridView datagridView, Label lnTongtien)
+        {
+            decimal totalAmount = TinhTongTien(datagridView);
+            lnTongtien.Text = totalAmount.ToString("N2");
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -162,20 +188,38 @@ namespace QLquannet
         private void button1_Click_1(object sender, EventArgs e)
         {
             int computerID = foodDAL.GetComputerID(cboCom.Text);
-            int billingID = foodDAL.GetBillingID(computerID);
-
-            foreach (DataGridViewRow row in dataGridView1.Rows)
+            int billingID = foodDAL.GetBillingID(foodDAL.GetComputerID(cboCom.Text));
+            if(cboCom.Text == "")
             {
-                if (row.IsNewRow) continue;
-
-                int foodID = Convert.ToInt32(row.Cells["ID"].Value);
-                int count = Convert.ToInt32(row.Cells["Qty"].Value);
-                decimal cost = Convert.ToDecimal(row.Cells["Amount"].Value);
-
-                foodDAL.SaveFoodDetails(billingID, foodID, count, cost);
+                MessageBox.Show("Bạn chưa chọn máy!");
             }
+            else if(billingID == -1)
+            {
+                MessageBox.Show("Máy chưa được bật1!");
+            }
+            else
+            {
+                try
+                {
+                    foreach (DataGridViewRow row in dataGridView1.Rows)
+                    {
+                        if (row.IsNewRow) continue;
 
-            MessageBox.Show("Dữ liệu đã được lưu thành công!");
+                        int foodID = Convert.ToInt32(row.Cells["ID"].Value);
+                        int count = Convert.ToInt32(row.Cells["Qty"].Value);
+                        decimal cost = Convert.ToDecimal(row.Cells["Amount"].Value);
+                        foodDAL.SaveFoodDetails(billingID, foodID, count, cost);
+
+                    }
+
+                    MessageBox.Show("Dữ liệu đã được lưu thành công!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Máy chưa được bật2!");
+                }
+            }
+            
         }
 
         private void LoadComboBox(ComboBox comboBox, string query)
@@ -238,6 +282,11 @@ namespace QLquannet
         {
             Model.AddCategory AC = new Model.AddCategory();
             AC.Show();
+        }
+
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            UpdateTongTien(dataGridView1, lbTongtien);
         }
     }
 }
