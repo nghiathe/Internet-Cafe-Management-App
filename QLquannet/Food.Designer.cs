@@ -52,6 +52,7 @@
             this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtSearchFood = new System.Windows.Forms.TextBox();
+            this.btnAddCategory = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -152,7 +153,7 @@
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(112, 60);
             this.btnThem.TabIndex = 1;
-            this.btnThem.Text = "Thêm";
+            this.btnThem.Text = "Thêm món";
             this.btnThem.UseVisualStyleBackColor = true;
             this.btnThem.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -214,12 +215,12 @@
             // 
             // CategoryPanel
             // 
-            this.CategoryPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.CategoryPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.CategoryPanel.AutoScroll = true;
             this.CategoryPanel.Location = new System.Drawing.Point(12, 101);
             this.CategoryPanel.Name = "CategoryPanel";
-            this.CategoryPanel.Size = new System.Drawing.Size(93, 478);
+            this.CategoryPanel.Size = new System.Drawing.Size(93, 404);
             this.CategoryPanel.TabIndex = 2;
             // 
             // ProductPanel
@@ -253,6 +254,7 @@
             this.dataGridView1.Size = new System.Drawing.Size(420, 478);
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
+            this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             // 
             // No
             // 
@@ -320,12 +322,23 @@
             this.txtSearchFood.Click += new System.EventHandler(this.txtSearchFood_Click);
             this.txtSearchFood.TextChanged += new System.EventHandler(this.txtSearchFood_TextChanged);
             // 
+            // btnAddCategory
+            // 
+            this.btnAddCategory.Location = new System.Drawing.Point(12, 511);
+            this.btnAddCategory.Name = "btnAddCategory";
+            this.btnAddCategory.Size = new System.Drawing.Size(93, 27);
+            this.btnAddCategory.TabIndex = 6;
+            this.btnAddCategory.Text = "Thêm";
+            this.btnAddCategory.UseVisualStyleBackColor = true;
+            this.btnAddCategory.Click += new System.EventHandler(this.btnAddCategory_Click);
+            // 
             // Food
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1065, 660);
+            this.Controls.Add(this.btnAddCategory);
             this.Controls.Add(this.txtSearchFood);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.ProductPanel);
@@ -334,6 +347,7 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Food";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Food";
             this.Load += new System.EventHandler(this.Food_Load);
             this.panel1.ResumeLayout(false);
@@ -373,5 +387,6 @@
         private System.Windows.Forms.ComboBox cboZone;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnAddCategory;
     }
 }

@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Remoting.Messaging;
 
 namespace DAL
 {
@@ -50,13 +51,33 @@ namespace DAL
 
         public int GetBillingID(int ComputerID)
         {
+            object endTime = null;
+            int billID = -1; 
+
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string query = "Select BillingID from UsageSession where ComputerID = @ComID";
+                string query = "SELECT BillingID, EndTime FROM UsageSession WHERE ComputerID = @ComID";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@ComID", ComputerID);
                 conn.Open();
-                return Convert.ToInt32(cmd.ExecuteScalar());
+
+                using (SqlDataReader r = cmd.ExecuteReader())
+                {
+                    while (r.Read())
+                    {
+                        endTime = r["EndTime"];
+                        billID = Convert.ToInt32(r["BillingID"]);
+                    }
+                }
+            }
+
+            if (endTime == DBNull.Value)
+            {
+                return billID;
+            }
+            else
+            {
+                return -1;
             }
         }
 

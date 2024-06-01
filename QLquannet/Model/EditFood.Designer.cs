@@ -72,7 +72,6 @@
             this.txtInventory.Name = "txtInventory";
             this.txtInventory.Size = new System.Drawing.Size(121, 22);
             this.txtInventory.TabIndex = 25;
-            
             // 
             // txtIntakePrice
             // 
@@ -81,7 +80,6 @@
             this.txtIntakePrice.Name = "txtIntakePrice";
             this.txtIntakePrice.Size = new System.Drawing.Size(121, 22);
             this.txtIntakePrice.TabIndex = 24;
-            
             // 
             // txtPrice
             // 
@@ -90,7 +88,6 @@
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(121, 22);
             this.txtPrice.TabIndex = 23;
-            
             // 
             // txtFoodName
             // 
@@ -99,7 +96,6 @@
             this.txtFoodName.Name = "txtFoodName";
             this.txtFoodName.Size = new System.Drawing.Size(121, 22);
             this.txtFoodName.TabIndex = 22;
-            
             // 
             // label6
             // 
@@ -276,6 +272,7 @@
             this.Controls.Add(this.label2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "EditFood";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EditFood";
             this.Load += new System.EventHandler(this.EditFood_Load);
             this.panel1.ResumeLayout(false);
