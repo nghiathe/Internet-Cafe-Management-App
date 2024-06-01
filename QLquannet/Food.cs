@@ -201,7 +201,7 @@ namespace QLquannet
         private int GetComputerID(string ComputerName)
         {
             int ComputerID;
-            string connectionString = "Data Source=DESKTOP-N234E7R\\SQLEXPRESS01;Initial Catalog=Qlquannet;Integrated Security=True";
+            string connectionString = "Data Source=LAPTOP-KKNF42CS\\SQLEXPRESS;Initial Catalog=QLyCafeInternet;Integrated Security=True";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -221,7 +221,7 @@ namespace QLquannet
         private int GetBllingID(int ComputerID)
         {
             int BillingID;
-            string connectionString = "Data Source=DESKTOP-N234E7R\\SQLEXPRESS01;Initial Catalog=Qlquannet;Integrated Security=True";
+            string connectionString = "Data Source=LAPTOP-KKNF42CS\\SQLEXPRESS;Initial Catalog=QLyCafeInternet;Integrated Security=True";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {

@@ -11,7 +11,7 @@ namespace DAL
 {
     public class AddFoodDAL
     {
-        private string connectionString = "Data Source=DESKTOP-N234E7R\\SQLEXPRESS01;Initial Catalog=Qlquannet;Integrated Security=True";
+        private string connectionString = "Data Source=LAPTOP-KKNF42CS\\SQLEXPRESS;Initial Catalog=QLyCafeInternet;Integrated Security=True";
 
         public DataTable GetCategories()
         {

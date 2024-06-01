@@ -43,8 +43,18 @@ namespace DAL
         public void CheckOut(int billid, byte emid)
         {
             string query = string.Format("ProcCheckOut @billingid , @employeeid");
-            Database.Instance.ExecuteNonQuery(query, new object[] {billid , emid});
+            Database.Instance.ExecuteNonQuery(query, new object[] { billid, emid });
         }
-        #endregion
+
+        public void CheckOutMaintainance(int billid, byte emid, decimal cost, byte comid)
+        {
+            string nonquery = string.Format("UPDATE Maintainance SET Cost = {0} WHERE billingid = {1}", cost, billid);
+            Database.Instance.ExecuteNonQuery(nonquery);
+            string query = string.Format("ProcCheckOut @billingid , @employeeid");
+            Database.Instance.ExecuteNonQuery(query, new object[] { billid, emid });
+            Database.Instance.ExecuteNonQuery("ProcComputerStatus @computerID , 0", new object[] { comid });
+            #endregion
+        }
     }
 }
+

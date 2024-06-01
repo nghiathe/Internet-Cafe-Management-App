@@ -29,26 +29,26 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.txtusername = new System.Windows.Forms.TextBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.txtpassword = new System.Windows.Forms.TextBox();
-            this.btnlogin = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.btnlogin = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,6 +62,18 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(962, 30);
             this.panel1.TabIndex = 0;
+            // 
+            // button1
+            // 
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Image = global::QLquannet.Properties.Resources.close__1_;
+            this.button1.Location = new System.Drawing.Point(932, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(27, 27);
+            this.button1.TabIndex = 0;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel2
             // 
@@ -121,8 +133,18 @@
             this.txtusername.Name = "txtusername";
             this.txtusername.Size = new System.Drawing.Size(323, 20);
             this.txtusername.TabIndex = 1;
-            this.txtusername.Text = "Enter Username";
+            this.txtusername.Text = "hungduy123";
             this.txtusername.Click += new System.EventHandler(this.txtusername_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::QLquannet.Properties.Resources.user__5_;
+            this.pictureBox2.Location = new System.Drawing.Point(33, 37);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(40, 37);
+            this.pictureBox2.TabIndex = 0;
+            this.pictureBox2.TabStop = false;
             // 
             // panel4
             // 
@@ -182,8 +204,18 @@
             this.txtpassword.Name = "txtpassword";
             this.txtpassword.Size = new System.Drawing.Size(323, 20);
             this.txtpassword.TabIndex = 1;
-            this.txtpassword.Text = "Enter Password";
+            this.txtpassword.Text = "hungduy123";
             this.txtpassword.Click += new System.EventHandler(this.txtpassword_Click);
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::QLquannet.Properties.Resources.key__1_;
+            this.pictureBox3.Location = new System.Drawing.Point(33, 33);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(40, 41);
+            this.pictureBox3.TabIndex = 0;
+            this.pictureBox3.TabStop = false;
             // 
             // btnlogin
             // 
@@ -201,26 +233,6 @@
             this.btnlogin.UseVisualStyleBackColor = true;
             this.btnlogin.Click += new System.EventHandler(this.btnlogin_Click);
             // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = global::QLquannet.Properties.Resources.key__1_;
-            this.pictureBox3.Location = new System.Drawing.Point(33, 33);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(2);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(40, 41);
-            this.pictureBox3.TabIndex = 0;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::QLquannet.Properties.Resources.user__5_;
-            this.pictureBox2.Location = new System.Drawing.Point(33, 37);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(40, 37);
-            this.pictureBox2.TabIndex = 0;
-            this.pictureBox2.TabStop = false;
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Left;
@@ -233,19 +245,7 @@
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
-            // button1
-            // 
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Image = global::QLquannet.Properties.Resources.close__1_;
-            this.button1.Location = new System.Drawing.Point(932, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(27, 27);
-            this.button1.TabIndex = 0;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // Login
+            // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -258,15 +258,15 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "Login";
+            this.Name = "frmLogin";
             this.Text = "Form1";
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

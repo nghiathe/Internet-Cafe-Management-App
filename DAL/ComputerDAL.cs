@@ -10,7 +10,6 @@ namespace DAL
 {
     public class ComputerDAL
     {
-        #region ---------- Code cua HungTuLenh 
         private static ComputerDAL instance;
 
         public static ComputerDAL Instance
@@ -26,26 +25,21 @@ namespace DAL
             private set { ComputerDAL.instance = value; }
         }
 
+        public static int ComWidth = 83;
+        public static int ComHeight = 83;
+
         private ComputerDAL() { }
 
-        public static int ComWidth = 150;
-        public static int ComHeight = 100;
-
-
-        public List<Computer> loadCom(byte zoneid)
+        public List<Computer> LoadFullCom()
         {
-            List<Computer> lc = new List<Computer>();
-            string query = "GetComputerDetailsByZone @zoneid";
-            DataTable dt = Database.Instance.ExecuteQuery(query , new object[] {zoneid});
+            List<Computer> com = new List<Computer>();
+            DataTable dt = Database.Instance.ExecuteQuery("select computerid, computername, computerstatus from computer");
             foreach (DataRow dr in dt.Rows)
             {
-                Computer com = new Computer(dr);
-                lc.Add(com);
+                Computer ban = new Computer(dr);
+                com.Add(ban);
             }
-            return lc;
+            return com;
         }
-
-        
-        #endregion
     }
 }
