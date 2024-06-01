@@ -54,9 +54,9 @@ namespace QLquannet
         }
         private void btnThanhtoan_Click(object sender, EventArgs e)
         {
-            if (txtTT.Text == "Online")
+            if (txtTT.Text == "Online" || txtTT.Text == "Offline")
             {
-                MessageBox.Show("Máy đang online!");
+                MessageBox.Show("Máy này không bảo trì!");
             }
             else if (gbMay.Text == "")
             {
