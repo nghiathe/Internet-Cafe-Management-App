@@ -11,100 +11,52 @@ namespace DAL
 {
     public class FoodDAL
     {
+
+
         private string connectionString = ConnectionConstants.DefaultConnection;
+
 
         public DataTable GetCategories()
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                string query = "Select CategoryName from Category";
-                SqlDataAdapter da = new SqlDataAdapter(query, conn);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                return dt;
-            }
+            string query = "SELECT CategoryName FROM Category";
+            return Database.Instance.ExecuteQuery(query);
         }
 
         public DataTable GetAllFoods()
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                string query = "Select * from Food as f inner join Category as c on f.CategoryID = c.CategoryID";
-                SqlDataAdapter da = new SqlDataAdapter(query, conn);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                return dt;
-            }
+            string query = "SELECT * FROM Food AS f INNER JOIN Category AS c ON f.CategoryID = c.CategoryID";
+            return Database.Instance.ExecuteQuery(query);
         }
 
         public int GetComputerID(string ComputerName)
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                string query = "Select c.ComputerID From Computer as c inner join UsageSession as us on c.ComputerID = us.ComputerID where c.ComputerName= @ComputerName";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@ComputerName", ComputerName);
-                conn.Open();
-                return Convert.ToInt32(cmd.ExecuteScalar());
-            }
+            string query = "SELECT c.ComputerID FROM Computer AS c INNER JOIN UsageSession AS us ON c.ComputerID = us.ComputerID WHERE c.ComputerName = @ComputerName";
+            return Convert.ToInt32(Database.Instance.ExecuteScalar(query, new object[] { "@ComputerName", ComputerName }));
         }
 
         public int GetBillingID(int ComputerID)
         {
-            object endTime = null;
-            int billID = -1; 
+            string query = "SELECT BillingID, EndTime FROM UsageSession WHERE ComputerID = @ComID";
+            DataTable dt = Database.Instance.ExecuteQuery(query, new object[] { "@ComID", ComputerID });
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            if (dt.Rows.Count > 0)
             {
-                string query = "SELECT BillingID, EndTime FROM UsageSession WHERE ComputerID = @ComID";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@ComID", ComputerID);
-                conn.Open();
-
-                using (SqlDataReader r = cmd.ExecuteReader())
-                {
-                    while (r.Read())
-                    {
-                        endTime = r["EndTime"];
-                        billID = Convert.ToInt32(r["BillingID"]);
-                    }
-                }
+                object endTime = dt.Rows[0]["EndTime"];
+                if (endTime == DBNull.Value)
+                    return Convert.ToInt32(dt.Rows[0]["BillingID"]);
             }
-
-            if (endTime == DBNull.Value)
-            {
-                return billID;
-            }
-            else
-            {
-                return -1;
-            }
+            return -1;
         }
 
         public void SaveFoodDetails(int BillingID, int FoodID, int Count, decimal Cost)
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                string query = "INSERT INTO FoodDetail (BillingID, FoodID, Count, Cost) VALUES (@BillingID, @FoodID, @Count, @Cost)";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@BillingID", BillingID);
-                cmd.Parameters.AddWithValue("@FoodID", FoodID);
-                cmd.Parameters.AddWithValue("@Count", Count);
-                cmd.Parameters.AddWithValue("@Cost", Cost);
-                conn.Open();
-                cmd.ExecuteNonQuery();
-            }
+            string query = "INSERT INTO FoodDetail (BillingID, FoodID, Count, Cost) VALUES (@BillingID, @FoodID, @Count, @Cost)";
+            Database.Instance.ExecuteNonQuery(query, new object[] { "@BillingID", BillingID, "@FoodID", FoodID, "@Count", Count, "@Cost", Cost });
         }
 
         public DataTable LoadComboBoxData(string query)
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                SqlDataAdapter da = new SqlDataAdapter(query, conn);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                return dt;
-            }
+            return Database.Instance.ExecuteQuery(query);
         }
     }
 }

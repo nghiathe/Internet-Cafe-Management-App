@@ -51,6 +51,7 @@
     <Compile Include="ComputerDAL.cs" />
     <Compile Include="ConnectionConstants.cs" />
     <Compile Include="MaintainanceDAL.cs" />
+    <Compile Include="PrintRecipeDAL.cs" />
     <Compile Include="ZoneDAL.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="EditFoodDAL.cs" />
