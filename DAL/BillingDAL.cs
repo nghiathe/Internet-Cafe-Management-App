@@ -27,14 +27,14 @@ namespace DAL
         }
         private BillingDAL() { }
 
-        public List<BillingHis> loadBillList(DateTime ngaybd, DateTime ngaykt)
+        public List<Billing> loadBillList(DateTime ngaybd, DateTime ngaykt)
         {
-            List<BillingHis> bl = new List<BillingHis>();
+            List<Billing> bl = new List<Billing>();
             string query = "GetBillByDate @ngaybd , @ngaykt";
             DataTable dt = Database.Instance.ExecuteQuery(query, new object[] { ngaybd, ngaykt });
             foreach (DataRow dr in dt.Rows)
             {
-                BillingHis hd = new BillingHis(dr);
+                Billing hd = new Billing(dr);
                 bl.Add(hd);
             }
             return bl;
