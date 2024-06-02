@@ -16,7 +16,6 @@ namespace DAL
 
             int result = Database.Instance.ExecuteNonQuery(query, new object[] { categoryName });
 
-            // If one row is affected, the insertion was successful
             return result > 0;
         }
     }

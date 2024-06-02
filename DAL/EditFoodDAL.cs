@@ -11,66 +11,33 @@ namespace DAL
 {
     public class EditFoodDAL
     {
-        private string connectionString = "Data Source=LAPTOP-KKNF42CS\\SQLEXPRESS;Initial Catalog=QLyCafeInternet;Integrated Security=True";
+<<<<<<< HEAD
+=======
+        private string connectionString = ConnectionConstants.DefaultConnection;
 
+>>>>>>> 5013b1028f1d2872d792ded0e7a3651d34896112
         public DataTable GetAllFood()
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                string query = "SELECT * FROM Food";
-                SqlDataAdapter da = new SqlDataAdapter(query, conn);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                return dt;
-            }
+            string query = "SELECT * FROM Food";
+            return Database.Instance.ExecuteQuery(query);
         }
 
         public void DeleteFood(int foodID)
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                string query = "DELETE FROM Food WHERE FoodID = @ID";
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@ID", foodID);
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                }
-            }
+            string query = "DELETE FROM Food WHERE FoodID = @ID";
+            Database.Instance.ExecuteNonQuery(query, new object[] { foodID });
         }
 
         public void UpdateFood(FoodDTO food)
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                string query = "UPDATE Food SET FoodName = @Name, Price = @Price, IntakePrice = @IntakePrice, Inventory = @Inventory, Image = @Image WHERE FoodID = @ID";
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@Name", food.FoodName);
-                    cmd.Parameters.AddWithValue("@Price", food.Price);
-                    cmd.Parameters.AddWithValue("@IntakePrice", food.IntakePrice);
-                    cmd.Parameters.AddWithValue("@Inventory", food.Inventory);
-                    cmd.Parameters.AddWithValue("@Image", food.Image);
-                    cmd.Parameters.AddWithValue("@ID", food.FoodID);
-
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                }
-            }
+            string query = "UPDATE Food SET FoodName = @Name, Price = @Price, IntakePrice = @IntakePrice, Inventory = @Inventory, Image = @Image WHERE FoodID = @ID";
+            Database.Instance.ExecuteNonQuery(query, new object[] { food.FoodName, food.Price, food.IntakePrice, food.Inventory, food.Image, food.FoodID });
         }
 
         public string GetCategoryName(int categoryID)
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                string query = "SELECT CategoryName FROM Category WHERE CategoryID = @CatID";
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@CatID", categoryID);
-                    conn.Open();
-                    return cmd.ExecuteScalar().ToString();
-                }
-            }
+            string query = "SELECT CategoryName FROM Category WHERE CategoryID = @CatID";
+            return Database.Instance.ExecuteScalar(query, new object[] { categoryID }).ToString();
         }
     }
 }

@@ -11,51 +11,28 @@ namespace DAL
 {
     public class AddFoodDAL
     {
-        private string connectionString = "Data Source=LAPTOP-KKNF42CS\\SQLEXPRESS;Initial Catalog=QLyCafeInternet;Integrated Security=True";
+<<<<<<< HEAD
+        Database database = Database.Instance;
+=======
+        private string connectionString = ConnectionConstants.DefaultConnection;
+>>>>>>> 5013b1028f1d2872d792ded0e7a3651d34896112
 
         public DataTable GetCategories()
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                string query = "SELECT CategoryName, CategoryID FROM Category";
-                SqlDataAdapter da = new SqlDataAdapter(query, conn);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                return dt;
-            }
+            string query = "SELECT CategoryName, CategoryID FROM Category";
+            return database.ExecuteQuery(query);
         }
 
         public void SaveFood(FoodDTO food)
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                string query = "INSERT INTO Food (FoodName, Price, IntakePrice, Inventory, CategoryID, Image) VALUES (@Name, @Price, @IntakePrice, @Inventory, @CategoryID, @Image)";
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@Name", food.FoodName);
-                    cmd.Parameters.AddWithValue("@Price", food.Price);
-                    cmd.Parameters.AddWithValue("@IntakePrice", food.IntakePrice);
-                    cmd.Parameters.AddWithValue("@Inventory", food.Inventory);
-                    cmd.Parameters.AddWithValue("@CategoryID", food.CategoryID);
-                    cmd.Parameters.AddWithValue("@Image", food.Image);
-
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                }
-            }
+            string query = "INSERT INTO Food (FoodName, Price, IntakePrice, Inventory, CategoryID, Image) VALUES (@Name, @Price, @IntakePrice, @Inventory, @CategoryID, @Image)";
+            database.ExecuteNonQuery(query, new object[] { food.FoodName, food.Price, food.IntakePrice, food.Inventory, food.CategoryID, food.Image });
         }
+
         public int GetCategoryID(string categoryName)
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                string query = "SELECT CategoryID FROM Category WHERE CategoryName = @CatName";
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@CatName", categoryName);
-                    conn.Open();
-                    return Convert.ToInt32(cmd.ExecuteScalar());
-                }
-            }
+            string query = "SELECT CategoryID FROM Category WHERE CategoryName = @CatName";
+            return Convert.ToInt32(database.ExecuteScalar(query, new object[] { categoryName }));
         }
     }
 }

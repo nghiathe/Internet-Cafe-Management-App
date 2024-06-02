@@ -48,6 +48,14 @@
             this.tpKt = new System.Windows.Forms.DateTimePicker();
             this.rbKhoang = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnReset = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.rbChi = new System.Windows.Forms.RadioButton();
+            this.rbThu = new System.Windows.Forms.RadioButton();
+            this.txtNhanvien = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.gbKhoang = new System.Windows.Forms.GroupBox();
             this.rbHai = new System.Windows.Forms.RadioButton();
             this.gbHai = new System.Windows.Forms.GroupBox();
@@ -59,7 +67,9 @@
             this.label7 = new System.Windows.Forms.Label();
             this.txtProfitMonth = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.btnPrint = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.gbKhoang.SuspendLayout();
             this.gbHai.SuspendLayout();
             this.SuspendLayout();
@@ -77,12 +87,13 @@
             this.lvBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvBill.ForeColor = System.Drawing.SystemColors.WindowText;
             this.lvBill.HideSelection = false;
-            this.lvBill.Location = new System.Drawing.Point(0, 36);
+            this.lvBill.Location = new System.Drawing.Point(1, 100);
             this.lvBill.Name = "lvBill";
-            this.lvBill.Size = new System.Drawing.Size(762, 577);
+            this.lvBill.Size = new System.Drawing.Size(762, 515);
             this.lvBill.TabIndex = 0;
             this.lvBill.UseCompatibleStateImageBehavior = false;
             this.lvBill.View = System.Windows.Forms.View.Details;
+            this.lvBill.SelectedIndexChanged += new System.EventHandler(this.lvBill_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -248,6 +259,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.groupBox2);
+            this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.lvBill);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.SystemColors.HighlightText;
@@ -257,6 +270,102 @@
             this.groupBox1.TabIndex = 66;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Lịch sử thanh toán";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.btnReset);
+            this.groupBox2.Controls.Add(this.label12);
+            this.groupBox2.Controls.Add(this.rbChi);
+            this.groupBox2.Controls.Add(this.rbThu);
+            this.groupBox2.Controls.Add(this.txtNhanvien);
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.groupBox2.Location = new System.Drawing.Point(6, 37);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(751, 57);
+            this.groupBox2.TabIndex = 73;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Bộ lọc";
+            // 
+            // btnReset
+            // 
+            this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReset.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnReset.Location = new System.Drawing.Point(609, 20);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(125, 30);
+            this.btnReset.TabIndex = 72;
+            this.btnReset.Text = "Làm mới bộ lọc";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.SystemColors.Control;
+            this.label12.Location = new System.Drawing.Point(6, 25);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(79, 20);
+            this.label12.TabIndex = 65;
+            this.label12.Text = "Nhân viên";
+            // 
+            // rbChi
+            // 
+            this.rbChi.AutoSize = true;
+            this.rbChi.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbChi.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.rbChi.Location = new System.Drawing.Point(496, 23);
+            this.rbChi.Name = "rbChi";
+            this.rbChi.Size = new System.Drawing.Size(50, 24);
+            this.rbChi.TabIndex = 71;
+            this.rbChi.TabStop = true;
+            this.rbChi.Text = "Chi";
+            this.rbChi.UseVisualStyleBackColor = true;
+            // 
+            // rbThu
+            // 
+            this.rbThu.AutoSize = true;
+            this.rbThu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbThu.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.rbThu.Location = new System.Drawing.Point(424, 23);
+            this.rbThu.Name = "rbThu";
+            this.rbThu.Size = new System.Drawing.Size(54, 24);
+            this.rbThu.TabIndex = 69;
+            this.rbThu.TabStop = true;
+            this.rbThu.Text = "Thu";
+            this.rbThu.UseVisualStyleBackColor = true;
+            // 
+            // txtNhanvien
+            // 
+            this.txtNhanvien.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNhanvien.Location = new System.Drawing.Point(91, 22);
+            this.txtNhanvien.Name = "txtNhanvien";
+            this.txtNhanvien.Size = new System.Drawing.Size(304, 26);
+            this.txtNhanvien.TabIndex = 70;
+            this.txtNhanvien.TextChanged += new System.EventHandler(this.txtNhanvien_TextChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.SystemColors.Control;
+            this.label9.Location = new System.Drawing.Point(-306, 31);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(79, 20);
+            this.label9.TabIndex = 65;
+            this.label9.Text = "Nhân viên";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.SystemColors.Control;
+            this.label11.Location = new System.Drawing.Point(17, 49);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(0, 20);
+            this.label11.TabIndex = 72;
             // 
             // gbKhoang
             // 
@@ -399,12 +508,23 @@
             this.label10.TabIndex = 61;
             this.label10.Text = "Lợi nhuận";
             // 
+            // btnPrint
+            // 
+            this.btnPrint.Location = new System.Drawing.Point(870, 571);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(117, 32);
+            this.btnPrint.TabIndex = 69;
+            this.btnPrint.Text = "In hóa đơn";
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
             // frmBilling
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1062, 615);
+            this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.gbHai);
             this.Controls.Add(this.rbHai);
             this.Controls.Add(this.gbKhoang);
@@ -414,6 +534,9 @@
             this.Name = "frmBilling";
             this.Text = "frmHoaDon";
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.gbKhoang.ResumeLayout(false);
             this.gbKhoang.PerformLayout();
             this.gbHai.ResumeLayout(false);
@@ -456,5 +579,17 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtProfitOtherMonth;
         private System.Windows.Forms.Label label8;
+<<<<<<< HEAD
+        private System.Windows.Forms.Button btnPrint;
+=======
+        private System.Windows.Forms.RadioButton rbThu;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtNhanvien;
+        private System.Windows.Forms.RadioButton rbChi;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button btnReset;
+>>>>>>> 5013b1028f1d2872d792ded0e7a3651d34896112
     }
 }

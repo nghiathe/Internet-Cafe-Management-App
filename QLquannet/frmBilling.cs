@@ -15,71 +15,31 @@ namespace QLquannet
 {
     public partial class frmBilling : Form
     {
+        decimal inc = 0;
+        decimal outc = 0;
         decimal profit = 0;
-
         CultureInfo ct = new CultureInfo("vi-VN");
+        private DateTimePicker lastSelectedDateTimePicker;
         public frmBilling()
         {
             InitializeComponent();
             LoadDate();
-            ShowBill(tpBd.Value, tpKt.Value);
-        }
-        void LoadDate()
-        {
-            DateTime today = DateTime.Now;
-            tpBd.Value = new DateTime(today.Year, today.Month, 1);
-            tpKt.Value = tpBd.Value.AddMonths(1);
-            tpTs.Value = new DateTime(today.Year, today.Month, 1);
-            tpTe.Value = tpTs.Value.AddMonths(-1);
-        }
-        void ShowBill(DateTime ngaybd, DateTime ngaykt)
-        {
-            lvBill.Items.Clear();
-            List<BillingHis> lb = BillingDAL.Instance.loadBillList(ngaybd, ngaykt);
-            decimal income = 0;
-            decimal outcome = 0;
-            foreach (BillingHis b in lb)
-            {
-                ListViewItem lvi = new ListViewItem(b.BDate.ToString());
-                lvi.SubItems.Add(b.EmName.ToString());
-                if (b.BType == 1)
-                {
-                    lvi.SubItems.Add("Thu");
-                }
-                else
-                {
-                    lvi.SubItems.Add("Chi");
-                }
+            ShowBill(tpBd.MinDate, tpKt.MaxDate);
 
-                lvi.SubItems.Add(b.SCost.ToString());
-                lvi.SubItems.Add(b.MCost.ToString());
-                lvi.SubItems.Add(b.FCost.ToString());
-                lvi.SubItems.Add(b.Amount.ToString());
-                if (b.BType == 1)
-                {
-                    income += b.Amount;
-                }
-                else
-                {
-                    outcome += b.Amount;
-                }
-
-                lvBill.Items.Add(lvi);
-            }
-            profit = income - outcome;
-            txtIn.Text = income.ToString("c", ct);
-            txtOut.Text = outcome.ToString("c", ct);
-            txtProfit.Text = (profit).ToString("c", ct);
+            txtNhanvien.TextChanged += new EventHandler(txtNhanvien_TextChanged);
+            rbThu.CheckedChanged += new EventHandler(rbThuChi_CheckedChanged);
+            rbChi.CheckedChanged += new EventHandler(rbThuChi_CheckedChanged);
 
         }
-   
 
+        #region Events
         private void rbKhoang_CheckedChanged(object sender, EventArgs e)
         {
-            if(rbKhoang.Checked)
+            if (rbKhoang.Checked)
             {
                 gbKhoang.Enabled = true;
                 ShowBill(tpBd.Value, tpKt.Value);
+                ResetValue();
             }
             else
             {
@@ -90,12 +50,19 @@ namespace QLquannet
         private void tpKt_ValueChanged(object sender, EventArgs e)
         {
             ShowBill(tpBd.Value, tpKt.Value);
+            txtIn.Text = inc.ToString("c", ct);
+            txtOut.Text = outc.ToString("c", ct);
+            txtProfit.Text = profit.ToString("c", ct);
+            ResetValue();
         }
 
         private void tpBd_ValueChanged(object sender, EventArgs e)
         {
             ShowBill(tpBd.Value, tpKt.Value);
-            
+            txtIn.Text = inc.ToString("c", ct);
+            txtOut.Text = outc.ToString("c", ct);
+            txtProfit.Text = profit.ToString("c", ct);
+            ResetValue();
         }
 
         private void rbHai_CheckedChanged(object sender, EventArgs e)
@@ -103,26 +70,203 @@ namespace QLquannet
             if (rbHai.Checked)
             {
                 gbHai.Enabled = true;
+                ResetValue();
             }
             else
             {
                 gbHai.Enabled = false;
             }
         }
+
         private void tpTs_ValueChanged(object sender, EventArgs e)
         {
-            DateTime fday = new DateTime(tpTs.Value.Year, tpTs.Value.Month, 1);
-            DateTime lday = fday.AddMonths(1);
-            ShowBill(fday, lday);
-            txtProfitMonth.Text = (profit).ToString("c", ct);
+            lastSelectedDateTimePicker = tpTs;
+            ApplyDateFilter();
+            ResetValue();
         }
 
         private void tpTe_ValueChanged(object sender, EventArgs e)
         {
-            DateTime fday = new DateTime(tpTe.Value.Year, tpTe.Value.Month, 1);
-            DateTime lday = fday.AddMonths(1);
-            ShowBill(fday, lday);
-            txtProfitOtherMonth.Text = (profit).ToString("c", ct);
+            lastSelectedDateTimePicker = tpTe;
+            ApplyDateFilter();
+            ResetValue();
         }
+
+<<<<<<< HEAD
+        private void lvBill_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            Model.frmPrintRecipe PR = new Model.frmPrintRecipe();
+            PR.Show();
+        }
+=======
+        private void rbThuChi_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbKhoang.Checked)
+            {
+                int? billingType = null;
+                if (rbThu.Checked) billingType = 1;
+                if (rbChi.Checked) billingType = 0;
+                ShowBill(tpBd.Value, tpKt.Value, txtNhanvien.Text, billingType);
+                txtIn.Text = inc.ToString("c", ct);
+                txtOut.Text = outc.ToString("c", ct);
+                txtProfit.Text = profit.ToString("c", ct);
+            }
+            else if (rbHai.Checked)
+            {
+                int? billingType = null;
+                if (rbThu.Checked) billingType = 1;
+                if (rbChi.Checked) billingType = 0;
+                DateTime fday = new DateTime(lastSelectedDateTimePicker.Value.Year, lastSelectedDateTimePicker.Value.Month, 1);
+                DateTime lday = fday.AddMonths(1);
+                ShowBill(fday, lday, txtNhanvien.Text, billingType);
+
+                if (lastSelectedDateTimePicker == tpTs)
+                {
+                    txtProfitMonth.Text = (profit).ToString("c", ct);
+                }
+                else if (lastSelectedDateTimePicker == tpTe)
+                {
+                    txtProfitOtherMonth.Text = (profit).ToString("c", ct);
+                }
+            }
+            else
+            {
+                int? billingType = null;
+                if (rbThu.Checked) billingType = 1;
+                if (rbChi.Checked) billingType = 0;
+                ShowBill(tpBd.MinDate, tpKt.MaxDate, txtNhanvien.Text, billingType);
+            }
+        }
+
+        private void txtNhanvien_TextChanged(object sender, EventArgs e)
+        {
+            if (rbKhoang.Checked)
+            {
+                int? billingType = null;
+                if (rbThu.Checked) billingType = 1;
+                if (rbChi.Checked) billingType = 0;
+                ShowBill(tpBd.Value, tpKt.Value, txtNhanvien.Text, billingType);
+                txtIn.Text = inc.ToString("c", ct);
+                txtOut.Text = outc.ToString("c", ct);
+                txtProfit.Text = profit.ToString("c", ct);
+            }
+            else if (rbHai.Checked)
+            {
+                int? billingType = null;
+                if (rbThu.Checked) billingType = 1;
+                if (rbChi.Checked) billingType = 0;
+                DateTime fday = new DateTime(lastSelectedDateTimePicker.Value.Year, lastSelectedDateTimePicker.Value.Month, 1);
+                DateTime lday = fday.AddMonths(1);
+                ShowBill(fday, lday, txtNhanvien.Text, billingType);
+
+                if (lastSelectedDateTimePicker == tpTs)
+                {
+                    txtProfitMonth.Text = (profit).ToString("c", ct);
+                }
+                else if (lastSelectedDateTimePicker == tpTe)
+                {
+                    txtProfitOtherMonth.Text = (profit).ToString("c", ct);
+                }
+            }
+            else
+            {
+                int? billingType = null;
+                if (rbThu.Checked) billingType = 1;
+                if (rbChi.Checked) billingType = 0;
+                ShowBill(tpBd.MinDate, tpKt.MaxDate, txtNhanvien.Text, billingType);
+            }
+
+        }
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            ResetValue();
+        }
+        #endregion
+
+        #region Methods
+
+        void LoadDate()
+        {
+            DateTime today = DateTime.Now;
+            tpBd.Value = new DateTime(today.Year, today.Month, 1);
+            tpKt.Value = tpBd.Value.AddMonths(1);
+            tpTs.Value = new DateTime(today.Year, today.Month, 1);
+            tpTe.Value = tpTs.Value.AddMonths(-1);
+        }
+
+        void ShowBill(DateTime ngaybd, DateTime ngaykt, string search = "", int? billingType = null)
+        {
+            lvBill.Items.Clear();
+            List<Billing> lb = BillingDAL.Instance.loadBillList(ngaybd, ngaykt);
+            decimal income = 0;
+            decimal outcome = 0;
+            foreach (Billing b in lb)
+            {
+                if ((string.IsNullOrEmpty(search) || b.EmName.ToString().Contains(search)) && (!billingType.HasValue || b.BType == billingType.Value))
+                {
+                    ListViewItem lvi = new ListViewItem(b.BDate.ToString());
+                    lvi.SubItems.Add(b.EmName.ToString());
+                    if (b.BType == 1)
+                    {
+                        lvi.SubItems.Add("Thu");
+                    }
+                    else
+                    {
+                        lvi.SubItems.Add("Chi");
+                    }
+
+                    lvi.SubItems.Add(b.SCost.ToString());
+                    lvi.SubItems.Add(b.MCost.ToString());
+                    lvi.SubItems.Add(b.FCost.ToString());
+                    lvi.SubItems.Add(b.Amount.ToString());
+                    if (b.BType == 1)
+                    {
+                        income += b.Amount;
+                    }
+                    else
+                    {
+                        outcome += b.Amount;
+                    }
+
+                    lvBill.Items.Add(lvi);
+                }
+            }
+            inc = income;
+            outc = outcome;
+            profit = income - outcome;
+        }
+
+        void ApplyDateFilter()
+        {
+            if (lastSelectedDateTimePicker != null)
+            {
+                DateTime fday = new DateTime(lastSelectedDateTimePicker.Value.Year, lastSelectedDateTimePicker.Value.Month, 1);
+                DateTime lday = fday.AddMonths(1);
+                ShowBill(fday, lday);
+
+                if (lastSelectedDateTimePicker == tpTs)
+                {
+                    txtProfitMonth.Text = (profit).ToString("c", ct);
+                }
+                else if (lastSelectedDateTimePicker == tpTe)
+                {
+                    txtProfitOtherMonth.Text = (profit).ToString("c", ct);
+                }
+            }
+        }
+
+        void ResetValue()
+        {
+            txtNhanvien.Text = "";
+            rbChi.Checked = false;
+            rbThu.Checked = false;
+        } 
+        #endregion
+>>>>>>> 5013b1028f1d2872d792ded0e7a3651d34896112
     }
 }

@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 namespace DTO
 {
     #region ---------- Code cua HungTuLenh 
-    public class BillingHis
+    public class Billing
     {
-        public BillingHis(DateTime bdate, string emname, byte btype, decimal scost, decimal mcost, decimal fcost,  decimal amount)
+        public Billing(DateTime bdate, string emname, byte btype, decimal scost, decimal mcost, decimal fcost,  decimal amount)
         {
             this.BDate = bdate;
             this.EmName = emname;
@@ -23,7 +23,7 @@ namespace DTO
             this.Amount = amount;
         }
 
-        public BillingHis(DataRow row)
+        public Billing(DataRow row)
         {
             this.BDate = (DateTime)row["billingdate"];
             this.EmName = row["employeename"].ToString();
