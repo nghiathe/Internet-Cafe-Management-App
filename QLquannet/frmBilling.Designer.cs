@@ -579,9 +579,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtProfitOtherMonth;
         private System.Windows.Forms.Label label8;
-<<<<<<< HEAD
-        private System.Windows.Forms.Button btnPrint;
-=======
         private System.Windows.Forms.RadioButton rbThu;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtNhanvien;
@@ -590,6 +587,5 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btnReset;
->>>>>>> 5013b1028f1d2872d792ded0e7a3651d34896112
     }
 }

@@ -92,18 +92,6 @@ namespace QLquannet
             ResetValue();
         }
 
-<<<<<<< HEAD
-        private void lvBill_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnPrint_Click(object sender, EventArgs e)
-        {
-            Model.frmPrintRecipe PR = new Model.frmPrintRecipe();
-            PR.Show();
-        }
-=======
         private void rbThuChi_CheckedChanged(object sender, EventArgs e)
         {
             if (rbKhoang.Checked)
@@ -267,6 +255,5 @@ namespace QLquannet
             rbThu.Checked = false;
         } 
         #endregion
->>>>>>> 5013b1028f1d2872d792ded0e7a3651d34896112
     }
 }
