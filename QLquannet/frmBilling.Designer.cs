@@ -67,7 +67,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.txtProfitMonth = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.btnPrint = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gbKhoang.SuspendLayout();
@@ -93,7 +93,6 @@
             this.lvBill.TabIndex = 0;
             this.lvBill.UseCompatibleStateImageBehavior = false;
             this.lvBill.View = System.Windows.Forms.View.Details;
-            this.lvBill.SelectedIndexChanged += new System.EventHandler(this.lvBill_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -298,7 +297,6 @@
             this.btnReset.TabIndex = 72;
             this.btnReset.Text = "Làm mới bộ lọc";
             this.btnReset.UseVisualStyleBackColor = true;
-            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // label12
             // 
@@ -344,7 +342,6 @@
             this.txtNhanvien.Name = "txtNhanvien";
             this.txtNhanvien.Size = new System.Drawing.Size(304, 26);
             this.txtNhanvien.TabIndex = 70;
-            this.txtNhanvien.TextChanged += new System.EventHandler(this.txtNhanvien_TextChanged);
             // 
             // label9
             // 
@@ -508,15 +505,15 @@
             this.label10.TabIndex = 61;
             this.label10.Text = "Lợi nhuận";
             // 
-            // btnPrint
+            // button1
             // 
-            this.btnPrint.Location = new System.Drawing.Point(870, 571);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(117, 32);
-            this.btnPrint.TabIndex = 69;
-            this.btnPrint.Text = "In hóa đơn";
-            this.btnPrint.UseVisualStyleBackColor = true;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            this.button1.Location = new System.Drawing.Point(835, 573);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(136, 30);
+            this.button1.TabIndex = 69;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // frmBilling
             // 
@@ -524,7 +521,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1062, 615);
-            this.Controls.Add(this.btnPrint);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.gbHai);
             this.Controls.Add(this.rbHai);
             this.Controls.Add(this.gbKhoang);
@@ -587,5 +584,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.Button button1;
     }
 }

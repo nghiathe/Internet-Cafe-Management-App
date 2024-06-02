@@ -253,7 +253,13 @@ namespace QLquannet
             txtNhanvien.Text = "";
             rbChi.Checked = false;
             rbThu.Checked = false;
-        } 
+        }
         #endregion
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Model.frmPrintRecipe fp= new Model.frmPrintRecipe();
+            fp.Show();
+        }
     }
 }

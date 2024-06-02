@@ -11,11 +11,10 @@ namespace DAL
 {
     public class EditFoodDAL
     {
-<<<<<<< HEAD
-=======
+
         private string connectionString = ConnectionConstants.DefaultConnection;
 
->>>>>>> 5013b1028f1d2872d792ded0e7a3651d34896112
+
         public DataTable GetAllFood()
         {
             string query = "SELECT * FROM Food";
