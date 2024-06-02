@@ -32,6 +32,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.ConfigurationManager.8.0.0\lib\net462\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -45,6 +49,7 @@
     <Compile Include="AddFoodDAL.cs" />
     <Compile Include="BillingDAL.cs" />
     <Compile Include="ComputerDAL.cs" />
+    <Compile Include="ConnectionConstants.cs" />
     <Compile Include="MaintainanceDAL.cs" />
     <Compile Include="ZoneDAL.cs" />
     <Compile Include="Database.cs" />
@@ -60,6 +65,9 @@
       <Project>{86d1afe9-33db-4fb0-be07-92fb56f83396}</Project>
       <Name>DTO</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

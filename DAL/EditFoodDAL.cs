@@ -11,7 +11,7 @@ namespace DAL
 {
     public class EditFoodDAL
     {
-        private string connectionString = "Data Source=LAPTOP-KKNF42CS\\SQLEXPRESS;Initial Catalog=QLyCafeInternet;Integrated Security=True";
+        private string connectionString = ConnectionConstants.DefaultConnection;
 
         public DataTable GetAllFood()
         {

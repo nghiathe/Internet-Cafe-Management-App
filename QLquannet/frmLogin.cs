@@ -44,7 +44,6 @@ namespace QLquannet
                 this.Hide();
                 Main main = new Main();
                 main.Show();
-            
             }
             else
             {
