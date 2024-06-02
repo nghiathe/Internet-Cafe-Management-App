@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BillingHis.cs" />
+    <Compile Include="Billing.cs" />
     <Compile Include="Computer.cs" />
     <Compile Include="Maintainance.cs" />
     <Compile Include="Zone.cs" />
