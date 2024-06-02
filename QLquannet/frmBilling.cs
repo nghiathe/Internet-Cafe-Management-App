@@ -31,60 +31,11 @@ namespace QLquannet
             rbChi.CheckedChanged += new EventHandler(rbThuChi_CheckedChanged);
 
         }
-        void LoadDate()
-        {
-            DateTime today = DateTime.Now;
-            tpBd.Value = new DateTime(today.Year, today.Month, 1);
-            tpKt.Value = tpBd.Value.AddMonths(1);
-            tpTs.Value = new DateTime(today.Year, today.Month, 1);
-            tpTe.Value = tpTs.Value.AddMonths(-1);
-        }
-        void ShowBill(DateTime ngaybd, DateTime ngaykt, string search = "", int? billingType = null)
-        {
-            lvBill.Items.Clear();
-            List<Billing> lb = BillingDAL.Instance.loadBillList(ngaybd, ngaykt);
-            decimal income = 0;
-            decimal outcome = 0;
-            foreach (Billing b in lb)
-            {
-                if ((string.IsNullOrEmpty(search) || b.EmName.ToString().Contains(search)) && (!billingType.HasValue || b.BType == billingType.Value))
-                {
-                    ListViewItem lvi = new ListViewItem(b.BDate.ToString());
-                    lvi.SubItems.Add(b.EmName.ToString());
-                    if (b.BType == 1)
-                    {
-                        lvi.SubItems.Add("Thu");
-                    }
-                    else
-                    {
-                        lvi.SubItems.Add("Chi");
-                    }
 
-                    lvi.SubItems.Add(b.SCost.ToString());
-                    lvi.SubItems.Add(b.MCost.ToString());
-                    lvi.SubItems.Add(b.FCost.ToString());
-                    lvi.SubItems.Add(b.Amount.ToString());
-                    if (b.BType == 1)
-                    {
-                        income += b.Amount;
-                    }
-                    else
-                    {
-                        outcome += b.Amount;
-                    }
-
-                    lvBill.Items.Add(lvi);
-                }
-            }
-            inc = income;
-            outc = outcome;
-            profit = income - outcome;
-        }
-   
-
+        #region Events
         private void rbKhoang_CheckedChanged(object sender, EventArgs e)
         {
-            if(rbKhoang.Checked)
+            if (rbKhoang.Checked)
             {
                 gbKhoang.Enabled = true;
                 ShowBill(tpBd.Value, tpKt.Value);
@@ -126,6 +77,7 @@ namespace QLquannet
                 gbHai.Enabled = false;
             }
         }
+
         private void tpTs_ValueChanged(object sender, EventArgs e)
         {
             lastSelectedDateTimePicker = tpTs;
@@ -139,13 +91,27 @@ namespace QLquannet
             ApplyDateFilter();
             ResetValue();
         }
-        private void ApplyDateFilter()
+
+        private void rbThuChi_CheckedChanged(object sender, EventArgs e)
         {
-            if (lastSelectedDateTimePicker != null)
+            if (rbKhoang.Checked)
             {
+                int? billingType = null;
+                if (rbThu.Checked) billingType = 1;
+                if (rbChi.Checked) billingType = 0;
+                ShowBill(tpBd.Value, tpKt.Value, txtNhanvien.Text, billingType);
+                txtIn.Text = inc.ToString("c", ct);
+                txtOut.Text = outc.ToString("c", ct);
+                txtProfit.Text = profit.ToString("c", ct);
+            }
+            else if (rbHai.Checked)
+            {
+                int? billingType = null;
+                if (rbThu.Checked) billingType = 1;
+                if (rbChi.Checked) billingType = 0;
                 DateTime fday = new DateTime(lastSelectedDateTimePicker.Value.Year, lastSelectedDateTimePicker.Value.Month, 1);
                 DateTime lday = fday.AddMonths(1);
-                ShowBill(fday, lday);
+                ShowBill(fday, lday, txtNhanvien.Text, billingType);
 
                 if (lastSelectedDateTimePicker == tpTs)
                 {
@@ -155,6 +121,13 @@ namespace QLquannet
                 {
                     txtProfitOtherMonth.Text = (profit).ToString("c", ct);
                 }
+            }
+            else
+            {
+                int? billingType = null;
+                if (rbThu.Checked) billingType = 1;
+                if (rbChi.Checked) billingType = 0;
+                ShowBill(tpBd.MinDate, tpKt.MaxDate, txtNhanvien.Text, billingType);
             }
         }
 
@@ -197,27 +170,72 @@ namespace QLquannet
             }
 
         }
-
-        private void rbThuChi_CheckedChanged(object sender, EventArgs e)
+        private void btnReset_Click(object sender, EventArgs e)
         {
-            if (rbKhoang.Checked)
+            ResetValue();
+        }
+        #endregion
+
+        #region Methods
+
+        void LoadDate()
+        {
+            DateTime today = DateTime.Now;
+            tpBd.Value = new DateTime(today.Year, today.Month, 1);
+            tpKt.Value = tpBd.Value.AddMonths(1);
+            tpTs.Value = new DateTime(today.Year, today.Month, 1);
+            tpTe.Value = tpTs.Value.AddMonths(-1);
+        }
+
+        void ShowBill(DateTime ngaybd, DateTime ngaykt, string search = "", int? billingType = null)
+        {
+            lvBill.Items.Clear();
+            List<Billing> lb = BillingDAL.Instance.loadBillList(ngaybd, ngaykt);
+            decimal income = 0;
+            decimal outcome = 0;
+            foreach (Billing b in lb)
             {
-                int? billingType = null;
-                if (rbThu.Checked) billingType = 1;
-                if (rbChi.Checked) billingType = 0;
-                ShowBill(tpBd.Value, tpKt.Value, txtNhanvien.Text, billingType);
-                txtIn.Text = inc.ToString("c", ct);
-                txtOut.Text = outc.ToString("c", ct);
-                txtProfit.Text = profit.ToString("c", ct);
+                if ((string.IsNullOrEmpty(search) || b.EmName.ToString().Contains(search)) && (!billingType.HasValue || b.BType == billingType.Value))
+                {
+                    ListViewItem lvi = new ListViewItem(b.BDate.ToString());
+                    lvi.SubItems.Add(b.EmName.ToString());
+                    if (b.BType == 1)
+                    {
+                        lvi.SubItems.Add("Thu");
+                    }
+                    else
+                    {
+                        lvi.SubItems.Add("Chi");
+                    }
+
+                    lvi.SubItems.Add(b.SCost.ToString());
+                    lvi.SubItems.Add(b.MCost.ToString());
+                    lvi.SubItems.Add(b.FCost.ToString());
+                    lvi.SubItems.Add(b.Amount.ToString());
+                    if (b.BType == 1)
+                    {
+                        income += b.Amount;
+                    }
+                    else
+                    {
+                        outcome += b.Amount;
+                    }
+
+                    lvBill.Items.Add(lvi);
+                }
             }
-            else if (rbHai.Checked)
+            inc = income;
+            outc = outcome;
+            profit = income - outcome;
+        }
+
+        void ApplyDateFilter()
+        {
+            if (lastSelectedDateTimePicker != null)
             {
-                int? billingType = null;
-                if (rbThu.Checked) billingType = 1;
-                if (rbChi.Checked) billingType = 0;
                 DateTime fday = new DateTime(lastSelectedDateTimePicker.Value.Year, lastSelectedDateTimePicker.Value.Month, 1);
                 DateTime lday = fday.AddMonths(1);
-                ShowBill(fday, lday, txtNhanvien.Text, billingType);
+                ShowBill(fday, lday);
 
                 if (lastSelectedDateTimePicker == tpTs)
                 {
@@ -228,24 +246,14 @@ namespace QLquannet
                     txtProfitOtherMonth.Text = (profit).ToString("c", ct);
                 }
             }
-            else
-            {
-                int? billingType = null;
-                if (rbThu.Checked) billingType = 1;
-                if (rbChi.Checked) billingType = 0;
-                ShowBill(tpBd.MinDate, tpKt.MaxDate, txtNhanvien.Text, billingType);
-            }
         }
+
         void ResetValue()
         {
             txtNhanvien.Text = "";
             rbChi.Checked = false;
             rbThu.Checked = false;
-        }
-
-        private void btnReset_Click(object sender, EventArgs e)
-        {
-            ResetValue();
-        }
+        } 
+        #endregion
     }
 }
