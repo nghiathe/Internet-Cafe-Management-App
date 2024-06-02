@@ -27,7 +27,7 @@ namespace DAL
             private set { Database.instance = value; }
         }
 
-        private string connectionSTR = "Data Source=LAPTOP-KKNF42CS\\SQLEXPRESS;Initial Catalog=QLyCafeInternet;Integrated Security=True";
+        private string connectionSTR = ConnectionConstants.DefaultConnection;
 
         public DataTable ExecuteQuery(string query, object[] parameter = null)
         {
