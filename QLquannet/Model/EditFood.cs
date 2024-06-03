@@ -106,7 +106,7 @@ namespace QLquannet.FoodModel
                     Price = Convert.ToDecimal(txtPrice.Text),
                     IntakePrice = Convert.ToDecimal(txtIntakePrice.Text),
                     Inventory = Convert.ToInt32(txtInventory.Text),
-                    CategoryID = CatID,
+                    //CategoryID = CatID,
                     Image = imageBytes
                 };
 
@@ -131,15 +131,15 @@ namespace QLquannet.FoodModel
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    // Get the path of specified file
                     imagePath = openFileDialog.FileName;
-
-                    // Display the image in PictureBox
+                    if (imagePath != null)
+                    {
+                        picFood.Image = Image.FromFile(imagePath);
+                        imageBytes = ImageToByteArray(imagePath);
+                    }
                 }
             }
-            
-            picFood.Image = Image.FromFile(imagePath);
-            imageBytes = ImageToByteArray(imagePath);
+
         }
 
         public static byte[] ImageToByteArray(string imagePath)
