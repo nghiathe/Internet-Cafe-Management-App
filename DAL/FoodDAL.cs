@@ -31,13 +31,13 @@ namespace DAL
         public int GetComputerID(string ComputerName)
         {
             string query = "SELECT c.ComputerID FROM Computer AS c INNER JOIN UsageSession AS us ON c.ComputerID = us.ComputerID WHERE c.ComputerName = @ComputerName";
-            return Convert.ToInt32(Database.Instance.ExecuteScalar(query, new object[] { "@ComputerName", ComputerName }));
+            return Convert.ToInt32(Database.Instance.ExecuteScalar(query, new object[] {  ComputerName }));
         }
 
         public int GetBillingID(int ComputerID)
         {
             string query = "SELECT BillingID, EndTime FROM UsageSession WHERE ComputerID = @ComID";
-            DataTable dt = Database.Instance.ExecuteQuery(query, new object[] { "@ComID", ComputerID });
+            DataTable dt = Database.Instance.ExecuteQuery(query, new object[] { ComputerID });
 
             if (dt.Rows.Count > 0)
             {
@@ -51,7 +51,7 @@ namespace DAL
         public void SaveFoodDetails(int BillingID, int FoodID, int Count, decimal Cost)
         {
             string query = "INSERT INTO FoodDetail (BillingID, FoodID, Count, Cost) VALUES (@BillingID, @FoodID, @Count, @Cost)";
-            Database.Instance.ExecuteNonQuery(query, new object[] { "@BillingID", BillingID, "@FoodID", FoodID, "@Count", Count, "@Cost", Cost });
+            Database.Instance.ExecuteNonQuery(query, new object[] { BillingID, FoodID, Count, Cost });
         }
 
         public DataTable LoadComboBoxData(string query)
