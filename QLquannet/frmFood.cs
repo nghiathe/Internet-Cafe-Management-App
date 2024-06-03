@@ -114,11 +114,35 @@ namespace QLquannet
                     PImage = food.FoodImage
                 };
 
+                // Add click event handler
+                ucproduct.PictureBoxClick += UcProduct_Clicked;
+
                 ProductPanel.Controls.Add(ucproduct);
             }
             ProductPanel.ResumeLayout();
         }
 
+        private void UcProduct_Clicked(object sender, EventArgs e)
+        {
+            ucProduct clickedProduct = sender as ucProduct;
+            bool productFound = false;
+            foreach (DataGridViewRow item in dgvFoodList.Rows)
+            {
+                if (Convert.ToInt32(item.Cells["ID"].Value) == clickedProduct.id)
+                {
+                    int quantity = int.Parse(item.Cells["Qty"].Value.ToString()) + 1;
+                    item.Cells["Qty"].Value = quantity;
+                    item.Cells["Amount"].Value = quantity * decimal.Parse(item.Cells["Price"].Value.ToString());
+
+                    productFound = true;
+                    break;
+                }
+            }
+            if (!productFound)
+            {
+                dgvFoodList.Rows.Add(new object[] { 0, clickedProduct.id, clickedProduct.PName, 1, clickedProduct.PPrice, clickedProduct.PPrice });
+            }
+        }
 
         private void txtSearchFood_TextChanged(object sender, EventArgs e)
         {
@@ -134,7 +158,7 @@ namespace QLquannet
             txtSearchFood.SelectAll();
         }
 
-        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void dgvFoodList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             int count = 0;
             foreach (DataGridViewRow r in dgvFoodList.Rows)
@@ -168,7 +192,7 @@ namespace QLquannet
             lnTongtien.Text = totalAmount.ToString("N2");
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnThem_Click(object sender, EventArgs e)
         {
             FoodModel.frmAddFood AF = new FoodModel.frmAddFood();
             AF.Show();

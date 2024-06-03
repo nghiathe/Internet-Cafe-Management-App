@@ -57,6 +57,7 @@ namespace DTO
 
         public FoodOnMenu(DataRow row)
         {
+            this.FoodID = (byte)row["foodid"];
             this.FoodName = row["foodname"].ToString();
             this.Price = (decimal)row["price"];
             this.FoodImage = Image.FromStream(new MemoryStream((byte[])row["image"]));
