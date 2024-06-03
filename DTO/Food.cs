@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
+using System.IO;
+using System.Drawing;
 
 namespace DTO
 {
@@ -51,9 +48,36 @@ namespace DTO
         public decimal Price { get => price; set => price = value; }
         public decimal Cost { get => cost; set => cost = value; }
     }
+    public class FoodOnMenu
+    {
+        int foodID;
+        string foodName;
+        decimal price;
+        Image foodImage;
+
+        public FoodOnMenu(DataRow row)
+        {
+            this.FoodName = row["foodname"].ToString();
+            this.Price = (decimal)row["price"];
+            this.FoodImage = Image.FromStream(new MemoryStream((byte[])row["image"]));
+        }
+        public int FoodID { get => foodID; set => foodID = value; }
+        public string FoodName { get => foodName; set => foodName = value; }
+        public decimal Price { get => price; set => price = value; }
+        public Image FoodImage { get => foodImage; set => foodImage = value; }
+
+    }
     public class Category
     {
+        private int categoryID;
+        private string categoryName;
+        public Category(DataRow row)
+        {
+            this.CategoryID = (int)row["categoryid"];
+            this.CategoryName = row["categoryname"].ToString();
+        }
 
-        public string CategoryName { get; set; }
+        public int CategoryID { get => categoryID; set => categoryID = value; }
+        public string CategoryName { get => categoryName; set => categoryName = value; }
     }
 }

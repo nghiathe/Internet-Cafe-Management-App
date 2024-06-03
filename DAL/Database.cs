@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace DAL
 {
@@ -30,8 +29,6 @@ namespace DAL
         private string connectionSTR = "Data Source=.;Initial Catalog=QlyCafeInternet;Integrated Security=True";
         //private string connectionSTR = "Data Source=DESKTOP-N234E7R\\SQLEXPRESS01;Initial Catalog=Qlquannet;Integrated Security=True";
         //private string connectionSTR = "Data Source=LAPTOP-KKNF42CS\\SQLEXPRESS;Initial Catalog=QLyCafeInternet;Integrated Security=True";
- 
-
 
         public DataTable ExecuteQuery(string query, object[] parameter = null)
         {

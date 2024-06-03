@@ -1,17 +1,10 @@
 ﻿using DAL;
 using DTO;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QLquannet.FoodModel
@@ -58,23 +51,10 @@ namespace QLquannet.FoodModel
             }
         }
 
-        public static byte[] ImageToByteArray(string imagePath)
-        {
-            using (Image image = Image.FromFile(imagePath))
-            {
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    image.Save(ms, ImageFormat.Jpeg);
-                    return ms.ToArray();
-                }
-            }
-        }
-
-
         private void btnConfirmAddFood_Click(object sender, EventArgs e)
         {
 
-                byte[] imageBytes = ImageToByteArray(imagePath);
+                byte[] imageBytes = ImageProcess.ImageToByteArray(imagePath);
                 CheckCboID();
 
                 Food food = new Food

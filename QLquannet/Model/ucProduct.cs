@@ -35,7 +35,6 @@ namespace QLquannet
             get { return txtImage.Image; }
             set { txtImage.Image = value; }
         }
-
         private void txtImage_Click(object sender, EventArgs e)
         {
             onSelect?.Invoke(this, e);

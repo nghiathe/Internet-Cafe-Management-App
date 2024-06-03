@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using DTO;
-using static System.Net.Mime.MediaTypeNames;
-using System.IO;
 
 namespace DAL
 {
@@ -37,13 +35,13 @@ namespace DAL
             return Database.Instance.ExecuteQuery(query);
         }
 
-        public int GetComputerID(string ComputerName)
+        public int GetComputerIDByName(string ComputerName)
         {
             string query = "SELECT c.ComputerID FROM Computer AS c INNER JOIN UsageSession AS us ON c.ComputerID = us.ComputerID WHERE c.ComputerName = @ComputerName";
             return Convert.ToInt32(Database.Instance.ExecuteScalar(query, new object[] {  ComputerName }));
         }
 
-        public int GetBillingID(int ComputerID)
+        public int GetBillingIDByComID(int ComputerID)
         {
             string query = "SELECT BillingID, EndTime FROM UsageSession WHERE ComputerID = @ComID";
             DataTable dt = Database.Instance.ExecuteQuery(query, new object[] { ComputerID });
@@ -69,39 +67,4 @@ namespace DAL
         }
     }
 
-    public class FoodOnComDAL
-    {
-        private static FoodOnComDAL instance;
-
-        public static FoodOnComDAL Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new FoodOnComDAL();
-                }
-                return FoodOnComDAL.instance;
-            }
-            private set { FoodOnComDAL.instance = value; }
-        }
-
-        private FoodOnComDAL() { }
-
-        public List<FoodOnCom> GetFoodDetail(byte comid)
-        {
-            List<FoodOnCom> fl = new List<FoodOnCom>();
-
-            string query = "GetFoodDetailsByComputerID @ComputerID";
-            DataTable dt = Database.Instance.ExecuteQuery(query, new object[] { comid });
-
-            foreach (DataRow dr in dt.Rows)
-            {
-                FoodOnCom f = new FoodOnCom(dr);
-                fl.Add(f);
-            }
-
-            return fl;
-        }
-    }
 }

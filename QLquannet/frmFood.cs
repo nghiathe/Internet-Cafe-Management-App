@@ -1,5 +1,7 @@
 ﻿using DAL;
+using DTO;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -18,13 +20,62 @@ namespace QLquannet
 
         private void Food_Load(object sender, EventArgs e)
         {
-            AddCategory();
+            LoadCategories();
             ProductPanel.Controls.Clear();
-            LoadProduct();
+            LoadMenu();
+            //LoadProduct();
             LoadComboBox(cboZone, "Select ZoneName From Zone");
         }
 
-        private void AddCategory()
+
+
+        //private void AddItem(DTO.Food food)
+        //{
+        //    var w = new ucProduct()
+        //    {
+        //        PName = food.FoodName,
+        //        PPrice = food.Price.ToString(),
+        //        PCategory = food.CategoryName,
+        //        PImage = Image.FromStream(new MemoryStream(food.Image)),
+        //        id = food.FoodID
+        //    };
+
+        //    ProductPanel.Controls.Add(w);
+
+        //    w.onSelect += (ss, ee) =>
+        //    {
+        //        var wdg = (ucProduct)ss;
+
+        //        foreach (DataGridViewRow item in dgvFoodList.Rows)
+        //        {
+        //            if (Convert.ToInt32(item.Cells["ID"].Value) == wdg.id)
+        //            {
+        //                item.Cells["Qty"].Value = int.Parse(item.Cells["Qty"].Value.ToString()) + 1;
+        //                item.Cells["Amount"].Value = decimal.Parse(item.Cells["Qty"].Value.ToString()) * decimal.Parse(item.Cells["Price"].Value.ToString());
+        //                return;
+        //            }
+        //        }
+        //        dgvFoodList.Rows.Add(new object[] { 0, wdg.id, wdg.PName, 1, wdg.PPrice, wdg.PPrice });
+        //    };
+        //}
+
+        //private void LoadProduct()
+        //{
+        //    DataTable dt = FoodDAL.Instance.GetAllFoods();
+        //    foreach (DataRow item in dt.Rows)
+        //    {
+        //        DTO.Food food = new DTO.Food
+        //        {
+        //            FoodID = Convert.ToInt32(item["FoodID"]),
+        //            FoodName = item["FoodName"].ToString(),
+        //            CategoryName = item["CategoryName"].ToString(),
+        //            Price = Convert.ToDecimal(item["Price"]),
+        //            Image = (byte[])item["Image"]
+        //        };
+        //        AddItem(food);
+        //    }
+        //}
+        private void LoadCategories()
         {
             DataTable dt = FoodDAL.Instance.GetCategories();
             foreach (DataRow row in dt.Rows)
@@ -32,70 +83,42 @@ namespace QLquannet
                 Button b = new Button
                 {
                     BackColor = Color.White,
-                    Size = new Size(90, 50),
+                    Size = new Size(80, 50),
                     Text = row["CategoryName"].ToString()
                 };
 
-                b.Click += new EventHandler(b_Click);
+                b.Click += new EventHandler(btn_Click);
                 CategoryPanel.Controls.Add(b);
             }
         }
 
-        private void b_Click(object sender, EventArgs e)
+        private void btn_Click(object sender, EventArgs e)
         {
-            Button b = (Button)sender;
-            foreach (ucProduct pro in ProductPanel.Controls)
-            {
-                pro.Visible = pro.PCategory.ToLower().Contains(b.Text.Trim().ToLower());
-            }
+            Button btn = (Button)sender;
+            LoadMenu(btn.Text);
         }
 
-        private void AddItem(DTO.Food food)
+        private void LoadMenu(string categoryName = null)
         {
-            var w = new ucProduct()
+            ProductPanel.Controls.Clear();
+            ProductPanel.SuspendLayout();
+
+            List<FoodOnMenu> foodls = FoodOnMenuDAL.Instance.LoadMenu(categoryName);
+            foreach (FoodOnMenu food in foodls)
             {
-                PName = food.FoodName,
-                PPrice = food.Price.ToString(),
-                PCategory = food.CategoryName,
-                PImage = Image.FromStream(new MemoryStream(food.Image)),
-                id = food.FoodID
-            };
-
-            ProductPanel.Controls.Add(w);
-
-            w.onSelect += (ss, ee) =>
-            {
-                var wdg = (ucProduct)ss;
-
-                foreach (DataGridViewRow item in dgvFoodList.Rows)
+                ucProduct ucproduct = new ucProduct
                 {
-                    if (Convert.ToInt32(item.Cells["ID"].Value) == wdg.id)
-                    {
-                        item.Cells["Qty"].Value = int.Parse(item.Cells["Qty"].Value.ToString()) + 1;
-                        item.Cells["Amount"].Value = decimal.Parse(item.Cells["Qty"].Value.ToString()) * decimal.Parse(item.Cells["Price"].Value.ToString());
-                        return;
-                    }
-                }
-                dgvFoodList.Rows.Add(new object[] { 0, wdg.id, wdg.PName, 1, wdg.PPrice, wdg.PPrice });
-            };
-        }
-
-        private void LoadProduct()
-        {
-            DataTable dt = FoodDAL.Instance.GetAllFoods();
-            foreach (DataRow item in dt.Rows)
-            {
-                DTO.Food food = new DTO.Food
-                {
-                    FoodID = Convert.ToInt32(item["FoodID"]),
-                    FoodName = item["FoodName"].ToString(),
-                    CategoryName = item["CategoryName"].ToString(),
-                    Price = Convert.ToDecimal(item["Price"]),
-                    Image = (byte[])item["Image"]
+                    id = food.FoodID,
+                    PName = food.FoodName,
+                    PPrice = food.Price.ToString(),
+                    PImage = food.FoodImage
                 };
-                AddItem(food);
+
+                ProductPanel.Controls.Add(ucproduct);
             }
+            ProductPanel.ResumeLayout();
         }
+
 
         private void txtSearchFood_TextChanged(object sender, EventArgs e)
         {
@@ -191,14 +214,14 @@ namespace QLquannet
         private void btnReset_Click(object sender, EventArgs e)
         {
             dgvFoodList.Rows.Clear();
-            LoadProduct();
+            //LoadProduct();
             lbTongtien.Text = "0.00";
         }
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            int computerID = FoodDAL.Instance.GetComputerID(cboCom.Text);
-            int billingID = FoodDAL.Instance.GetBillingID(computerID);
+            int computerID = FoodDAL.Instance.GetComputerIDByName(cboCom.Text);
+            int billingID = FoodDAL.Instance.GetBillingIDByComID(computerID);
 
             if (cboCom.SelectedIndex.Equals(-1))
             {
