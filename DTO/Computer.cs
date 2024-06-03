@@ -10,12 +10,9 @@ namespace DTO
     public class Computer
     {
 
-        public Computer(byte comid, string comname, byte comstatus) 
-        { 
-            this.ComId = comid;
-            this.ComName = comname;
-            this.ComStatus = comstatus;
-        }
+        private byte comId;
+        private string comName;
+        private byte comStatus;
         public Computer(DataRow row)
         {
             this.ComId = (byte)row["computerid"];
@@ -23,10 +20,6 @@ namespace DTO
             this.ComStatus = (byte)row["computerstatus"]; ;
 
         }
-
-        private byte comId;
-        private string comName;
-        private byte comStatus;
 
         public byte ComId { get => comId; set => comId = value; }
         public string ComName { get => comName; set => comName = value; }

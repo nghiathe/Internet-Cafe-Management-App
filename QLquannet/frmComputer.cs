@@ -211,9 +211,9 @@ namespace QLquannet
         void LoadFoodDetail(byte comid)
         {
             lvFood.Items.Clear();
-            List<FoodPerCom> fl = FoodPerComDAL.Instance.GetFoodDetail(comid);
+            List<FoodOnCom> fl = FoodOnComDAL.Instance.GetFoodDetail(comid);
             decimal fcost = 0m;
-            foreach (FoodPerCom f in fl)
+            foreach (FoodOnCom f in fl)
             {
                 ListViewItem lvi = new ListViewItem(f.FoodName.ToString());
                 lvi.SubItems.Add(f.Price.ToString());

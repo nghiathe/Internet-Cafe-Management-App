@@ -10,23 +10,6 @@ namespace DTO
     #region ---------- Code cua HungTuLenh 
     public class Zone
     {
-        
-        public Zone(byte comid, string comname, string zonename, byte comstatus, decimal priceph, string cpumodel, string gpumodel, string hddmodel, string ssdmodel, string mousemodel, string keyboardmodel, string monitormodel)
-        {
-            this.ComId = comid;
-            this.ComName = comname;
-            this.ZoneName = zonename;
-            this.ComStatus = comstatus;
-            this.PricePh = priceph;
-            this.CpuModel = cpumodel;
-            this.Gpumodel = gpumodel;
-            this.HddModel = hddmodel;
-            this.SsdModel = ssdmodel;
-            this.MouseModel = mousemodel;
-            this.KeyboardModel = keyboardmodel;
-            this.MonitorModel = monitormodel;
-
-        }
         public Zone (DataRow row)
         {
             this.ComId = (byte)row["computerid"];
@@ -42,8 +25,6 @@ namespace DTO
             this.KeyboardModel = row["keyboardmodel"].ToString();;
             this.MonitorModel = row["monitormodel"].ToString(); ;
         }
-
-        public Zone() { }
 
         private byte comId;
         private string comName;

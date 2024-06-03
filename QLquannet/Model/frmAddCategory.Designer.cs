@@ -1,6 +1,6 @@
 ﻿namespace QLquannet.Model
 {
-    partial class AddCategory
+    partial class frmAddCategory
     {
         /// <summary>
         /// Required designer variable.

@@ -49,14 +49,12 @@
     <Compile Include="AddFoodDAL.cs" />
     <Compile Include="BillingDAL.cs" />
     <Compile Include="ComputerDAL.cs" />
-    <Compile Include="ConnectionConstants.cs" />
     <Compile Include="MaintainanceDAL.cs" />
     <Compile Include="PrintRecipeDAL.cs" />
     <Compile Include="ZoneDAL.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="EditFoodDAL.cs" />
     <Compile Include="FoodDAL.cs" />
-    <Compile Include="FoodPerComDAL.cs" />
     <Compile Include="LoginDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UsageSessionDAL.cs" />

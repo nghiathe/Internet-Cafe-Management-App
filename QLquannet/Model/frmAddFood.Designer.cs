@@ -1,6 +1,6 @@
 ﻿namespace QLquannet.FoodModel
 {
-    partial class AddFood
+    partial class frmAddFood
     {
         /// <summary>
         /// Required designer variable.

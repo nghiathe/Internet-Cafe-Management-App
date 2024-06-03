@@ -9,6 +9,10 @@ namespace DTO
 {
     public class Maintainance
     {
+        private int maintainId;
+        private int billingId;
+        private string component;
+        private string description;
         public Maintainance(DataRow row) 
         {
             this.MaintainId = (int)row["maintainanceid"];
@@ -21,11 +25,6 @@ namespace DTO
             }
             
         }
-        private int maintainId;
-        private int billingId;
-        private string component;
-        private string description;
-
 
         public int BillingId { get => billingId; set => billingId = value; }
         public string Component { get => component; set => component = value; }
