@@ -16,6 +16,9 @@ namespace DTO
         public int CategoryID { get; set; }
         public decimal Price { get; set; }
         public byte[] Image { get; set; }
+
+        public int Count { get; set; }
+        public decimal Cost { get; set; }
     }
 
     public class CategoryDTO
