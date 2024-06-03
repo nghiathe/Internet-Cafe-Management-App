@@ -20,7 +20,7 @@ namespace QLquannet.FoodModel
     {
         public int CatID;
         public string CatName;
-        public string FoodID;
+        public int FoodID;
         public string imagePath;
         public byte[] imageBytes;
         private EditFoodDAL editFoodDAL;
@@ -46,9 +46,10 @@ namespace QLquannet.FoodModel
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0) // Ensure that the row index is valid
+            if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                FoodID = Convert.ToInt32(row.Cells["FoodID"].Value.ToString());
                 txtFoodName.Text = row.Cells["FoodName"].Value.ToString();
                 txtPrice.Text = row.Cells["Price"].Value.ToString();
                 txtIntakePrice.Text = row.Cells["IntakePrice"].Value.ToString();

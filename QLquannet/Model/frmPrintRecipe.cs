@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace QLquannet.Model
 {
     public partial class frmPrintRecipe : Form
     {
-        
+
         private PrintRecipeDAL prDAL;
         public frmPrintRecipe()
         {
@@ -40,43 +41,21 @@ namespace QLquannet.Model
 
         private void btnPrintRecipe_Click(object sender, EventArgs e)
         {
+            
             if (dgvBilling.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Please select a row first.");
                 return;
             }
 
-
             DataGridViewRow selectedRow = dgvBilling.SelectedRows[0];
-            string billingID = selectedRow.Cells["BillingID"].Value.ToString();
+            int billingID = Convert.ToInt32(selectedRow.Cells["BillingID"].Value.ToString());
 
-            string connectionString = "Data Source=DESKTOP-N234E7R\\SQLEXPRESS01;Initial Catalog=Qlquannet;Integrated Security=True"; // Update with your connection string
-            string sql1 = "Select us.ComputerID, z.ZoneName, z.PricePerHour, us.Duration, us.Cost,us.BillingID, b.BillingDate, e.LastName, b.Amount From Computer as c inner join Zone as z on c.ZoneID = z.ZoneID inner join UsageSession as us on c.ComputerID = us.ComputerID inner join Billing as b on us.BillingID = b.BillingID inner join Employee as e on e.EmployeeID = b.EmployeeID where us.BillingID = @BillingID";
-            string sql2 = "SELECT f.FoodName, fd.Count, f.Price, fd.Cost " +
-                 "FROM Food AS f " +
-                 "INNER JOIN FoodDetail AS fd ON f.FoodID = fd.FoodID " +
-                 "WHERE fd.BillingID = @BillingID";
-            DataTable billingInfo = new DataTable();
+           
+            DataTable billingInfo = prDAL.GetBillingInfo( billingID);
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                using (SqlCommand cmd = new SqlCommand(sql1, conn))
-                {
-                    cmd.Parameters.AddWithValue("@BillingID", billingID);
-                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                    adapter.Fill(billingInfo);
-                }
-            }
-            DataTable foodDetails = new DataTable();
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                using (SqlCommand cmd = new SqlCommand(sql2, conn))
-                {
-                    cmd.Parameters.AddWithValue("@BillingID", billingID);
-                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                    adapter.Fill(foodDetails);
-                }
-            }
+            DataTable foodDetails = prDAL.GetFoodDetails(billingID);
+            
 
             if (billingInfo.Rows.Count == 0)
             {
@@ -84,21 +63,20 @@ namespace QLquannet.Model
                 return;
             }
 
-            // Khởi động chương trình Excel
             COMExcel.Application exApp = new COMExcel.Application();
-            COMExcel.Workbook exBook; //Trong 1 chương trình Excel có nhiều Workbook
-            COMExcel.Worksheet exSheet; //Trong 1 Workbook có nhiều Worksheet
+            COMExcel.Workbook exBook;
+            COMExcel.Worksheet exSheet;
             COMExcel.Range exRange;
 
             exBook = exApp.Workbooks.Add(COMExcel.XlWBATemplate.xlWBATWorksheet);
             exSheet = exBook.Worksheets[1];
 
-            // Định dạng chung
+
             exRange = exSheet.Cells[1, 1];
             exRange.Range["A1:B3"].Font.Size = 10;
             exRange.Range["A1:B3"].Font.Name = "Times new roman";
             exRange.Range["A1:B3"].Font.Bold = true;
-            exRange.Range["A1:B3"].Font.ColorIndex = 5; //Màu xanh da trời
+            exRange.Range["A1:B3"].Font.ColorIndex = 5;
             exRange.Range["A1:A1"].ColumnWidth = 7;
             exRange.Range["B1:B1"].ColumnWidth = 15;
             exRange.Range["A1:B1"].MergeCells = true;
@@ -116,12 +94,12 @@ namespace QLquannet.Model
             exRange.Range["C2:E2"].Font.Size = 16;
             exRange.Range["C2:E2"].Font.Name = "Times new roman";
             exRange.Range["C2:E2"].Font.Bold = true;
-            exRange.Range["C2:E2"].Font.ColorIndex = 3; //Màu đỏ
+            exRange.Range["C2:E2"].Font.ColorIndex = 3;
             exRange.Range["C2:E2"].MergeCells = true;
             exRange.Range["C2:E2"].HorizontalAlignment = COMExcel.XlHAlign.xlHAlignCenter;
             exRange.Range["C2:E2"].Value = "HÓA ĐƠN";
 
-            // Biểu diễn thông tin chung của hóa đơn bán
+
             DataRow row = billingInfo.Rows[0];
             exRange.Range["B6:C9"].Font.Size = 12;
             exRange.Range["B6:C9"].Font.Name = "Times new roman";
@@ -167,12 +145,12 @@ namespace QLquannet.Model
 
             for (int i = 0; i < foodDetails.Rows.Count; i++)
             {
-                exSheet.Cells[2][i + 14, 1] = i + 1; // STT
+                exSheet.Cells[2][i + 14, 1] = i + 1; 
                 exSheet.Cells[2][i + 14, 2] = foodDetails.Rows[i]["FoodName"].ToString(); // Tên món
                 exSheet.Cells[2][i + 14, 3] = foodDetails.Rows[i]["Count"].ToString(); // Số lượng
                 exSheet.Cells[2][i + 14, 4] = foodDetails.Rows[i]["Price"].ToString(); // Đơn giá
                 exSheet.Cells[2][i + 14, 5] = foodDetails.Rows[i]["Cost"].ToString(); // Thành tiền
-                 // Đơn giá
+
             }
             int totalRowIndex = foodDetails.Rows.Count + 14;
             exSheet.Cells[totalRowIndex, 5] = "Tổng tiền:";
@@ -187,7 +165,7 @@ namespace QLquannet.Model
 
             exRange = exSheet.Range["B13", "F" + (13 + foodDetails.Rows.Count)];
             exRange.Borders.LineStyle = COMExcel.XlLineStyle.xlContinuous;
-            //exRange.Range["A1:B1"].MergeCells = true;
+
             exRange.HorizontalAlignment = COMExcel.XlHAlign.xlHAlignCenter;
 
             exRange = exSheet.Range["A1", "G" + (employeeSignatureRowIndex + 7)];
