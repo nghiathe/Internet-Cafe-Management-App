@@ -35,6 +35,7 @@
             this.btnCnfirmAddCat = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.txtCat = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -42,6 +43,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.button5);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -110,6 +112,18 @@
             this.txtCat.Size = new System.Drawing.Size(137, 26);
             this.txtCat.TabIndex = 31;
             // 
+            // button1
+            // 
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Image = global::QLquannet.Properties.Resources.close__1_;
+            this.button1.Location = new System.Drawing.Point(351, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(30, 30);
+            this.button1.TabIndex = 2;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // AddCategory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -139,5 +153,6 @@
         private System.Windows.Forms.Button btnCnfirmAddCat;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtCat;
+        private System.Windows.Forms.Button button1;
     }
 }

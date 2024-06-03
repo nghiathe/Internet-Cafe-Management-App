@@ -22,6 +22,7 @@ namespace QLquannet.FoodModel
         public string CatName;
         public string FoodID;
         public string imagePath;
+        public byte[] imageBytes;
         private EditFoodDAL editFoodDAL;
         public EditFood()
         {
@@ -55,7 +56,7 @@ namespace QLquannet.FoodModel
                 CatID = Convert.ToInt32(row.Cells["CategoryID"].Value.ToString());
                 CheckCboID();
                 // Lấy ảnh từ cơ sở dữ liệu
-                byte[] imageBytes = (byte[])row.Cells["Image"].Value;
+                imageBytes = (byte[])row.Cells["Image"].Value;
                 if (imageBytes != null && imageBytes.Length > 0)
                 {
                     using (var ms = new System.IO.MemoryStream(imageBytes))
@@ -97,12 +98,7 @@ namespace QLquannet.FoodModel
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                byte[] imageBytes = null;
-                if (!string.IsNullOrEmpty(imagePath))
-                {
-                    imageBytes = ImageToByteArray(imagePath);
-                }
-
+                
                 FoodDTO food = new FoodDTO
                 {
                     FoodID = Convert.ToInt32(FoodID),
@@ -141,7 +137,9 @@ namespace QLquannet.FoodModel
                     // Display the image in PictureBox
                 }
             }
+            
             picFood.Image = Image.FromFile(imagePath);
+            imageBytes = ImageToByteArray(imagePath);
         }
 
         public static byte[] ImageToByteArray(string imagePath)

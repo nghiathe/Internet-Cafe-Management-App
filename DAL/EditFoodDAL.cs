@@ -29,7 +29,7 @@ namespace DAL
 
         public void UpdateFood(FoodDTO food)
         {
-            string query = "UPDATE Food SET FoodName = @Name, Price = @Price, IntakePrice = @IntakePrice, Inventory = @Inventory, Image = @Image WHERE FoodID = @ID";
+            string query = "UPDATE Food SET FoodName = @Name , Price = @Price , IntakePrice = @IntakePrice , Inventory = @Inventory , Image = @Image WHERE FoodID = @ID";
             Database.Instance.ExecuteNonQuery(query, new object[] { food.FoodName, food.Price, food.IntakePrice, food.Inventory, food.Image, food.FoodID });
         }
 

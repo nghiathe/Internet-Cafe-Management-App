@@ -20,19 +20,32 @@ namespace QLquannet.Model
 
         private void btnCnfirmAddCat_Click(object sender, EventArgs e)
         {
-            string categoryName = txtCat.Text;
-            AddCategoryDAL addCategoryDAL = new AddCategoryDAL();
-
-            bool isAdded = addCategoryDAL.AddCategory(categoryName);
-            if (isAdded)
+            if(txtCat.Text == "")
             {
-                MessageBox.Show("Thêm loại đồ ăn thành công!");
-                this.Close();
+                MessageBox.Show("Chưa nhập tên loại món!");
             }
             else
             {
-                MessageBox.Show("Không thể thêm loại đồ ăn!");
+                string categoryName = txtCat.Text;
+
+                AddCategoryDAL addCategoryDAL = new AddCategoryDAL();
+
+                bool isAdded = addCategoryDAL.AddCategory(categoryName);
+                if (isAdded)
+                {
+                    MessageBox.Show("Thêm loại đồ ăn thành công!");
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Không thể thêm loại đồ ăn!");
+                }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

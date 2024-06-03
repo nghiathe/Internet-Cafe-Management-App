@@ -17,7 +17,7 @@ namespace QLquannet.Model
 {
     public partial class frmPrintRecipe : Form
     {
-        private string connn = "Data Source=DESKTOP-N234E7R\\SQLEXPRESS01;Initial Catalog=Qlquannet;Integrated Security=True";
+        
         private PrintRecipeDAL prDAL;
         public frmPrintRecipe()
         {
