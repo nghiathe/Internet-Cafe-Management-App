@@ -50,7 +50,7 @@ namespace DAL
 
         public void SaveFoodDetails(int BillingID, int FoodID, int Count, decimal Cost)
         {
-            string query = "INSERT INTO FoodDetail (BillingID, FoodID, Count, Cost) VALUES (@BillingID, @FoodID, @Count, @Cost)";
+            string query = "INSERT INTO FoodDetail (BillingID, FoodID, Count, Cost) VALUES ( @BillingID , @FoodID , @Count , @Cost )";
             Database.Instance.ExecuteNonQuery(query, new object[] { BillingID, FoodID, Count, Cost });
         }
 
