@@ -8,7 +8,6 @@ namespace DTO
     public class Food
     {
         private int foodID;
-        private string categoryName;
         private decimal intakePrice;
         private int inventory;
         private int categoryID;
@@ -22,13 +21,12 @@ namespace DTO
             this.FoodID = (byte)row["foodid"];
             this.FoodName = row["foodname"].ToString();
             this.categoryID = (int)row["categoryid"];
-            this.Count = row["count"] is DBNull ? 0 : (int)row["count"];
+            this.Count = row["count"] is DBNull ? 0 : Convert.ToInt32(row["count"]);
             this.Price = (decimal)row["price"];
-            this.Cost = row["cost"] is DBNull ? 0 : (decimal)row["cost"];
+            this.Cost =row["cost"] is DBNull ? 0 : Convert.ToDecimal(row["cost"]);
             this.Image = Image.FromStream(new MemoryStream((byte[])row["image"]));
         }
         public int FoodID { get => foodID; set => foodID = value; }
-        public string CategoryName { get => categoryName; set => categoryName = value; }
         public decimal IntakePrice { get => intakePrice; set => intakePrice = value; }
         public int Inventory { get => inventory; set => inventory = value; }
         public int CategoryID { get => categoryID; set => categoryID = value; }

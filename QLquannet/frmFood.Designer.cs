@@ -284,8 +284,8 @@
             this.dgvFoodList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvFoodList.Size = new System.Drawing.Size(560, 588);
             this.dgvFoodList.TabIndex = 4;
-            this.dgvFoodList.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvFoodList_CellFormatting);
-            //this.dgvFoodList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFoodList_CellValueChanged);
+            //this.dgvFoodList.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvFoodList_CellFormatting);
+            this.dgvFoodList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFoodList_CellValueChanged);
             // 
             // No
             // 
@@ -322,13 +322,13 @@
             this.Qty.MinimumWidth = 30;
             this.Qty.Name = "Qty";
             this.Qty.ReadOnly = true;
-            this.Qty.Width = 125;
+            this.Qty.Width = 80;
             // 
             // Price
             // 
             this.Price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Price.HeaderText = "Đơn giá";
-            this.Price.MinimumWidth = 100;
+            this.Price.MinimumWidth = 80;
             this.Price.Name = "Price";
             this.Price.ReadOnly = true;
             this.Price.Width = 125;
@@ -337,7 +337,7 @@
             // 
             this.Amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Amount.HeaderText = "Thành tiên";
-            this.Amount.MinimumWidth = 100;
+            this.Amount.MinimumWidth = 80;
             this.Amount.Name = "Amount";
             this.Amount.ReadOnly = true;
             this.Amount.Width = 125;

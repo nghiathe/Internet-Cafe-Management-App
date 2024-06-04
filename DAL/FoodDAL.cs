@@ -44,9 +44,8 @@ namespace DAL
         {
             StringBuilder builder = new StringBuilder();
             List<Food> productls = new List<Food>();
-            builder.Append(@"SELECT f.foodid, f.categoryid, f.foodname, fd.count, f.price, fd.cost, 
-                            f.image FROM food f left join fooddetail fd on fd.foodid = f.foodid 
-                            join category c on c.categoryid = f.categoryid");
+            builder.Append(@"SELECT f.foodid, f.categoryid, f.foodname, 0 AS count, f.price, 0 AS cost, f.image
+                            FROM food f JOIN category c ON c.categoryid = f.categoryid");
 
             DataTable dt;
             string query = builder.ToString();
@@ -76,24 +75,17 @@ namespace DAL
             return Database.Instance.ExecuteQuery(query);
         }
 
-        public int GetComputerIDByName(string ComputerName)
+        public int GetUncheckBillingID(byte comId)
         {
-            string query = "SELECT c.ComputerID FROM Computer AS c INNER JOIN UsageSession AS us ON c.ComputerID = us.ComputerID WHERE c.ComputerName = @ComputerName";
-            return Convert.ToInt32(Database.Instance.ExecuteScalar(query, new object[] { ComputerName }));
-        }
+            string query = "SELECT BillingID FROM UsageSession WHERE ComputerID = @ComID and endtime is null";
+            object result = Database.Instance.ExecuteScalar(query, new object[] { comId });
 
-        public int GetBillingIDByComID(int ComputerID)
-        {
-            string query = "SELECT BillingID, EndTime FROM UsageSession WHERE ComputerID = @ComID";
-            DataTable dt = Database.Instance.ExecuteQuery(query, new object[] { ComputerID });
-
-            if (dt.Rows.Count > 0)
+            if (result == null || result == DBNull.Value)
             {
-                object endTime = dt.Rows[0]["EndTime"];
-                if (endTime == DBNull.Value)
-                    return Convert.ToInt32(dt.Rows[0]["BillingID"]);
+                return -1; // Trả về -1 nếu không có kết quả hoặc kết quả là null
             }
-            return -1;
+
+            return (int)result;
         }
 
         public void SaveFoodDetails(int BillingID, int FoodID, int Count, decimal Cost)

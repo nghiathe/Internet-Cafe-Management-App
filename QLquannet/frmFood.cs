@@ -25,8 +25,7 @@ namespace QLquannet
             ProductPanel.Controls.Clear();
             LoadMenu();
             LoadcboZone();
-            //cboCom.DataSource = null;
-            //LoadComboBox(cboZone, "Select ZoneName From Zone");
+            dgvFoodList.Rows.Clear();
         }
 
         private void LoadcboZone()
@@ -34,14 +33,12 @@ namespace QLquannet
             cboZone.DataSource = ZoneDAL.Instance.getZones();
             cboZone.DisplayMember = "ZoneName";
             cboZone.ValueMember = "ZoneID";
-            cboZone.SelectedIndex = -1;
         }
         private void LoadcboCom(byte zoneid)
         {
             cboCom.DataSource = ComputerDAL.Instance.GetComs(zoneid);
             cboCom.DisplayMember = "ComputerName";
             cboCom.ValueMember = "ComputerID";
-            cboCom.SelectedIndex = -1;
         }
         private void LoadCategories()
         {
@@ -82,7 +79,6 @@ namespace QLquannet
                     PImage = food.Image
                 };
 
-                // Add click event handler
                 ucproduct.PictureBoxClick += UcProduct_Clicked;
 
                 ProductPanel.Controls.Add(ucproduct);
@@ -109,6 +105,7 @@ namespace QLquannet
             {
                 dgvFoodList.Rows.Add(new object[] { 0, clickedProduct.id, clickedProduct.PName, 1, clickedProduct.PPrice, clickedProduct.PPrice });
             }
+
         }
 
         private void txtSearchFood_TextChanged(object sender, EventArgs e)
@@ -125,15 +122,15 @@ namespace QLquannet
             txtSearchFood.SelectAll();
         }
 
-        private void dgvFoodList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            int count = 0;
-            foreach (DataGridViewRow r in dgvFoodList.Rows)
-            {
-                count++;
-                r.Cells[0].Value = count;
-            }
-        }
+        //private void dgvFoodList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        //{
+        //    int count = 0;
+        //    foreach (DataGridViewRow r in dgvFoodList.Rows)
+        //    {
+        //        count++;
+        //        r.Cells[0].Value = count;
+        //    }
+        //}
 
         //private decimal TinhTongTien(DataGridView datagridView)
         //{
@@ -163,35 +160,38 @@ namespace QLquannet
         {
             List<Food> foods = FoodDAL.Instance.GetFoodDetail(comid);
 
-            dgvFoodList.Rows.Clear(); // Clear existing rows (optional)
+            dgvFoodList.Rows.Clear();
 
+            int i = 1;
             foreach (Food food in foods)
             {
-                DataGridViewRow row = new DataGridViewRow();
-
-                foreach (PropertyInfo property in food.GetType().GetProperties())
-                {
-                    object value = property.GetValue(food);
-                    row.Cells.Add(new DataGridViewTextBoxCell() { Value = value });
-                }
-
-                dgvFoodList.Rows.Add(row);
+                int rowIndex = dgvFoodList.Rows.Add();
+                DataGridViewRow newRow = dgvFoodList.Rows[rowIndex];
+                newRow.Cells[0].Value = i; i++;
+                newRow.Cells[1].Value = food.FoodID;
+                newRow.Cells[2].Value = food.FoodName;
+                newRow.Cells[3].Value = food.Count;
+                newRow.Cells[4].Value = food.Price;
+                newRow.Cells[5].Value = food.Cost;
             }
         }
 
-
-
-        //        foreach (DataGridViewRow item in dgvFoodList.Rows)
-        //            {
-        //                if (Convert.ToInt32(item.Cells["ID"].Value) == clickedProduct.id)
-        //                {
-        //                    int quantity = int.Parse(item.Cells["Qty"].Value.ToString()) + 1;
-        //        item.Cells["Qty"].Value = quantity;
-        //                    item.Cells["Amount"].Value = quantity* decimal.Parse(item.Cells["Price"].Value.ToString());
-        //        productFound = true;
-        //                    break;
-        //                }
-        //}
+        private void HandlelblTongTien()
+        {
+            decimal amount = 0;
+            foreach(DataGridViewRow row in dgvFoodList.Rows)
+            {
+                amount += Convert.ToDecimal(row.Cells[5].Value);
+            }
+            lbTongtien.Text = amount.ToString();
+        }
+        private void dgvFoodList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 5)
+            {
+                HandlelblTongTien();
+            }
+        }
 
         private void btnThem_Click(object sender, EventArgs e)
         {
@@ -207,6 +207,7 @@ namespace QLquannet
 
         private void cboZone_SelectedIndexChanged(object sender, EventArgs e)
         {
+            dgvFoodList.Rows.Clear();
             if (cboZone.SelectedIndex != -1)
             {
                 DataRowView selectedRow = (DataRowView)cboZone.SelectedItem;
@@ -216,6 +217,7 @@ namespace QLquannet
 
         private void cboCom_SelectedIndexChanged(object sender, EventArgs e)
         {
+            dgvFoodList.Rows.Clear();
             if (cboCom.SelectedIndex != -1)
             {
                 DataRowView selectedRow = (DataRowView)cboCom.SelectedItem;
@@ -243,8 +245,9 @@ namespace QLquannet
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            int computerID = FoodDAL.Instance.GetComputerIDByName(cboCom.Text);
-            int billingID = FoodDAL.Instance.GetBillingIDByComID(computerID);
+            DataRowView selectedRow = (DataRowView)cboCom.SelectedItem;
+            byte computerID = (byte)selectedRow["ComputerID"];
+            int billingID = FoodDAL.Instance.GetUncheckBillingID(computerID);
 
             if (cboCom.SelectedIndex.Equals(-1))
             {
