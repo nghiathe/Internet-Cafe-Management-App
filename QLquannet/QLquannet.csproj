@@ -48,11 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Food.cs">
+    <Compile Include="frmFood.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Food.Designer.cs">
-      <DependentUpon>Food.cs</DependentUpon>
+    <Compile Include="frmFood.Designer.cs">
+      <DependentUpon>frmFood.cs</DependentUpon>
     </Compile>
     <Compile Include="frmComputer.cs">
       <SubType>Form</SubType>
@@ -78,29 +78,29 @@
     <Compile Include="frmMaintainance.Designer.cs">
       <DependentUpon>frmMaintainance.cs</DependentUpon>
     </Compile>
-    <Compile Include="Main.cs">
+    <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Main.Designer.cs">
-      <DependentUpon>Main.cs</DependentUpon>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\AddCategory.cs">
+    <Compile Include="Model\frmAddCategory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Model\AddCategory.Designer.cs">
-      <DependentUpon>AddCategory.cs</DependentUpon>
+    <Compile Include="Model\frmAddCategory.Designer.cs">
+      <DependentUpon>frmAddCategory.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\AddFood.cs">
+    <Compile Include="Model\frmAddFood.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Model\AddFood.Designer.cs">
-      <DependentUpon>AddFood.cs</DependentUpon>
+    <Compile Include="Model\frmAddFood.Designer.cs">
+      <DependentUpon>frmAddFood.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\EditFood.cs">
+    <Compile Include="Model\frmEditFood.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Model\EditFood.Designer.cs">
-      <DependentUpon>EditFood.cs</DependentUpon>
+    <Compile Include="Model\frmEditFood.Designer.cs">
+      <DependentUpon>frmEditFood.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\frmPrintRecipe.cs">
       <SubType>Form</SubType>
@@ -116,8 +116,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Food.resx">
-      <DependentUpon>Food.cs</DependentUpon>
+    <EmbeddedResource Include="frmFood.resx">
+      <DependentUpon>frmFood.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmComputer.resx">
       <DependentUpon>frmComputer.cs</DependentUpon>
@@ -131,17 +131,17 @@
     <EmbeddedResource Include="frmMaintainance.resx">
       <DependentUpon>frmMaintainance.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Main.resx">
-      <DependentUpon>Main.cs</DependentUpon>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Model\AddCategory.resx">
-      <DependentUpon>AddCategory.cs</DependentUpon>
+    <EmbeddedResource Include="Model\frmAddCategory.resx">
+      <DependentUpon>frmAddCategory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Model\AddFood.resx">
-      <DependentUpon>AddFood.cs</DependentUpon>
+    <EmbeddedResource Include="Model\frmAddFood.resx">
+      <DependentUpon>frmAddFood.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Model\EditFood.resx">
-      <DependentUpon>EditFood.cs</DependentUpon>
+    <EmbeddedResource Include="Model\frmEditFood.resx">
+      <DependentUpon>frmEditFood.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Model\frmPrintRecipe.resx">
       <DependentUpon>frmPrintRecipe.cs</DependentUpon>

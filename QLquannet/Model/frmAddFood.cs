@@ -16,12 +16,12 @@ using System.Windows.Forms;
 
 namespace QLquannet.FoodModel
 {
-    public partial class AddFood : Form
+    public partial class frmAddFood : Form
     {
         public string imagePath;
         public string CatID;
         private AddFoodDAL addFoodDAL;
-        public AddFood()
+        public frmAddFood()
         {
             InitializeComponent();
             addFoodDAL = new AddFoodDAL();
@@ -73,12 +73,11 @@ namespace QLquannet.FoodModel
 
         private void btnConfirmAddFood_Click(object sender, EventArgs e)
         {
-            try
-            {
+
                 byte[] imageBytes = ImageToByteArray(imagePath);
                 CheckCboID();
 
-                FoodDTO food = new FoodDTO
+                Food food = new Food
                 {
                     FoodName = txtFoodName.Text,
                     Price = Convert.ToDecimal(txtPrice.Text),
@@ -91,11 +90,7 @@ namespace QLquannet.FoodModel
                 addFoodDAL.SaveFood(food);
                 MessageBox.Show("Thêm món ăn thành công!");
                 this.Close();
-            }
-            catch
-            {
-                MessageBox.Show("Lỗi!");
-            }
+
         }
 
         private void LoadComboBox(ComboBox comboBox, string query)

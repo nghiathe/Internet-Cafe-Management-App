@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace QLquannet
 {
-    public partial class Main : Form
+    public partial class frmMain : Form
     {
-        public Main()
+        public frmMain()
         {
             InitializeComponent();
         }
@@ -48,27 +48,27 @@ namespace QLquannet
         private void btnComputer_Click(object sender, EventArgs e)
         {
 
-            LoadFormCon(new frmComputer());
+            LoadForm(new frmComputer());
             ChangeColorMainBtn(btnComputer, null);
         }
 
         private void btnFood_Click(object sender, EventArgs e)
         {
-            loadform(new Food());
+            LoadForm(new frmFood());
             ChangeColorMainBtn(btnFood, null);
         }
         
         private void btnBill_Click(object sender, EventArgs e)
         {
-            LoadFormCon(new frmBilling());
+            LoadForm(new frmBilling());
             ChangeColorMainBtn(btnBill, null);
         }
-        private void button1_Click(object sender, EventArgs e)
+        private void btnMaintain_Click(object sender, EventArgs e)
         {
-            LoadFormCon(new frmMaintainance());
+            LoadForm(new frmMaintainance());
             ChangeColorMainBtn(btnMaintain, null);
         }
-        private void loadform(object Form)
+        private void LoadForm(object Form)
         {
             if (this.pnlMain.Controls.Count > 0)
             {
@@ -81,21 +81,7 @@ namespace QLquannet
             this.pnlMain.Tag = f;
             f.Show();
         }
-        private Form curentChildForm;
-        void LoadFormCon (Form childForm)
-        {
-            if(curentChildForm != null)
-            {
-                curentChildForm.Close();
-            }
-            curentChildForm = childForm;
-            childForm.TopLevel = false;
-            childForm.Dock = DockStyle.Fill;
-            pnlMain.Controls.Add(childForm);
-            pnlMain.Tag = childForm;
-            childForm.BringToFront();
-            childForm.Show();
-        }
+
         void ChangeColorMainBtn(object sender, EventArgs e)
         {
             foreach (Control c in pnlMenubar.Controls)

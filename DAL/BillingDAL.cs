@@ -10,7 +10,6 @@ namespace DAL
 {
     public class BillingDAL
     {
-        #region ---------- Code cua HungTuLenh 
         private static BillingDAL instance;
 
         public static BillingDAL Instance
@@ -53,7 +52,6 @@ namespace DAL
             string query = string.Format("ProcCheckOut @billingid , @employeeid");
             Database.Instance.ExecuteNonQuery(query, new object[] { billid, emid });
             Database.Instance.ExecuteNonQuery("ProcComputerStatus @computerID , 0", new object[] { comid });
-            #endregion
         }
     }
 }

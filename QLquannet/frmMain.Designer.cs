@@ -1,6 +1,6 @@
 ﻿namespace QLquannet
 {
-    partial class Main
+    partial class frmMain
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.pnlMovable = new System.Windows.Forms.Panel();
             this.pnlStatus = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -113,7 +113,7 @@
             this.btnMaintain.TabIndex = 4;
             this.btnMaintain.Text = "Bảo trì";
             this.btnMaintain.UseVisualStyleBackColor = true;
-            this.btnMaintain.Click += new System.EventHandler(this.button1_Click);
+            this.btnMaintain.Click += new System.EventHandler(this.btnMaintain_Click);
             // 
             // bthLogout
             // 

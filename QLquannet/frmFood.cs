@@ -1,28 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using DAL;
+using System;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using DAL;
-using DTO;
 
 
 namespace QLquannet
 {
-    public partial class Food : Form
+    public partial class frmFood : Form
     {
-        private FoodDAL foodDAL;
 
-        public Food()
+        public frmFood()
         {
             InitializeComponent();
-            foodDAL = new FoodDAL();
         }
 
         private void Food_Load(object sender, EventArgs e)
@@ -35,7 +26,7 @@ namespace QLquannet
 
         private void AddCategory()
         {
-            DataTable dt = foodDAL.GetCategories();
+            DataTable dt = FoodDAL.Instance.GetCategories();
             foreach (DataRow row in dt.Rows)
             {
                 Button b = new Button
@@ -59,7 +50,7 @@ namespace QLquannet
             }
         }
 
-        private void AddItem(FoodDTO food)
+        private void AddItem(DTO.Food food)
         {
             var w = new ucProduct()
             {
@@ -76,25 +67,25 @@ namespace QLquannet
             {
                 var wdg = (ucProduct)ss;
 
-                foreach (DataGridViewRow item in dataGridView1.Rows)
+                foreach (DataGridViewRow item in dgvFoodList.Rows)
                 {
                     if (Convert.ToInt32(item.Cells["ID"].Value) == wdg.id)
                     {
                         item.Cells["Qty"].Value = int.Parse(item.Cells["Qty"].Value.ToString()) + 1;
-                        item.Cells["Amount"].Value = int.Parse(item.Cells["Qty"].Value.ToString()) * double.Parse(item.Cells["Price"].Value.ToString());
+                        item.Cells["Amount"].Value = decimal.Parse(item.Cells["Qty"].Value.ToString()) * decimal.Parse(item.Cells["Price"].Value.ToString());
                         return;
                     }
                 }
-                dataGridView1.Rows.Add(new object[] { 0, wdg.id, wdg.PName, 1, wdg.PPrice, wdg.PPrice });
+                dgvFoodList.Rows.Add(new object[] { 0, wdg.id, wdg.PName, 1, wdg.PPrice, wdg.PPrice });
             };
         }
 
         private void LoadProduct()
         {
-            DataTable dt = foodDAL.GetAllFoods();
+            DataTable dt = FoodDAL.Instance.GetAllFoods();
             foreach (DataRow item in dt.Rows)
             {
-                FoodDTO food = new FoodDTO
+                DTO.Food food = new DTO.Food
                 {
                     FoodID = Convert.ToInt32(item["FoodID"]),
                     FoodName = item["FoodName"].ToString(),
@@ -123,28 +114,11 @@ namespace QLquannet
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             int count = 0;
-            foreach (DataGridViewRow r in dataGridView1.Rows)
+            foreach (DataGridViewRow r in dgvFoodList.Rows)
             {
                 count++;
                 r.Cells[0].Value = count;
             }
-        }
-
-        private void GetTotal()
-        {
-            double total = 0;
-            lbTongtien.Text = "";
-
-            foreach (DataGridViewRow r in dataGridView1.Rows)
-            {
-                if (r.Cells["Amount"].Value == null)
-                {
-                    continue;
-                }
-                total += double.Parse(r.Cells["Amount"].Value.ToString());
-            }
-
-            lbTongtien.Text = total.ToString("N2");
         }
 
         private decimal TinhTongTien(DataGridView datagridView)
@@ -173,13 +147,13 @@ namespace QLquannet
 
         private void button1_Click(object sender, EventArgs e)
         {
-            FoodModel.AddFood AF = new FoodModel.AddFood();
+            FoodModel.frmAddFood AF = new FoodModel.frmAddFood();
             AF.Show();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            FoodModel.EditFood EF = new FoodModel.EditFood();
+            FoodModel.frmEditFood EF = new FoodModel.frmEditFood();
             EF.Show();
         }
 
@@ -190,7 +164,7 @@ namespace QLquannet
 
         private void LoadComboBox(ComboBox comboBox, string query)
         {
-            DataTable dt = foodDAL.LoadComboBoxData(query);
+            DataTable dt = FoodDAL.Instance.LoadComboBoxData(query);
             foreach (DataRow row in dt.Rows)
             {
                 comboBox.Items.Add(row[0].ToString());
@@ -205,25 +179,26 @@ namespace QLquannet
 
         private void btnAddCategory_Click(object sender, EventArgs e)
         {
-            Model.AddCategory AC = new Model.AddCategory();
+            Model.frmAddCategory AC = new Model.frmAddCategory();
             AC.Show();
         }
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            UpdateTongTien(dataGridView1, lbTongtien);
+            UpdateTongTien(dgvFoodList, lbTongtien);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnReset_Click(object sender, EventArgs e)
         {
-            dataGridView1.Rows.Clear();
+            dgvFoodList.Rows.Clear();
+            LoadProduct();
             lbTongtien.Text = "0.00";
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void btnConfirm_Click(object sender, EventArgs e)
         {
-            int computerID = foodDAL.GetComputerID(cboCom.Text);
-            int billingID = foodDAL.GetBillingID(computerID);
+            int computerID = FoodDAL.Instance.GetComputerID(cboCom.Text);
+            int billingID = FoodDAL.Instance.GetBillingID(computerID);
 
             if (cboCom.SelectedIndex.Equals(-1))
             {
@@ -237,14 +212,14 @@ namespace QLquannet
             {
                 try
                 {
-                    foreach (DataGridViewRow row in dataGridView1.Rows)
+                    foreach (DataGridViewRow row in dgvFoodList.Rows)
                     {
                         if (row.IsNewRow) continue;
 
                         int foodID = Convert.ToInt32(row.Cells["ID"].Value);
                         int count = Convert.ToInt32(row.Cells["Qty"].Value);
                         decimal cost = Convert.ToDecimal(row.Cells["Amount"].Value);
-                        foodDAL.SaveFoodDetails(billingID, foodID, count, cost);
+                        FoodDAL.Instance.SaveFoodDetails(billingID, foodID, count, cost);
                     }
 
                     MessageBox.Show("Dữ liệu đã được lưu thành công!");

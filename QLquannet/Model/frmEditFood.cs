@@ -16,7 +16,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 namespace QLquannet.FoodModel
 {
     
-    public partial class EditFood : Form
+    public partial class frmEditFood : Form
     {
         public int CatID;
         public string CatName;
@@ -24,7 +24,7 @@ namespace QLquannet.FoodModel
         public string imagePath;
         public byte[] imageBytes;
         private EditFoodDAL editFoodDAL;
-        public EditFood()
+        public frmEditFood()
         {
             InitializeComponent();
             editFoodDAL = new EditFoodDAL();
@@ -35,20 +35,20 @@ namespace QLquannet.FoodModel
         }
         private void LoadDataGridView()
         {
-            dataGridView1.DataSource = editFoodDAL.GetAllFood();
-            dataGridView1.Columns[6].Width = 200;
+            dgvFood.DataSource = editFoodDAL.GetAllFood();
+            dgvFood.Columns[6].Width = 200;
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvFood_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
-                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                DataGridViewRow row = dgvFood.Rows[e.RowIndex];
                 FoodID = Convert.ToInt32(row.Cells["FoodID"].Value.ToString());
                 txtFoodName.Text = row.Cells["FoodName"].Value.ToString();
                 txtPrice.Text = row.Cells["Price"].Value.ToString();
@@ -72,21 +72,17 @@ namespace QLquannet.FoodModel
             }
         }
 
-        private void CheckCboID()
-        {
-            CatName = editFoodDAL.GetCategoryName(CatID);
-            cboCategory.Text = CatName;
-        }
+        
 
         private void btnDlt_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count > 0)
+            if (dgvFood.SelectedRows.Count > 0)
             {
-                DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+                DataGridViewRow selectedRow = dgvFood.SelectedRows[0];
                 int rowId = Convert.ToInt32(selectedRow.Cells["FoodID"].Value);
 
                 editFoodDAL.DeleteFood(rowId);
-                dataGridView1.Rows.Remove(selectedRow);
+                dgvFood.Rows.Remove(selectedRow);
                 MessageBox.Show("Dòng đã được xóa từ cơ sở dữ liệu và DataGridView.");
             }
             else
@@ -97,10 +93,10 @@ namespace QLquannet.FoodModel
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count > 0)
+            if (dgvFood.SelectedRows.Count > 0)
             {
-                
-                FoodDTO food = new FoodDTO
+
+                DTO.Food food = new DTO.Food
                 {
                     FoodID = Convert.ToInt32(FoodID),
                     FoodName = txtFoodName.Text,
@@ -141,6 +137,12 @@ namespace QLquannet.FoodModel
                 }
             }
 
+        }
+
+        private void CheckCboID()
+        {
+            CatName = editFoodDAL.GetCategoryName(CatID);
+            cboCategory.Text = CatName;
         }
 
         public static byte[] ImageToByteArray(string imagePath)

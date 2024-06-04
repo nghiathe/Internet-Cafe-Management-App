@@ -2,13 +2,7 @@
 using DTO;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QLquannet
@@ -195,7 +189,7 @@ namespace QLquannet
             decimal outcome = 0;
             foreach (Billing b in lb)
             {
-                if ((string.IsNullOrEmpty(search) || b.EmName.ToString().Contains(search)) && (!billingType.HasValue || b.BType == billingType.Value))
+                if ((string.IsNullOrEmpty(search) || b.EmName.ToString().ToLower().Contains(search) && (!billingType.HasValue || b.BType == billingType.Value))) 
                 {
                     ListViewItem lvi = new ListViewItem(b.BDate.ToString());
                     lvi.SubItems.Add(b.EmName.ToString());
@@ -256,10 +250,11 @@ namespace QLquannet
         }
         #endregion
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnPrint_Click(object sender, EventArgs e)
         {
             Model.frmPrintRecipe fp= new Model.frmPrintRecipe();
             fp.Show();
         }
+
     }
 }

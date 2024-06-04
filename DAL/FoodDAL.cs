@@ -1,21 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.Remoting.Messaging;
+using DTO;
+using static System.Net.Mime.MediaTypeNames;
+using System.IO;
 
 namespace DAL
 {
     public class FoodDAL
     {
+        private static FoodDAL instance;
 
+        public static FoodDAL Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new FoodDAL();
+                }
+                return FoodDAL.instance;
+            }
+            private set { FoodDAL.instance = value; }
+        }
 
-        private string connectionString = ConnectionConstants.DefaultConnection;
-
-
+        private FoodDAL() { }
         public DataTable GetCategories()
         {
             string query = "SELECT CategoryName FROM Category";
@@ -57,6 +66,42 @@ namespace DAL
         public DataTable LoadComboBoxData(string query)
         {
             return Database.Instance.ExecuteQuery(query);
+        }
+    }
+
+    public class FoodOnComDAL
+    {
+        private static FoodOnComDAL instance;
+
+        public static FoodOnComDAL Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new FoodOnComDAL();
+                }
+                return FoodOnComDAL.instance;
+            }
+            private set { FoodOnComDAL.instance = value; }
+        }
+
+        private FoodOnComDAL() { }
+
+        public List<FoodOnCom> GetFoodDetail(byte comid)
+        {
+            List<FoodOnCom> fl = new List<FoodOnCom>();
+
+            string query = "GetFoodDetailsByComputerID @ComputerID";
+            DataTable dt = Database.Instance.ExecuteQuery(query, new object[] { comid });
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                FoodOnCom f = new FoodOnCom(dr);
+                fl.Add(f);
+            }
+
+            return fl;
         }
     }
 }

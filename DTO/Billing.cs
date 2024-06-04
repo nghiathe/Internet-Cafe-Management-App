@@ -9,20 +9,16 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    #region ---------- Code cua HungTuLenh 
+
     public class Billing
     {
-        public Billing(DateTime bdate, string emname, byte btype, decimal scost, decimal mcost, decimal fcost,  decimal amount)
-        {
-            this.BDate = bdate;
-            this.EmName = emname;
-            this.BType = btype;
-            this.SCost = scost;
-            this.MCost = mcost;
-            this.FCost = fcost;
-            this.Amount = amount;
-        }
-
+        private DateTime bDate;
+        private string emName;
+        private byte bType;
+        private decimal sCost;
+        private decimal mCost;
+        private decimal fCost;
+        private decimal amount;
         public Billing(DataRow row)
         {
             this.BDate = (DateTime)row["billingdate"];
@@ -33,13 +29,6 @@ namespace DTO
             this.FCost = (decimal)row["foodcost"];
             this.Amount = (decimal)row["amount"];
         }
-        DateTime bDate;
-        string emName;
-        byte bType;
-        decimal sCost;
-        decimal mCost;
-        decimal fCost;
-        decimal amount;
 
         public DateTime BDate { get => bDate; set => bDate = value; }
         public string EmName { get => emName; set => emName = value; }
@@ -49,5 +38,16 @@ namespace DTO
         public decimal FCost { get => fCost; set => fCost = value; }
         public decimal Amount { get => amount; set => amount = value; }
     }
-    #endregion
+    public class BillingPrint
+    {
+        private string billingID;
+        private DateTime dateTime;
+        private string lastName;
+        private decimal amount;
+        public string BillingID { get => billingID; set => billingID = value; }
+        public DateTime DateTime { get => dateTime; set => dateTime = value; }
+        public string LastName { get => lastName; set => lastName = value; }
+        public decimal Amount { get => amount; set => amount = value; }
+    }
+
 }

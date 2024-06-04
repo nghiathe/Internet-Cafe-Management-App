@@ -42,7 +42,7 @@ namespace QLquannet
                 Employee.fullName = rs;
                 btnlogin.ForeColor = Color.Blue;
                 this.Hide();
-                Main main = new Main();
+                frmMain main = new frmMain();
                 main.Show();
             }
             else

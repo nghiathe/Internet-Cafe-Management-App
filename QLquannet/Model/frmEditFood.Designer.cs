@@ -1,6 +1,6 @@
 ﻿namespace QLquannet.FoodModel
 {
-    partial class EditFood
+    partial class frmEditFood
     {
         /// <summary>
         /// Required designer variable.
@@ -41,24 +41,24 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button5 = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnDlt = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.picFood = new System.Windows.Forms.PictureBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvFood = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picFood)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFood)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAddImage
             // 
             this.btnAddImage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddImage.Location = new System.Drawing.Point(939, 298);
-            this.btnAddImage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAddImage.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddImage.Name = "btnAddImage";
             this.btnAddImage.Size = new System.Drawing.Size(161, 30);
             this.btnAddImage.TabIndex = 26;
@@ -70,7 +70,7 @@
             // 
             this.txtInventory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtInventory.Location = new System.Drawing.Point(191, 255);
-            this.txtInventory.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtInventory.Margin = new System.Windows.Forms.Padding(4);
             this.txtInventory.Name = "txtInventory";
             this.txtInventory.Size = new System.Drawing.Size(160, 26);
             this.txtInventory.TabIndex = 25;
@@ -79,7 +79,7 @@
             // 
             this.txtIntakePrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtIntakePrice.Location = new System.Drawing.Point(191, 217);
-            this.txtIntakePrice.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtIntakePrice.Margin = new System.Windows.Forms.Padding(4);
             this.txtIntakePrice.Name = "txtIntakePrice";
             this.txtIntakePrice.Size = new System.Drawing.Size(160, 26);
             this.txtIntakePrice.TabIndex = 24;
@@ -88,7 +88,7 @@
             // 
             this.txtPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPrice.Location = new System.Drawing.Point(191, 170);
-            this.txtPrice.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPrice.Margin = new System.Windows.Forms.Padding(4);
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(160, 26);
             this.txtPrice.TabIndex = 23;
@@ -97,7 +97,7 @@
             // 
             this.txtFoodName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFoodName.Location = new System.Drawing.Point(191, 123);
-            this.txtFoodName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtFoodName.Margin = new System.Windows.Forms.Padding(4);
             this.txtFoodName.Name = "txtFoodName";
             this.txtFoodName.Size = new System.Drawing.Size(160, 26);
             this.txtFoodName.TabIndex = 22;
@@ -118,7 +118,7 @@
             this.cboCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboCategory.FormattingEnabled = true;
             this.cboCategory.Location = new System.Drawing.Point(191, 298);
-            this.cboCategory.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cboCategory.Margin = new System.Windows.Forms.Padding(4);
             this.cboCategory.Name = "cboCategory";
             this.cboCategory.Size = new System.Drawing.Size(160, 28);
             this.cboCategory.TabIndex = 20;
@@ -181,27 +181,27 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
-            this.panel1.Controls.Add(this.button5);
+            this.panel1.Controls.Add(this.btnExit);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1200, 89);
             this.panel1.TabIndex = 27;
             // 
-            // button5
+            // btnExit
             // 
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Image = global::QLquannet.Properties.Resources.close__1_;
-            this.button5.Location = new System.Drawing.Point(1160, 4);
-            this.button5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(40, 37);
-            this.button5.TabIndex = 1;
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.btnExit.FlatAppearance.BorderSize = 0;
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExit.Image = global::QLquannet.Properties.Resources.close__1_;
+            this.btnExit.Location = new System.Drawing.Point(1160, 4);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(4);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(40, 37);
+            this.btnExit.TabIndex = 1;
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // label1
             // 
@@ -222,7 +222,7 @@
             this.panel2.Controls.Add(this.btnEdit);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 792);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1200, 62);
             this.panel2.TabIndex = 28;
@@ -230,7 +230,7 @@
             // btnDlt
             // 
             this.btnDlt.Location = new System.Drawing.Point(1031, 4);
-            this.btnDlt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDlt.Margin = new System.Windows.Forms.Padding(4);
             this.btnDlt.Name = "btnDlt";
             this.btnDlt.Size = new System.Drawing.Size(132, 54);
             this.btnDlt.TabIndex = 1;
@@ -241,7 +241,7 @@
             // btnEdit
             // 
             this.btnEdit.Location = new System.Drawing.Point(879, 4);
-            this.btnEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(4);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(132, 54);
             this.btnEdit.TabIndex = 0;
@@ -252,31 +252,31 @@
             // picFood
             // 
             this.picFood.Location = new System.Drawing.Point(599, 128);
-            this.picFood.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.picFood.Margin = new System.Windows.Forms.Padding(4);
             this.picFood.Name = "picFood";
             this.picFood.Size = new System.Drawing.Size(265, 199);
             this.picFood.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picFood.TabIndex = 29;
             this.picFood.TabStop = false;
             // 
-            // dataGridView1
+            // dgvFood
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(39, 364);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1124, 409);
-            this.dataGridView1.TabIndex = 30;
-            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dgvFood.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvFood.Location = new System.Drawing.Point(39, 364);
+            this.dgvFood.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvFood.Name = "dgvFood";
+            this.dgvFood.RowHeadersWidth = 51;
+            this.dgvFood.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvFood.Size = new System.Drawing.Size(1124, 409);
+            this.dgvFood.TabIndex = 30;
+            this.dgvFood.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFood_CellClick);
             // 
-            // EditFood
+            // frmEditFood
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1200, 854);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvFood);
             this.Controls.Add(this.picFood);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -293,8 +293,8 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.Name = "EditFood";
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "frmEditFood";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EditFood";
             this.Load += new System.EventHandler(this.EditFood_Load);
@@ -302,7 +302,7 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picFood)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFood)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -323,12 +323,12 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox picFood;
         private System.Windows.Forms.Button btnDlt;
         private System.Windows.Forms.Button btnEdit;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvFood;
     }
 }

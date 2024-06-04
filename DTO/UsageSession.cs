@@ -9,13 +9,6 @@ namespace DTO
 {
     public class UsageSession
     {
-        public UsageSession(int billid, string comname, byte comstatus, DateTime? stime)
-        {
-            this.BillId = billid;
-            this.ComName = comname;
-            this.ComStatus = comstatus;
-            this.STime = stime;
-        }
         public UsageSession(DataRow row)
         { 
             this.ComName = row["computername"].ToString();
@@ -31,9 +24,6 @@ namespace DTO
                 this.BillId = (int)billidTemp;
             }
         }
-
-        public UsageSession() { }
-
 
         private int billId;
         private string comName;

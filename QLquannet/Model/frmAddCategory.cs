@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace QLquannet.Model
 {
-    public partial class AddCategory : Form
+    public partial class frmAddCategory : Form
     {
-        public AddCategory()
+        public frmAddCategory()
         {
             InitializeComponent();
         }
