@@ -1,9 +1,8 @@
-﻿using System;
+﻿using DTO;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using DTO;
-using static System.Net.Mime.MediaTypeNames;
-using System.IO;
+using System.Text;
 
 namespace DAL
 {
@@ -25,36 +24,68 @@ namespace DAL
         }
 
         private FoodDAL() { }
+        public List<Food> GetFoodDetail(byte comid)
+        {
+            List<Food> fl = new List<Food>();
+
+            string query = "GetFoodDetailsByComputerID @ComputerID";
+            DataTable dt = Database.Instance.ExecuteQuery(query, new object[] { comid });
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                Food f = new Food(dr);
+                fl.Add(f);
+            }
+
+            return fl;
+        }
+
+        public List<Food> LoadMenu(string categoryName = null)
+        {
+            StringBuilder builder = new StringBuilder();
+            List<Food> productls = new List<Food>();
+            builder.Append(@"SELECT f.foodid, f.categoryid, f.foodname, 0 AS count, f.price, 0 AS cost, f.image
+                            FROM food f JOIN category c ON c.categoryid = f.categoryid");
+
+            DataTable dt;
+            string query = builder.ToString();
+
+            if (!string.IsNullOrEmpty(categoryName))
+            {
+                builder.Append(" WHERE categoryname = @categoryName");
+                query = builder.ToString();
+                dt = Database.Instance.ExecuteQuery(query, new object[] { categoryName });
+            }
+            else
+            {
+                dt = Database.Instance.ExecuteQuery(query);
+            }
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                Food f = new Food(dr);
+                productls.Add(f);
+            }
+
+            return productls;
+        }
         public DataTable GetCategories()
         {
             string query = "SELECT CategoryName FROM Category";
             return Database.Instance.ExecuteQuery(query);
         }
 
-        public DataTable GetAllFoods()
+        public int GetUncheckBillingID(byte comId)
         {
-            string query = "SELECT * FROM Food AS f INNER JOIN Category AS c ON f.CategoryID = c.CategoryID";
-            return Database.Instance.ExecuteQuery(query);
-        }
+            string query = "SELECT BillingID FROM UsageSession WHERE ComputerID = @ComID and endtime is null";
+            object result = Database.Instance.ExecuteScalar(query, new object[] { comId });
 
-        public int GetComputerID(string ComputerName)
-        {
-            string query = "SELECT c.ComputerID FROM Computer AS c INNER JOIN UsageSession AS us ON c.ComputerID = us.ComputerID WHERE c.ComputerName = @ComputerName";
-            return Convert.ToInt32(Database.Instance.ExecuteScalar(query, new object[] {  ComputerName }));
-        }
-
-        public int GetBillingID(int ComputerID)
-        {
-            string query = "SELECT BillingID, EndTime FROM UsageSession WHERE ComputerID = @ComID";
-            DataTable dt = Database.Instance.ExecuteQuery(query, new object[] { ComputerID });
-
-            if (dt.Rows.Count > 0)
+            if (result == null || result == DBNull.Value)
             {
-                object endTime = dt.Rows[0]["EndTime"];
-                if (endTime == DBNull.Value)
-                    return Convert.ToInt32(dt.Rows[0]["BillingID"]);
+                return -1; // Trả về -1 nếu không có kết quả hoặc kết quả là null
             }
-            return -1;
+
+            return (int)result;
         }
 
         public void SaveFoodDetails(int BillingID, int FoodID, int Count, decimal Cost)
@@ -67,41 +98,7 @@ namespace DAL
         {
             return Database.Instance.ExecuteQuery(query);
         }
+
     }
 
-    public class FoodOnComDAL
-    {
-        private static FoodOnComDAL instance;
-
-        public static FoodOnComDAL Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new FoodOnComDAL();
-                }
-                return FoodOnComDAL.instance;
-            }
-            private set { FoodOnComDAL.instance = value; }
-        }
-
-        private FoodOnComDAL() { }
-
-        public List<FoodOnCom> GetFoodDetail(byte comid)
-        {
-            List<FoodOnCom> fl = new List<FoodOnCom>();
-
-            string query = "GetFoodDetailsByComputerID @ComputerID";
-            DataTable dt = Database.Instance.ExecuteQuery(query, new object[] { comid });
-
-            foreach (DataRow dr in dt.Rows)
-            {
-                FoodOnCom f = new FoodOnCom(dr);
-                fl.Add(f);
-            }
-
-            return fl;
-        }
-    }
 }

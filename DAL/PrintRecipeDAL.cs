@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DTO;
+﻿using System.Data;
 
 namespace DAL
 {
@@ -20,7 +14,7 @@ namespace DAL
         {
             string sql = "Select us.ComputerID, z.ZoneName, z.PricePerHour, us.Duration, us.Cost,us.BillingID, b.BillingDate, e.LastName, b.Amount From Computer as c inner join Zone as z on c.ZoneID = z.ZoneID inner join UsageSession as us on c.ComputerID = us.ComputerID inner join Billing as b on us.BillingID = b.BillingID inner join Employee as e on e.EmployeeID = b.EmployeeID where us.BillingID = @BillingID ";
 
-            return Database.Instance.ExecuteQuery(sql, new object []{ billingID} );
+            return Database.Instance.ExecuteQuery(sql, new object[] { billingID });
         }
 
         public DataTable GetFoodDetails(int billingID)

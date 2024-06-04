@@ -1,17 +1,6 @@
 ﻿using DAL;
-using DTO;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QLquannet.FoodModel
@@ -29,17 +18,6 @@ namespace QLquannet.FoodModel
         private void AddFood_Load(object sender, EventArgs e)
         {
             LoadComboBox(cboCategory, "SELECT CategoryName FROM Category");
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void btnAddImage_Click(object sender, EventArgs e)
@@ -58,38 +36,25 @@ namespace QLquannet.FoodModel
             }
         }
 
-        public static byte[] ImageToByteArray(string imagePath)
-        {
-            using (Image image = Image.FromFile(imagePath))
-            {
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    image.Save(ms, ImageFormat.Jpeg);
-                    return ms.ToArray();
-                }
-            }
-        }
-
-
         private void btnConfirmAddFood_Click(object sender, EventArgs e)
         {
 
-                byte[] imageBytes = ImageToByteArray(imagePath);
-                CheckCboID();
+            byte[] imageBytes = ImageProcess.ImageToByteArray(imagePath);
+            CheckCboID();
 
-                Food food = new Food
-                {
-                    FoodName = txtFoodName.Text,
-                    Price = Convert.ToDecimal(txtPrice.Text),
-                    IntakePrice = Convert.ToDecimal(txtIntakePrice.Text),
-                    Inventory = Convert.ToInt32(txtInventory.Text),
-                    CategoryID = Convert.ToInt32(CatID),
-                    Image = imageBytes
-                };
+            //Food food = new Food
+            //{
+            //    FoodName = txtFoodName.Text,
+            //    Price = Convert.ToDecimal(txtPrice.Text),
+            //    IntakePrice = Convert.ToDecimal(txtIntakePrice.Text),
+            //    Inventory = Convert.ToInt32(txtInventory.Text),
+            //    CategoryID = Convert.ToInt32(CatID),
+            //    Image = imageBytes
+            //};
 
-                addFoodDAL.SaveFood(food);
-                MessageBox.Show("Thêm món ăn thành công!");
-                this.Close();
+            //addFoodDAL.SaveFood(food);
+            //MessageBox.Show("Thêm món ăn thành công!");
+            //this.Close();
 
         }
 

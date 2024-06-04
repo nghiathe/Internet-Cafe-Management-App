@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 
 namespace DTO
 {
@@ -13,7 +8,7 @@ namespace DTO
         private int billingId;
         private string component;
         private string description;
-        public Maintainance(DataRow row) 
+        public Maintainance(DataRow row)
         {
             this.MaintainId = (int)row["maintainanceid"];
             this.BillingId = (int)row["BillingId"];
@@ -23,7 +18,7 @@ namespace DTO
             {
                 this.Description = descriptionTemp.ToString();
             }
-            
+
         }
 
         public int BillingId { get => billingId; set => billingId = value; }

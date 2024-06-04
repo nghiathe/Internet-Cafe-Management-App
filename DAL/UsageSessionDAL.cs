@@ -1,10 +1,5 @@
 ﻿using DTO;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL
 {
@@ -49,7 +44,7 @@ namespace DAL
             Database.Instance.ExecuteNonQuery("ProcBillingINIT @Billingtype", new object[] { 1 });
             Database.Instance.ExecuteNonQuery("ProcUsageSessionINIT @ComputerID", new object[] { comId });
 
-        }        
+        }
         public void EndSesion(int billid)
         {
             string query = string.Format("ProcEndSession @billingid ");

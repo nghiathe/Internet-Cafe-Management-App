@@ -1,12 +1,5 @@
 ﻿using DAL;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QLquannet.Model
@@ -20,7 +13,7 @@ namespace QLquannet.Model
 
         private void btnCnfirmAddCat_Click(object sender, EventArgs e)
         {
-            if(txtCat.Text == "")
+            if (txtCat.Text == "")
             {
                 MessageBox.Show("Chưa nhập tên loại món!");
             }

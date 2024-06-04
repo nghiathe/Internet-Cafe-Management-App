@@ -1,21 +1,12 @@
 ﻿using DAL;
-using DTO;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace QLquannet.FoodModel
 {
-    
+
     public partial class frmEditFood : Form
     {
         public int CatID;
@@ -72,7 +63,7 @@ namespace QLquannet.FoodModel
             }
         }
 
-        
+
 
         private void btnDlt_Click(object sender, EventArgs e)
         {
@@ -96,19 +87,19 @@ namespace QLquannet.FoodModel
             if (dgvFood.SelectedRows.Count > 0)
             {
 
-                DTO.Food food = new DTO.Food
-                {
-                    FoodID = Convert.ToInt32(FoodID),
-                    FoodName = txtFoodName.Text,
-                    Price = Convert.ToDecimal(txtPrice.Text),
-                    IntakePrice = Convert.ToDecimal(txtIntakePrice.Text),
-                    Inventory = Convert.ToInt32(txtInventory.Text),
-                    //CategoryID = CatID,
-                    Image = imageBytes
-                };
+                //DTO.Food food = new DTO.Food
+                //{
+                //    FoodID = Convert.ToInt32(FoodID),
+                //    FoodName = txtFoodName.Text,
+                //    Price = Convert.ToDecimal(txtPrice.Text),
+                //    IntakePrice = Convert.ToDecimal(txtIntakePrice.Text),
+                //    Inventory = Convert.ToInt32(txtInventory.Text),
+                //    //CategoryID = CatID,
+                //    Image = imageBytes
+                //};
 
-                editFoodDAL.UpdateFood(food);
-                LoadDataGridView();
+                //editFoodDAL.UpdateFood(food);
+                //LoadDataGridView();
                 MessageBox.Show("Cập nhật món ăn thành công!");
             }
             else

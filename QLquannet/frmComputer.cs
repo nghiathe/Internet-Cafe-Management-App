@@ -2,13 +2,8 @@
 using DTO;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QLquannet
@@ -84,7 +79,7 @@ namespace QLquannet
         }
         private void btnThanhtoan_Click(object sender, EventArgs e)
         {
-            int billid = UsageSessionDAL.Instance.GetUnCheckOutSession(cid); 
+            int billid = UsageSessionDAL.Instance.GetUnCheckOutSession(cid);
             if (txtTT.Text == "Offline" || txtTT.Text == "Error")
             {
                 MessageBox.Show(gbMay.Text + " đang offline!");
@@ -96,7 +91,7 @@ namespace QLquannet
             else
             {
                 if (billid != -1)
-                {   
+                {
                     UsageSessionDAL.Instance.EndSesion(billid);
                     BillingDAL.Instance.CheckOut(billid, Employee.emId);
                     LoadZone(ComputerZone.zoneId);
@@ -105,7 +100,7 @@ namespace QLquannet
                     LoadFoodDetail(cid);
 
                 }
-                
+
             }
         }
         #endregion
@@ -126,7 +121,7 @@ namespace QLquannet
                     Width = ZoneDAL.ComWidth,
                     Height = ZoneDAL.ComHeight,
                 };
-                
+
                 btn.Click += btn_Click;
 
                 btn.FlatStyle = FlatStyle.Flat;
@@ -141,7 +136,7 @@ namespace QLquannet
                         btn.Text = com.ComName + Environment.NewLine + "Offline";
                         offline++;
                         break;
-                        
+
                     case 1:
                         btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(100, 228, 178);
                         btn.BackColor = Color.Aqua;
@@ -211,9 +206,9 @@ namespace QLquannet
         void LoadFoodDetail(byte comid)
         {
             lvFood.Items.Clear();
-            List<FoodOnCom> fl = FoodOnComDAL.Instance.GetFoodDetail(comid);
+            List<Food> fl = FoodDAL.Instance.GetFoodDetail(comid);
             decimal fcost = 0m;
-            foreach (FoodOnCom f in fl)
+            foreach (Food f in fl)
             {
                 ListViewItem lvi = new ListViewItem(f.FoodName.ToString());
                 lvi.SubItems.Add(f.Price.ToString());
@@ -227,9 +222,9 @@ namespace QLquannet
             CultureInfo ct = new CultureInfo("vi-VN");
             txtTotal.Text = (decimal.Parse(txtTamtinh.Text) + decimal.Parse(txtFcost.Text)).ToString("c", ct);
         }
-        void ChangeColorZoneBtn(object sender, EventArgs e )
+        void ChangeColorZoneBtn(object sender, EventArgs e)
         {
-            foreach(Control c in pnlZone.Controls)
+            foreach (Control c in pnlZone.Controls)
             {
                 c.BackColor = Color.FromArgb(37, 42, 64);
             }
@@ -269,7 +264,7 @@ namespace QLquannet
                 cl.BackColor = Color.FromArgb(228, 135, 50);
             }
         }
-        
+
         #endregion
 
         #endregion

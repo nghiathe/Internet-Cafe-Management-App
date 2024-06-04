@@ -1,13 +1,7 @@
 ﻿using DAL;
 using DTO;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QLquannet
@@ -36,7 +30,7 @@ namespace QLquannet
             lg.username = txtusername.Text;
             lg.password = txtpassword.Text;
             string rs = (string)LoginDAL.Instance.Login(lg);
-            if(rs != null)
+            if (rs != null)
             {
                 Employee.emId = (byte)LoginDAL.Instance.GetEmployeeId(lg);
                 Employee.fullName = rs;
@@ -49,7 +43,7 @@ namespace QLquannet
             {
                 MessageBox.Show("Tài khoản hoặc mật khẩu không đúng!");
             }
-            
+
         }
 
 
