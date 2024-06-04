@@ -15,7 +15,7 @@ namespace DAL
         public void SaveFood(Food food)
         {
             string query = "INSERT INTO Food (FoodName, Price, IntakePrice, Inventory, CategoryID, Image) VALUES ( @Name , @Price , @IntakePrice , @Inventory , @CategoryID , @Image )";
-            Database.Instance.ExecuteNonQuery(query, new object[] { food.FoodName, food.Price, food.IntakePrice, food.Inventory, food.CategoryID, food.Image });
+            Database.Instance.ExecuteNonQuery(query, new object[] { food.FoodName, food.Price, food.IntakePrice, food.Inventory, food.CategoryID, ImageProcess.ImageToByteArray(food.Image) });
         }
 
         public int GetCategoryID(string categoryName)

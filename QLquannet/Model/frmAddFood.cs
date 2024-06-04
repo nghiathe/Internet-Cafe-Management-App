@@ -1,6 +1,8 @@
 ﻿using DAL;
+using DTO;
 using System;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace QLquannet.FoodModel
@@ -38,23 +40,21 @@ namespace QLquannet.FoodModel
 
         private void btnConfirmAddFood_Click(object sender, EventArgs e)
         {
-
-            byte[] imageBytes = ImageProcess.ImageToByteArray(imagePath);
             CheckCboID();
 
-            //Food food = new Food
-            //{
-            //    FoodName = txtFoodName.Text,
-            //    Price = Convert.ToDecimal(txtPrice.Text),
-            //    IntakePrice = Convert.ToDecimal(txtIntakePrice.Text),
-            //    Inventory = Convert.ToInt32(txtInventory.Text),
-            //    CategoryID = Convert.ToInt32(CatID),
-            //    Image = imageBytes
-            //};
+            Food food = new Food
+            {
+                FoodName = txtFoodName.Text,
+                Price = Convert.ToDecimal(txtPrice.Text),
+                IntakePrice = Convert.ToDecimal(txtIntakePrice.Text),
+                Inventory = Convert.ToInt32(txtInventory.Text),
+                CategoryID = Convert.ToInt32(CatID),
+                Image = Image.FromFile(imagePath)
+            };
 
-            //addFoodDAL.SaveFood(food);
-            //MessageBox.Show("Thêm món ăn thành công!");
-            //this.Close();
+            addFoodDAL.SaveFood(food);
+            MessageBox.Show("Thêm món ăn thành công!");
+            this.Close();
 
         }
 

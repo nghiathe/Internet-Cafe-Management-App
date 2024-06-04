@@ -51,10 +51,11 @@ namespace QLquannet.FoodModel
                 imageBytes = (byte[])row.Cells["Image"].Value;
                 if (imageBytes != null && imageBytes.Length > 0)
                 {
-                    using (var ms = new System.IO.MemoryStream(imageBytes))
-                    {
-                        picFood.Image = Image.FromStream(ms);
-                    }
+                    //using (var ms = new System.IO.MemoryStream(imageBytes))
+                    //{
+                    //    picFood.Image = Image.FromStream(ms);
+                    //}\
+                    ImageProcess.ByteArrayToImage(imageBytes);
                 }
                 else
                 {

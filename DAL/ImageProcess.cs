@@ -7,18 +7,14 @@ namespace DAL
 {
     public class ImageProcess
     {
-        public static byte[] ImageToByteArray(string imagePath)
+        public static byte[] ImageToByteArray(Image image)
         {
-            using (Image image = Image.FromFile(imagePath))
+            using (MemoryStream ms = new MemoryStream())
             {
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    image.Save(ms, ImageFormat.Jpeg);
-                    return ms.ToArray();
-                }
+                image.Save(ms, ImageFormat.Jpeg);
+                return ms.ToArray();
             }
         }
-
         public static Image ByteArrayToImage(byte[] imageBytes)
         {
             if (imageBytes == null || imageBytes.Length == 0)

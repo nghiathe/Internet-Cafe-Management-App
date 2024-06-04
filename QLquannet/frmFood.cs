@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
-using System.Globalization;
-using System.Reflection;
 using System.Windows.Forms;
 
 
@@ -33,12 +31,14 @@ namespace QLquannet
             cboZone.DataSource = ZoneDAL.Instance.getZones();
             cboZone.DisplayMember = "ZoneName";
             cboZone.ValueMember = "ZoneID";
+            cboZone.SelectedIndex = -1;
         }
         private void LoadcboCom(byte zoneid)
         {
             cboCom.DataSource = ComputerDAL.Instance.GetComs(zoneid);
             cboCom.DisplayMember = "ComputerName";
             cboCom.ValueMember = "ComputerID";
+            cboCom.SelectedIndex = -1;
         }
         private void LoadCategories()
         {
@@ -122,40 +122,6 @@ namespace QLquannet
             txtSearchFood.SelectAll();
         }
 
-        //private void dgvFoodList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        //{
-        //    int count = 0;
-        //    foreach (DataGridViewRow r in dgvFoodList.Rows)
-        //    {
-        //        count++;
-        //        r.Cells[0].Value = count;
-        //    }
-        //}
-
-        //private decimal TinhTongTien(DataGridView datagridView)
-        //{
-        //    decimal totalAmount = 0;
-
-        //    foreach (DataGridViewRow row in datagridView.Rows)
-        //    {
-        //        if (row.IsNewRow) continue;
-        //        var cellValue = row.Cells["Amount"].Value;
-
-        //        if (decimal.TryParse(cellValue.ToString(), out decimal amount))
-        //        {
-        //            totalAmount += amount;
-        //        }
-        //    }
-
-        //    return totalAmount;
-        //}
-
-        //private void UpdateTongTien(DataGridView datagridView, Label lnTongtien)
-        //{
-        //    decimal totalAmount = TinhTongTien(datagridView);
-        //    lnTongtien.Text = totalAmount.ToString("N2");
-        //}
-
         private void LoadFoodDetail(byte comid)
         {
             List<Food> foods = FoodDAL.Instance.GetFoodDetail(comid);
@@ -184,6 +150,10 @@ namespace QLquannet
                 amount += Convert.ToDecimal(row.Cells[5].Value);
             }
             lbTongtien.Text = amount.ToString();
+        }
+        private void dgvFoodList_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            HandlelblTongTien();
         }
         private void dgvFoodList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
@@ -215,6 +185,7 @@ namespace QLquannet
             }
         }
 
+
         private void cboCom_SelectedIndexChanged(object sender, EventArgs e)
         {
             dgvFoodList.Rows.Clear();
@@ -231,10 +202,6 @@ namespace QLquannet
             AC.Show();
         }
 
-        //private void dgvFoodList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    UpdateTongTien(dgvFoodList, lbTongtien);
-        //}
 
         private void btnReset_Click(object sender, EventArgs e)
         {
@@ -245,39 +212,45 @@ namespace QLquannet
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            DataRowView selectedRow = (DataRowView)cboCom.SelectedItem;
-            byte computerID = (byte)selectedRow["ComputerID"];
-            int billingID = FoodDAL.Instance.GetUncheckBillingID(computerID);
-
-            if (cboCom.SelectedIndex.Equals(-1))
+            if (cboCom.SelectedIndex == -1)
             {
                 MessageBox.Show("Bạn chưa chọn máy!");
+                return;
             }
-            else if (billingID == -1)
+            byte computerID;
+            DataRowView selectedRow = (DataRowView)cboCom.SelectedItem;
+            try
             {
-                MessageBox.Show("Máy chưa được bật!");
+                computerID = (byte)selectedRow["ComputerID"];
             }
-            else
+            catch{ return; }
+
+            int billingID;
+            try
             {
-                try
+                billingID = FoodDAL.Instance.GetUncheckBillingID(computerID);
+                if (billingID == -1)
                 {
-                    foreach (DataGridViewRow row in dgvFoodList.Rows)
-                    {
-                        if (row.IsNewRow) continue;
-
-                        int foodID = Convert.ToInt32(row.Cells["ID"].Value);
-                        int count = Convert.ToInt32(row.Cells["Qty"].Value);
-                        decimal cost = Convert.ToDecimal(row.Cells["Amount"].Value);
-                        FoodDAL.Instance.SaveFoodDetails(billingID, foodID, count, cost);
-                    }
-
-                    MessageBox.Show("Dữ liệu đã được lưu thành công!");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Lỗi: " + ex.Message);
+                    MessageBox.Show("Máy chưa được bật!");
+                    return; 
                 }
             }
+            catch { return; }
+            foreach (DataGridViewRow row in dgvFoodList.Rows)
+            {
+                int foodID = Convert.ToInt32(row.Cells[1].Value);
+                int count = Convert.ToInt32(row.Cells[3].Value);
+                if (FoodDAL.Instance.FoodDetailsExist(billingID, foodID))
+                {
+                    FoodDAL.Instance.UpdateFoodDetails(billingID, foodID, count);
+                }
+                else
+                {
+                FoodDAL.Instance.SaveFoodDetails(billingID, foodID, count);
+                }
+            }
+            MessageBox.Show("Dữ liệu đã được lưu thành công!");
+
         }
 
         

@@ -87,16 +87,25 @@ namespace DAL
 
             return (int)result;
         }
-
-        public void SaveFoodDetails(int BillingID, int FoodID, int Count, decimal Cost)
+        public void UpdateFoodDetails(int BillingID, int FoodID, int Count)
         {
-            string query = "INSERT INTO FoodDetail (BillingID, FoodID, Count, Cost) VALUES ( @BillingID , @FoodID , @Count , @Cost )";
-            Database.Instance.ExecuteNonQuery(query, new object[] { BillingID, FoodID, Count, Cost });
+            string query = "Update FoodDetail set count = @count where billingid = @BillingID and foodid = @FoodID ";
+            Database.Instance.ExecuteNonQuery(query, new object[] { Count, BillingID, FoodID });
+        }
+        public bool FoodDetailsExist(int BillingID, int FoodID)
+        {
+            string checkQuery = "SELECT 1 FROM FoodDetail WHERE BillingID = @BillingID AND FoodID = @FoodID ";
+
+            object result = Database.Instance.ExecuteScalar(checkQuery, new object[] { BillingID, FoodID });
+
+            return result != null;
         }
 
-        public DataTable LoadComboBoxData(string query)
+        public void SaveFoodDetails(int BillingID, int FoodID, int Count)
         {
-            return Database.Instance.ExecuteQuery(query);
+
+            string query = "Exec ProcFoodDetailINIT @BillingID , @FoodID , @Count ";
+            Database.Instance.ExecuteNonQuery(query, new object[] { BillingID, FoodID, Count });
         }
 
     }

@@ -284,8 +284,8 @@
             this.dgvFoodList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvFoodList.Size = new System.Drawing.Size(560, 588);
             this.dgvFoodList.TabIndex = 4;
-            //this.dgvFoodList.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvFoodList_CellFormatting);
             this.dgvFoodList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFoodList_CellValueChanged);
+            this.dgvFoodList.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvFoodList_RowsAdded);
             // 
             // No
             // 
