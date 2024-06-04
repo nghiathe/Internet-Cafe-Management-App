@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QLquannet
@@ -36,7 +30,8 @@ namespace QLquannet
             if (drag)
             {
                 Point p = PointToScreen(e.Location);
-                this.Location = new Point(p.X - start_point.X, p.Y - start_point.Y);            }
+                this.Location = new Point(p.X - start_point.X, p.Y - start_point.Y);
+            }
         }
 
         private void pnlMovable_MouseUp(object sender, MouseEventArgs e)
@@ -57,7 +52,7 @@ namespace QLquannet
             LoadForm(new frmFood());
             ChangeColorMainBtn(btnFood, null);
         }
-        
+
         private void btnBill_Click(object sender, EventArgs e)
         {
             LoadForm(new frmBilling());

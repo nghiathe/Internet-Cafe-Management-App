@@ -50,8 +50,6 @@
     <Compile Include="AddFoodDAL.cs" />
     <Compile Include="BillingDAL.cs" />
     <Compile Include="ComputerDAL.cs" />
-    <Compile Include="FoodOnComDAL.cs" />
-    <Compile Include="FoodOnMenuDAL.cs" />
     <Compile Include="ImageProcess.cs" />
     <Compile Include="MaintainanceDAL.cs" />
     <Compile Include="PrintRecipeDAL.cs" />

@@ -161,7 +161,6 @@
             this.cboCategory.Name = "cboCategory";
             this.cboCategory.Size = new System.Drawing.Size(121, 24);
             this.cboCategory.TabIndex = 8;
-            this.cboCategory.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label6
             // 

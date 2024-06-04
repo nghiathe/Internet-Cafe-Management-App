@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DTO
 {
     public class UsageSession
     {
         public UsageSession(DataRow row)
-        { 
+        {
             this.ComName = row["computername"].ToString();
             this.ComStatus = (byte)row["computerstatus"];
             var thoigianTemp = row["starttime"];

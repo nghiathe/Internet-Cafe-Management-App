@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL
 {
@@ -36,7 +33,7 @@ namespace DAL
         {
             List<Zone> lc = new List<Zone>();
             string query = "GetComputerDetailsByZone @zoneid";
-            DataTable dt = Database.Instance.ExecuteQuery(query , new object[] {zoneid});
+            DataTable dt = Database.Instance.ExecuteQuery(query, new object[] { zoneid });
             foreach (DataRow dr in dt.Rows)
             {
                 Zone com = new Zone(dr);
@@ -45,7 +42,12 @@ namespace DAL
             return lc;
         }
 
-        
+        public DataTable getZones()
+        {
+            return Database.Instance.ExecuteQuery("Select ZoneID, ZoneName from Zone");
+        }
+
+
         #endregion
     }
 }

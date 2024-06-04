@@ -1,7 +1,8 @@
-﻿using System;
+﻿using DTO;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using DTO;
+using System.Text;
 
 namespace DAL
 {
@@ -23,22 +24,62 @@ namespace DAL
         }
 
         private FoodDAL() { }
+        public List<Food> GetFoodDetail(byte comid)
+        {
+            List<Food> fl = new List<Food>();
+
+            string query = "GetFoodDetailsByComputerID @ComputerID";
+            DataTable dt = Database.Instance.ExecuteQuery(query, new object[] { comid });
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                Food f = new Food(dr);
+                fl.Add(f);
+            }
+
+            return fl;
+        }
+
+        public List<Food> LoadMenu(string categoryName = null)
+        {
+            StringBuilder builder = new StringBuilder();
+            List<Food> productls = new List<Food>();
+            builder.Append(@"SELECT f.foodid, f.categoryid, f.foodname, fd.count, f.price, fd.cost, 
+                            f.image FROM food f left join fooddetail fd on fd.foodid = f.foodid 
+                            join category c on c.categoryid = f.categoryid");
+
+            DataTable dt;
+            string query = builder.ToString();
+
+            if (!string.IsNullOrEmpty(categoryName))
+            {
+                builder.Append(" WHERE categoryname = @categoryName");
+                query = builder.ToString();
+                dt = Database.Instance.ExecuteQuery(query, new object[] { categoryName });
+            }
+            else
+            {
+                dt = Database.Instance.ExecuteQuery(query);
+            }
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                Food f = new Food(dr);
+                productls.Add(f);
+            }
+
+            return productls;
+        }
         public DataTable GetCategories()
         {
             string query = "SELECT CategoryName FROM Category";
             return Database.Instance.ExecuteQuery(query);
         }
 
-        public DataTable GetAllFoods()
-        {
-            string query = "SELECT * FROM Food AS f INNER JOIN Category AS c ON f.CategoryID = c.CategoryID";
-            return Database.Instance.ExecuteQuery(query);
-        }
-
         public int GetComputerIDByName(string ComputerName)
         {
             string query = "SELECT c.ComputerID FROM Computer AS c INNER JOIN UsageSession AS us ON c.ComputerID = us.ComputerID WHERE c.ComputerName = @ComputerName";
-            return Convert.ToInt32(Database.Instance.ExecuteScalar(query, new object[] {  ComputerName }));
+            return Convert.ToInt32(Database.Instance.ExecuteScalar(query, new object[] { ComputerName }));
         }
 
         public int GetBillingIDByComID(int ComputerID)
@@ -65,6 +106,7 @@ namespace DAL
         {
             return Database.Instance.ExecuteQuery(query);
         }
+
     }
 
 }

@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 
 namespace DTO
-{   
+{
     #region ---------- Code cua HungTuLenh 
     public class Zone
     {
-        public Zone (DataRow row)
+        public Zone(DataRow row)
         {
             this.ComId = (byte)row["computerid"];
             this.ComName = row["computername"].ToString(); ;
@@ -22,7 +17,7 @@ namespace DTO
             this.HddModel = row["hddmodel"].ToString(); ;
             this.SsdModel = row["ssdmodel"].ToString(); ;
             this.MouseModel = row["mousemodel"].ToString(); ;
-            this.KeyboardModel = row["keyboardmodel"].ToString();;
+            this.KeyboardModel = row["keyboardmodel"].ToString(); ;
             this.MonitorModel = row["monitormodel"].ToString(); ;
         }
 

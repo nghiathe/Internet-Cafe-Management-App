@@ -1,9 +1,6 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
-using System.IO;
 using System.Linq;
-using System.Drawing;
-using System.Drawing.Imaging;
 
 namespace DAL
 {

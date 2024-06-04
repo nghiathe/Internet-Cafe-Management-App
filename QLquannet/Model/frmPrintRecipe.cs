@@ -1,5 +1,4 @@
 ﻿using DAL;
-using DTO;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -32,7 +31,7 @@ namespace QLquannet.Model
 
         private void btnPrintRecipe_Click(object sender, EventArgs e)
         {
-            
+
             if (dgvBilling.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Please select a row first.");
@@ -42,11 +41,11 @@ namespace QLquannet.Model
             DataGridViewRow selectedRow = dgvBilling.SelectedRows[0];
             int billingID = Convert.ToInt32(selectedRow.Cells["BillingID"].Value.ToString());
 
-           
-            DataTable billingInfo = prDAL.GetBillingInfo( billingID);
+
+            DataTable billingInfo = prDAL.GetBillingInfo(billingID);
 
             DataTable foodDetails = prDAL.GetFoodDetails(billingID);
-            
+
 
             if (billingInfo.Rows.Count == 0)
             {
@@ -117,7 +116,7 @@ namespace QLquannet.Model
             exRange.Range["E10:E10"].Value = "Thời gian";
             exRange.Range["F10:F10"].Value = "Thành tiền";
 
-     
+
 
             exSheet.Cells[2][11] = billingInfo.Rows[0]["ComputerID"].ToString();
             exSheet.Cells[3][11] = billingInfo.Rows[0]["ZoneName"].ToString();
@@ -136,7 +135,7 @@ namespace QLquannet.Model
 
             for (int i = 0; i < foodDetails.Rows.Count; i++)
             {
-                exSheet.Cells[2][i + 14, 1] = i + 1; 
+                exSheet.Cells[2][i + 14, 1] = i + 1;
                 exSheet.Cells[2][i + 14, 2] = foodDetails.Rows[i]["FoodName"].ToString(); // Tên món
                 exSheet.Cells[2][i + 14, 3] = foodDetails.Rows[i]["Count"].ToString(); // Số lượng
                 exSheet.Cells[2][i + 14, 4] = foodDetails.Rows[i]["Price"].ToString(); // Đơn giá

@@ -2,9 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL
 {
@@ -40,6 +38,11 @@ namespace DAL
                 com.Add(ban);
             }
             return com;
+        }
+
+        public DataTable GetComs(byte zoneid)
+        {
+            return Database.Instance.ExecuteQuery($"Select computerid, computername from Computer where zoneid = {zoneid}");
         }
     }
 }

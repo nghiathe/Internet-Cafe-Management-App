@@ -1,20 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DAL
+﻿namespace DAL
 {
     public class AddCategoryDAL
     {
         public bool AddCategory(string categoryName)
         {
-            string query = "INSERT INTO Category (CategoryName) VALUES (N'"+categoryName+"')";
-            
-
-            int result = Database.Instance.ExecuteNonQuery(query, new object[] { categoryName });
+            int result = Database.Instance.ExecuteNonQuery($"INSERT INTO Category (CategoryName) VALUES (N' {categoryName} ')");
 
             return result > 0;
         }
