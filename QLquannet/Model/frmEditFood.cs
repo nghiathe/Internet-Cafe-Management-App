@@ -1,4 +1,5 @@
 ﻿using DAL;
+using DTO;
 using System;
 using System.Drawing;
 using System.IO;
@@ -48,19 +49,7 @@ namespace QLquannet.FoodModel
                 CatID = Convert.ToInt32(row.Cells["CategoryID"].Value.ToString());
                 CheckCboID();
                 // Lấy ảnh từ cơ sở dữ liệu
-                imageBytes = (byte[])row.Cells["Image"].Value;
-                if (imageBytes != null && imageBytes.Length > 0)
-                {
-                    //using (var ms = new System.IO.MemoryStream(imageBytes))
-                    //{
-                    //    picFood.Image = Image.FromStream(ms);
-                    //}\
-                    ImageProcess.ByteArrayToImage(imageBytes);
-                }
-                else
-                {
-                    picFood.Image = null;
-                }
+                picFood.Image = ImageProcess.ByteArrayToImage((byte[])row.Cells["image"].Value);
             }
         }
 
@@ -88,19 +77,19 @@ namespace QLquannet.FoodModel
             if (dgvFood.SelectedRows.Count > 0)
             {
 
-                //DTO.Food food = new DTO.Food
-                //{
-                //    FoodID = Convert.ToInt32(FoodID),
-                //    FoodName = txtFoodName.Text,
-                //    Price = Convert.ToDecimal(txtPrice.Text),
-                //    IntakePrice = Convert.ToDecimal(txtIntakePrice.Text),
-                //    Inventory = Convert.ToInt32(txtInventory.Text),
-                //    //CategoryID = CatID,
-                //    Image = imageBytes
-                //};
+                Food food = new Food
+                {
+                    FoodID = Convert.ToInt32(FoodID),
+                    FoodName = txtFoodName.Text,
+                    Price = Convert.ToDecimal(txtPrice.Text),
+                    IntakePrice = Convert.ToDecimal(txtIntakePrice.Text),
+                    Inventory = Convert.ToInt32(txtInventory.Text),
+                    //CategoryID = CatID,
+                    Image = picFood.Image
+                };
 
-                //editFoodDAL.UpdateFood(food);
-                //LoadDataGridView();
+                editFoodDAL.UpdateFood(food);
+                LoadDataGridView();
                 MessageBox.Show("Cập nhật món ăn thành công!");
             }
             else
