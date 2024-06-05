@@ -11,15 +11,13 @@ namespace QLquannet.FoodModel
     {
         public string imagePath;
         public string CatID;
-        private AddFoodDAL addFoodDAL;
         public frmAddFood()
         {
             InitializeComponent();
-            addFoodDAL = new AddFoodDAL();
         }
         private void AddFood_Load(object sender, EventArgs e)
         {
-            LoadComboBox(cboCategory, "SELECT CategoryName FROM Category");
+            LoadCboCat();
         }
 
         private void btnAddImage_Click(object sender, EventArgs e)
@@ -52,19 +50,18 @@ namespace QLquannet.FoodModel
                 Image = Image.FromFile(imagePath)
             };
 
-            addFoodDAL.SaveFood(food);
+            AddFoodDAL.Instance.SaveFood(food);
             MessageBox.Show("Thêm món ăn thành công!");
             this.Close();
 
         }
 
-        private void LoadComboBox(ComboBox comboBox, string query)
+        private void LoadCboCat()
         {
-            DataTable dt = addFoodDAL.GetCategories();
-            foreach (DataRow row in dt.Rows)
-            {
-                comboBox.Items.Add(row["CategoryName"].ToString());
-            }
+            cboCategory.DataSource = CategoryDAL.Instance.GetCategories();
+            cboCategory.DisplayMember = "CategoryName";
+            cboCategory.ValueMember = "CategoryID";
+            cboCategory.SelectedIndex = -1;
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -74,7 +71,7 @@ namespace QLquannet.FoodModel
 
         private void CheckCboID()
         {
-            CatID = addFoodDAL.GetCategoryID(cboCategory.SelectedItem.ToString()).ToString();
+            CatID = AddFoodDAL.Instance.GetCategoryID(cboCategory.SelectedItem.ToString()).ToString();
         }
     }
 }

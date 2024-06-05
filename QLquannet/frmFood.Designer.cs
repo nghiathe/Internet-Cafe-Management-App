@@ -54,6 +54,7 @@
             this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtSearchFood = new System.Windows.Forms.TextBox();
             this.btnAddCategory = new System.Windows.Forms.Button();
+            this.btnIntake = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFoodList)).BeginInit();
@@ -62,6 +63,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
+            this.panel1.Controls.Add(this.btnIntake);
             this.panel1.Controls.Add(this.cboCom);
             this.panel1.Controls.Add(this.cboZone);
             this.panel1.Controls.Add(this.label4);
@@ -366,6 +368,17 @@
             this.btnAddCategory.UseVisualStyleBackColor = true;
             this.btnAddCategory.Click += new System.EventHandler(this.btnAddCategory_Click);
             // 
+            // btnIntake
+            // 
+            this.btnIntake.Location = new System.Drawing.Point(562, 17);
+            this.btnIntake.Margin = new System.Windows.Forms.Padding(4);
+            this.btnIntake.Name = "btnIntake";
+            this.btnIntake.Size = new System.Drawing.Size(149, 74);
+            this.btnIntake.TabIndex = 10;
+            this.btnIntake.Text = "Nhập hàng";
+            this.btnIntake.UseVisualStyleBackColor = true;
+            this.btnIntake.Click += new System.EventHandler(this.btnIntake_Click);
+            // 
             // frmFood
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -424,5 +437,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn Price;
         private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
+        private System.Windows.Forms.Button btnIntake;
     }
 }

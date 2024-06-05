@@ -24,6 +24,10 @@ namespace DAL
         }
 
         private FoodDAL() { }
+        public DataTable GetFoods(int categoryId)
+        {
+            return Database.Instance.ExecuteQuery($"Select FoodID, FoodName from Food where categoryid = {categoryId}");
+        }
         public List<Food> GetFoodDetail(byte comid)
         {
             List<Food> fl = new List<Food>();

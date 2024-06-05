@@ -6,6 +6,21 @@ namespace DAL
 {
     public class AddFoodDAL
     {
+        private static AddFoodDAL instance;
+
+        public static AddFoodDAL Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new AddFoodDAL();
+                }
+                return AddFoodDAL.instance;
+            }
+            private set { AddFoodDAL.instance = value; }
+        }
+        public AddFoodDAL() { }
         public DataTable GetCategories()
         {
             string query = "SELECT CategoryName, CategoryID FROM Category";

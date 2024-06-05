@@ -5,6 +5,21 @@ namespace DAL
 {
     public class EditFoodDAL
     {
+        private static EditFoodDAL instance;
+
+        public static EditFoodDAL Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new EditFoodDAL();
+                }
+                return EditFoodDAL.instance;
+            }
+            private set { EditFoodDAL.instance = value; }
+        }
+        public EditFoodDAL () { }
         public DataTable GetAllFood()
         {
             string query = "SELECT * FROM Food";

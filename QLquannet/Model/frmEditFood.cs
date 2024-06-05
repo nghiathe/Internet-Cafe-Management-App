@@ -15,11 +15,9 @@ namespace QLquannet.FoodModel
         public int FoodID;
         public string imagePath;
         public byte[] imageBytes;
-        private EditFoodDAL editFoodDAL;
         public frmEditFood()
         {
             InitializeComponent();
-            editFoodDAL = new EditFoodDAL();
         }
         private void EditFood_Load(object sender, EventArgs e)
         {
@@ -27,8 +25,8 @@ namespace QLquannet.FoodModel
         }
         private void LoadDataGridView()
         {
-            dgvFood.DataSource = editFoodDAL.GetAllFood();
-            dgvFood.Columns[6].Width = 200;
+            dgvFood.DataSource = EditFoodDAL.Instance.GetAllFood();
+            
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -62,7 +60,7 @@ namespace QLquannet.FoodModel
                 DataGridViewRow selectedRow = dgvFood.SelectedRows[0];
                 int rowId = Convert.ToInt32(selectedRow.Cells["FoodID"].Value);
 
-                editFoodDAL.DeleteFood(rowId);
+                EditFoodDAL.Instance.DeleteFood(rowId);
                 dgvFood.Rows.Remove(selectedRow);
                 MessageBox.Show("Dòng đã được xóa từ cơ sở dữ liệu và DataGridView.");
             }
@@ -88,7 +86,7 @@ namespace QLquannet.FoodModel
                     Image = picFood.Image
                 };
 
-                editFoodDAL.UpdateFood(food);
+                EditFoodDAL.Instance.UpdateFood(food);
                 LoadDataGridView();
                 MessageBox.Show("Cập nhật món ăn thành công!");
             }
@@ -122,7 +120,7 @@ namespace QLquannet.FoodModel
 
         private void CheckCboID()
         {
-            CatName = editFoodDAL.GetCategoryName(CatID);
+            CatName = EditFoodDAL.Instance.GetCategoryName(CatID);
             cboCategory.Text = CatName;
         }
 

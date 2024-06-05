@@ -102,6 +102,12 @@
     <Compile Include="Model\frmEditFood.Designer.cs">
       <DependentUpon>frmEditFood.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\frmIntakeFood.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Model\frmIntakeFood.Designer.cs">
+      <DependentUpon>frmIntakeFood.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\frmPrintRecipe.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Model\frmEditFood.resx">
       <DependentUpon>frmEditFood.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model\frmIntakeFood.resx">
+      <DependentUpon>frmIntakeFood.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Model\frmPrintRecipe.resx">
       <DependentUpon>frmPrintRecipe.cs</DependentUpon>

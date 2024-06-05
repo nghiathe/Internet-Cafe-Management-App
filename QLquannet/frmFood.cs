@@ -1,5 +1,6 @@
 ﻿using DAL;
 using DTO;
+using QLquannet.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -174,6 +175,16 @@ namespace QLquannet
             FoodModel.frmEditFood EF = new FoodModel.frmEditFood();
             EF.Show();
         }
+        private void btnIntake_Click(object sender, EventArgs e)
+        {
+            frmIntakeFood IF = new frmIntakeFood();
+            IF.Show();
+        }
+        private void btnAddCategory_Click(object sender, EventArgs e)
+        {
+            Model.frmAddCategory AC = new Model.frmAddCategory();
+            AC.Show();
+        }
 
         private void cboZone_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -195,14 +206,6 @@ namespace QLquannet
                 LoadFoodDetail((byte)selectedRow["ComputerID"]);
             }
         }
-
-        private void btnAddCategory_Click(object sender, EventArgs e)
-        {
-            Model.frmAddCategory AC = new Model.frmAddCategory();
-            AC.Show();
-        }
-
-
         private void btnReset_Click(object sender, EventArgs e)
         {
             dgvFoodList.Rows.Clear();
@@ -253,7 +256,6 @@ namespace QLquannet
 
         }
 
-        
     }
 }
 
