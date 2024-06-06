@@ -50,6 +50,17 @@ namespace DAL
             Database.Instance.ExecuteNonQuery(query, new object[] { billid, emid });
             Database.Instance.ExecuteNonQuery("ProcComputerStatus @computerID , 0", new object[] { comid });
         }
+        public int GetMaxBillingID()
+        {
+            return (int)Database.Instance.ExecuteScalar("Select max(billingid) from billing");
+        }
+        public void CheckOutFoodIntake(byte foodId, int count)
+        {
+            Database.Instance.ExecuteNonQuery("Exec ProcBillingINIT 0");
+            int billid = GetMaxBillingID();
+            Database.Instance.ExecuteNonQuery($"Insert into FoodDetail(Billingid, foodid, count) values ({billid},{foodId}, {count})");
+            Database.Instance.ExecuteNonQuery("Exec ProcCheckOut @billingid , @employeeid", new object[] {billid, Employee.emId});
+        }
     }
 }
 

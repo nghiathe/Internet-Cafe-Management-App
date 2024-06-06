@@ -41,17 +41,17 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnExit = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnDlt = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
-            this.picFood = new System.Windows.Forms.PictureBox();
             this.dgvFood = new System.Windows.Forms.DataGridView();
+            this.picFood = new System.Windows.Forms.PictureBox();
+            this.btnExit = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picFood)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFood)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picFood)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAddImage
@@ -190,19 +190,6 @@
             this.panel1.Size = new System.Drawing.Size(1200, 89);
             this.panel1.TabIndex = 27;
             // 
-            // btnExit
-            // 
-            this.btnExit.FlatAppearance.BorderSize = 0;
-            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExit.Image = global::QLquannet.Properties.Resources.close__1_;
-            this.btnExit.Location = new System.Drawing.Point(1160, 4);
-            this.btnExit.Margin = new System.Windows.Forms.Padding(4);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(40, 37);
-            this.btnExit.TabIndex = 1;
-            this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -249,6 +236,19 @@
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
+            // dgvFood
+            // 
+            this.dgvFood.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvFood.Location = new System.Drawing.Point(28, 362);
+            this.dgvFood.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvFood.Name = "dgvFood";
+            this.dgvFood.RowHeadersVisible = false;
+            this.dgvFood.RowHeadersWidth = 51;
+            this.dgvFood.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvFood.Size = new System.Drawing.Size(1124, 409);
+            this.dgvFood.TabIndex = 30;
+            this.dgvFood.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFood_CellClick);
+            // 
             // picFood
             // 
             this.picFood.Location = new System.Drawing.Point(599, 128);
@@ -259,17 +259,18 @@
             this.picFood.TabIndex = 29;
             this.picFood.TabStop = false;
             // 
-            // dgvFood
+            // btnExit
             // 
-            this.dgvFood.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvFood.Location = new System.Drawing.Point(39, 364);
-            this.dgvFood.Margin = new System.Windows.Forms.Padding(4);
-            this.dgvFood.Name = "dgvFood";
-            this.dgvFood.RowHeadersWidth = 51;
-            this.dgvFood.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvFood.Size = new System.Drawing.Size(1124, 409);
-            this.dgvFood.TabIndex = 30;
-            this.dgvFood.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFood_CellClick);
+            this.btnExit.FlatAppearance.BorderSize = 0;
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExit.Image = global::QLquannet.Properties.Resources.close__1_;
+            this.btnExit.Location = new System.Drawing.Point(1160, 4);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(4);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(40, 37);
+            this.btnExit.TabIndex = 1;
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // frmEditFood
             // 
@@ -301,8 +302,8 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picFood)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFood)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picFood)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

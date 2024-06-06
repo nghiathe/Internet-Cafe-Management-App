@@ -189,7 +189,7 @@ namespace QLquannet
             decimal outcome = 0;
             foreach (Billing b in lb)
             {
-                if ((string.IsNullOrEmpty(search) || b.EmName.ToString().ToLower().Contains(search) && (!billingType.HasValue || b.BType == billingType.Value)))
+                if ((string.IsNullOrEmpty(search) || b.EmName.ToString().ToLower().Contains(search)) && (!billingType.HasValue || b.BType == billingType.Value))
                 {
                     ListViewItem lvi = new ListViewItem(b.BDate.ToString());
                     lvi.SubItems.Add(b.EmName.ToString());

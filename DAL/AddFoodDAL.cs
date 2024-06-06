@@ -6,6 +6,21 @@ namespace DAL
 {
     public class AddFoodDAL
     {
+        private static AddFoodDAL instance;
+
+        public static AddFoodDAL Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new AddFoodDAL();
+                }
+                return AddFoodDAL.instance;
+            }
+            private set { AddFoodDAL.instance = value; }
+        }
+        public AddFoodDAL() { }
         public DataTable GetCategories()
         {
             string query = "SELECT CategoryName, CategoryID FROM Category";
@@ -16,7 +31,7 @@ namespace DAL
         {
             
             string query = "INSERT INTO Food (FoodName, Price, IntakePrice, Inventory, CategoryID, Image) VALUES ( @Name , @Price , @IntakePrice , @Inventory , @CategoryID , @Image )";
-            Database.Instance.ExecuteNonQuery(query, new object[] { food.FoodName, food.Price, food.IntakePrice, food.Inventory, food.CategoryID, food.Image });
+            Database.Instance.ExecuteNonQuery(query, new object[] { food.FoodName, food.Price, food.IntakePrice, food.Inventory, food.CategoryID, ImageProcess.ImageToByteArray(food.Image) });
         }
 
         public int GetCategoryID(string categoryName)

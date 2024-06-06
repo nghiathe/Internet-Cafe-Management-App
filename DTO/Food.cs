@@ -16,6 +16,8 @@ namespace DTO
         private Image image;
         private int count;
         private decimal cost;
+
+        public Food() { }
         public Food(DataRow row)
         {
             this.FoodID = (byte)row["foodid"];

@@ -1,11 +1,10 @@
 ﻿using DAL;
 using DTO;
+using QLquannet.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
-using System.Globalization;
-using System.Reflection;
 using System.Windows.Forms;
 
 
@@ -33,12 +32,14 @@ namespace QLquannet
             cboZone.DataSource = ZoneDAL.Instance.getZones();
             cboZone.DisplayMember = "ZoneName";
             cboZone.ValueMember = "ZoneID";
+            cboZone.SelectedIndex = -1;
         }
         private void LoadcboCom(byte zoneid)
         {
             cboCom.DataSource = ComputerDAL.Instance.GetComs(zoneid);
             cboCom.DisplayMember = "ComputerName";
             cboCom.ValueMember = "ComputerID";
+            cboCom.SelectedIndex = -1;
         }
         private void LoadCategories()
         {
@@ -91,14 +92,13 @@ namespace QLquannet
             int i = 0;
             ucProduct clickedProduct = sender as ucProduct;
             bool productFound = false;
-            foreach (DataGridViewRow item in dgvFoodList.Rows)
+            foreach (DataGridViewRow row in dgvFoodList.Rows)
             {
-                i++;
-                if (Convert.ToInt32(item.Cells["ID"].Value) == clickedProduct.id)
+                if (Convert.ToInt32(row.Cells["ID"].Value) == clickedProduct.id)
                 {
-                    int quantity = int.Parse(item.Cells["Qty"].Value.ToString()) + 1;
-                    item.Cells["Qty"].Value = quantity;
-                    item.Cells["Amount"].Value = quantity * decimal.Parse(item.Cells["Price"].Value.ToString());
+                    int quantity = int.Parse(row.Cells["Qty"].Value.ToString()) + 1;
+                    row.Cells["Qty"].Value = quantity;
+                    row.Cells["Amount"].Value = quantity * decimal.Parse(row.Cells["Price"].Value.ToString());
                     productFound = true;
                     
                     break;
@@ -106,7 +106,8 @@ namespace QLquannet
             }
             if (!productFound)
             {
-                dgvFoodList.Rows.Add(new object[] { i, clickedProduct.id, clickedProduct.PName, 1, clickedProduct.PPrice, clickedProduct.PPrice });
+                int index = dgvFoodList.Rows.Count; // Tăng số thứ tự dựa trên số lượng hàng hiện có
+                dgvFoodList.Rows.Add(new object[] { index, clickedProduct.id, clickedProduct.PName, 1, clickedProduct.PPrice, clickedProduct.PPrice });
             }
 
         }
@@ -124,40 +125,6 @@ namespace QLquannet
         {
             txtSearchFood.SelectAll();
         }
-
-        private void dgvFoodList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            int count = 0;
-            foreach (DataGridViewRow r in dgvFoodList.Rows)
-            {
-                count++;
-                r.Cells[0].Value = count;
-            }
-        }
-
-        //private decimal TinhTongTien(DataGridView datagridView)
-        //{
-        //    decimal totalAmount = 0;
-
-        //    foreach (DataGridViewRow row in datagridView.Rows)
-        //    {
-        //        if (row.IsNewRow) continue;
-        //        var cellValue = row.Cells["Amount"].Value;
-
-        //        if (decimal.TryParse(cellValue.ToString(), out decimal amount))
-        //        {
-        //            totalAmount += amount;
-        //        }
-        //    }
-
-        //    return totalAmount;
-        //}
-
-        //private void UpdateTongTien(DataGridView datagridView, Label lnTongtien)
-        //{
-        //    decimal totalAmount = TinhTongTien(datagridView);
-        //    lnTongtien.Text = totalAmount.ToString("N2");
-        //}
 
         private void LoadFoodDetail(byte comid)
         {
@@ -188,6 +155,10 @@ namespace QLquannet
             }
             lbTongtien.Text = amount.ToString();
         }
+        private void dgvFoodList_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            HandlelblTongTien();
+        }
         private void dgvFoodList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 5)
@@ -207,6 +178,16 @@ namespace QLquannet
             FoodModel.frmEditFood EF = new FoodModel.frmEditFood();
             EF.Show();
         }
+        private void btnIntake_Click(object sender, EventArgs e)
+        {
+            frmIntakeFood IF = new frmIntakeFood();
+            IF.Show();
+        }
+        private void btnAddCategory_Click(object sender, EventArgs e)
+        {
+            Model.frmAddCategory AC = new Model.frmAddCategory();
+            AC.Show();
+        }
 
         private void cboZone_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -218,6 +199,7 @@ namespace QLquannet
             }
         }
 
+
         private void cboCom_SelectedIndexChanged(object sender, EventArgs e)
         {
             dgvFoodList.Rows.Clear();
@@ -227,18 +209,6 @@ namespace QLquannet
                 LoadFoodDetail((byte)selectedRow["ComputerID"]);
             }
         }
-
-        private void btnAddCategory_Click(object sender, EventArgs e)
-        {
-            Model.frmAddCategory AC = new Model.frmAddCategory();
-            AC.Show();
-        }
-
-        //private void dgvFoodList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    UpdateTongTien(dgvFoodList, lbTongtien);
-        //}
-
         private void btnReset_Click(object sender, EventArgs e)
         {
             dgvFoodList.Rows.Clear();
@@ -248,42 +218,47 @@ namespace QLquannet
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            DataRowView selectedRow = (DataRowView)cboCom.SelectedItem;
-            byte computerID = (byte)selectedRow["ComputerID"];
-            int billingID = FoodDAL.Instance.GetUncheckBillingID(computerID);
-
-            if (cboCom.SelectedIndex.Equals(-1))
+            if (cboCom.SelectedIndex == -1)
             {
                 MessageBox.Show("Bạn chưa chọn máy!");
+                return;
             }
-            else if (billingID == -1)
+            byte computerID;
+            DataRowView selectedRow = (DataRowView)cboCom.SelectedItem;
+            try
             {
-                MessageBox.Show("Máy chưa được bật!");
+                computerID = (byte)selectedRow["ComputerID"];
             }
-            else
+            catch{ return; }
+
+            int billingID;
+            try
             {
-                try
+                billingID = FoodDAL.Instance.GetUncheckBillingID(computerID);
+                if (billingID == -1)
                 {
-                    foreach (DataGridViewRow row in dgvFoodList.Rows)
-                    {
-                        if (row.IsNewRow) continue;
-
-                        int foodID = Convert.ToInt32(row.Cells["ID"].Value);
-                        int count = Convert.ToInt32(row.Cells["Qty"].Value);
-                        decimal cost = Convert.ToDecimal(row.Cells["Amount"].Value);
-                        FoodDAL.Instance.SaveFoodDetails(billingID, foodID, count, cost);
-                    }
-
-                    MessageBox.Show("Dữ liệu đã được lưu thành công!");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Lỗi: " + ex.Message);
+                    MessageBox.Show("Máy chưa được bật!");
+                    return; 
                 }
             }
+            catch { return; }
+            foreach (DataGridViewRow row in dgvFoodList.Rows)
+            {
+                int foodID = Convert.ToInt32(row.Cells[1].Value);
+                int count = Convert.ToInt32(row.Cells[3].Value);
+                if (FoodDAL.Instance.FoodDetailsExist(billingID, foodID))
+                {
+                    FoodDAL.Instance.UpdateFoodDetails(billingID, foodID, count);
+                }
+                else
+                {
+                FoodDAL.Instance.SaveFoodDetails(billingID, foodID, count);
+                }
+            }
+            MessageBox.Show("Dữ liệu đã được lưu thành công!");
+
         }
 
-        
     }
 }
 

@@ -5,6 +5,21 @@ namespace DAL
 {
     public class EditFoodDAL
     {
+        private static EditFoodDAL instance;
+
+        public static EditFoodDAL Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new EditFoodDAL();
+                }
+                return EditFoodDAL.instance;
+            }
+            private set { EditFoodDAL.instance = value; }
+        }
+        public EditFoodDAL () { }
         public DataTable GetAllFood()
         {
             string query = "SELECT * FROM Food";
@@ -20,7 +35,7 @@ namespace DAL
         public void UpdateFood(Food food)
         {
             string query = "UPDATE Food SET FoodName = @Name , Price = @Price , IntakePrice = @IntakePrice , Inventory = @Inventory , Image = @Image WHERE FoodID = @ID";
-            Database.Instance.ExecuteNonQuery(query, new object[] { food.FoodName, food.Price, food.IntakePrice, food.Inventory, food.Image, food.FoodID });
+            Database.Instance.ExecuteNonQuery(query, new object[] { food.FoodName, food.Price, food.IntakePrice, food.Inventory, ImageProcess.ImageToByteArray(food.Image), food.FoodID });
         }
 
         public string GetCategoryName(int categoryID)

@@ -49,6 +49,7 @@
     <Compile Include="AddCategoryDAL.cs" />
     <Compile Include="AddFoodDAL.cs" />
     <Compile Include="BillingDAL.cs" />
+    <Compile Include="CategoryDAL.cs" />
     <Compile Include="ComputerDAL.cs" />
     <Compile Include="ImageProcess.cs" />
     <Compile Include="MaintainanceDAL.cs" />
