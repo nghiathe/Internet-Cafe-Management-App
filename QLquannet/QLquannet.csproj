@@ -66,6 +66,12 @@
     <Compile Include="frmBilling.Designer.cs">
       <DependentUpon>frmBilling.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmIntakeFood.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmIntakeFood.Designer.cs">
+      <DependentUpon>frmIntakeFood.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,12 +108,6 @@
     <Compile Include="Model\frmEditFood.Designer.cs">
       <DependentUpon>frmEditFood.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\frmIntakeFood.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Model\frmIntakeFood.Designer.cs">
-      <DependentUpon>frmIntakeFood.cs</DependentUpon>
-    </Compile>
     <Compile Include="Model\frmPrintRecipe.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,6 +131,9 @@
     <EmbeddedResource Include="frmBilling.resx">
       <DependentUpon>frmBilling.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmIntakeFood.resx">
+      <DependentUpon>frmIntakeFood.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -148,9 +151,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Model\frmEditFood.resx">
       <DependentUpon>frmEditFood.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Model\frmIntakeFood.resx">
-      <DependentUpon>frmIntakeFood.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Model\frmPrintRecipe.resx">
       <DependentUpon>frmPrintRecipe.cs</DependentUpon>
@@ -270,6 +270,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shopping_cart.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

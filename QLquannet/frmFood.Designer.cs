@@ -46,15 +46,14 @@
             this.CategoryPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.ProductPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.dgvFoodList = new System.Windows.Forms.DataGridView();
+            this.txtSearchFood = new System.Windows.Forms.TextBox();
+            this.btnAddCategory = new System.Windows.Forms.Button();
             this.No = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FoodName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtSearchFood = new System.Windows.Forms.TextBox();
-            this.btnAddCategory = new System.Windows.Forms.Button();
-            this.btnIntake = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFoodList)).BeginInit();
@@ -63,7 +62,6 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
-            this.panel1.Controls.Add(this.btnIntake);
             this.panel1.Controls.Add(this.cboCom);
             this.panel1.Controls.Add(this.cboZone);
             this.panel1.Controls.Add(this.label4);
@@ -150,7 +148,7 @@
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(405, 17);
+            this.btnEdit.Location = new System.Drawing.Point(514, 13);
             this.btnEdit.Margin = new System.Windows.Forms.Padding(4);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(149, 74);
@@ -161,7 +159,7 @@
             // 
             // btnThem
             // 
-            this.btnThem.Location = new System.Drawing.Point(248, 17);
+            this.btnThem.Location = new System.Drawing.Point(345, 13);
             this.btnThem.Margin = new System.Windows.Forms.Padding(4);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(149, 74);
@@ -177,9 +175,9 @@
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(31, 36);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(152, 31);
+            this.label3.Size = new System.Drawing.Size(155, 31);
             this.label3.TabIndex = 0;
-            this.label3.Text = "Food Order";
+            this.label3.Text = "Menu đồ ăn";
             // 
             // panel2
             // 
@@ -289,61 +287,6 @@
             this.dgvFoodList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFoodList_CellValueChanged);
             this.dgvFoodList.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvFoodList_RowsAdded);
             // 
-            // No
-            // 
-            this.No.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.No.HeaderText = "STT";
-            this.No.MinimumWidth = 40;
-            this.No.Name = "No";
-            this.No.ReadOnly = true;
-            this.No.Width = 40;
-            // 
-            // ID
-            // 
-            this.ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.ID.HeaderText = "ID";
-            this.ID.MinimumWidth = 30;
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Visible = false;
-            this.ID.Width = 30;
-            // 
-            // FoodName
-            // 
-            this.FoodName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.FoodName.HeaderText = "Tên món";
-            this.FoodName.MinimumWidth = 80;
-            this.FoodName.Name = "FoodName";
-            this.FoodName.ReadOnly = true;
-            this.FoodName.Width = 125;
-            // 
-            // Qty
-            // 
-            this.Qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Qty.HeaderText = "Số lượng";
-            this.Qty.MinimumWidth = 30;
-            this.Qty.Name = "Qty";
-            this.Qty.ReadOnly = true;
-            this.Qty.Width = 80;
-            // 
-            // Price
-            // 
-            this.Price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Price.HeaderText = "Đơn giá";
-            this.Price.MinimumWidth = 80;
-            this.Price.Name = "Price";
-            this.Price.ReadOnly = true;
-            this.Price.Width = 125;
-            // 
-            // Amount
-            // 
-            this.Amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Amount.HeaderText = "Thành tiên";
-            this.Amount.MinimumWidth = 80;
-            this.Amount.Name = "Amount";
-            this.Amount.ReadOnly = true;
-            this.Amount.Width = 125;
-            // 
             // txtSearchFood
             // 
             this.txtSearchFood.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -368,16 +311,57 @@
             this.btnAddCategory.UseVisualStyleBackColor = true;
             this.btnAddCategory.Click += new System.EventHandler(this.btnAddCategory_Click);
             // 
-            // btnIntake
+            // No
             // 
-            this.btnIntake.Location = new System.Drawing.Point(562, 17);
-            this.btnIntake.Margin = new System.Windows.Forms.Padding(4);
-            this.btnIntake.Name = "btnIntake";
-            this.btnIntake.Size = new System.Drawing.Size(149, 74);
-            this.btnIntake.TabIndex = 10;
-            this.btnIntake.Text = "Nhập hàng";
-            this.btnIntake.UseVisualStyleBackColor = true;
-            this.btnIntake.Click += new System.EventHandler(this.btnIntake_Click);
+            this.No.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.No.HeaderText = "STT";
+            this.No.MinimumWidth = 40;
+            this.No.Name = "No";
+            this.No.ReadOnly = true;
+            this.No.Width = 40;
+            // 
+            // ID
+            // 
+            this.ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ID.HeaderText = "ID";
+            this.ID.MinimumWidth = 30;
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
+            this.ID.Width = 30;
+            // 
+            // FoodName
+            // 
+            this.FoodName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.FoodName.HeaderText = "Tên món";
+            this.FoodName.MinimumWidth = 80;
+            this.FoodName.Name = "FoodName";
+            this.FoodName.ReadOnly = true;
+            // 
+            // Qty
+            // 
+            this.Qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Qty.HeaderText = "Số lượng";
+            this.Qty.MinimumWidth = 30;
+            this.Qty.Name = "Qty";
+            this.Qty.ReadOnly = true;
+            this.Qty.Width = 80;
+            // 
+            // Price
+            // 
+            this.Price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Price.HeaderText = "Đơn giá";
+            this.Price.MinimumWidth = 100;
+            this.Price.Name = "Price";
+            this.Price.ReadOnly = true;
+            // 
+            // Amount
+            // 
+            this.Amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Amount.HeaderText = "Thành tiên";
+            this.Amount.MinimumWidth = 100;
+            this.Amount.Name = "Amount";
+            this.Amount.ReadOnly = true;
             // 
             // frmFood
             // 
@@ -437,6 +421,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn Price;
         private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
-        private System.Windows.Forms.Button btnIntake;
     }
 }

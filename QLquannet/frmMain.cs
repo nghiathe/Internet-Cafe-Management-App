@@ -63,6 +63,11 @@ namespace QLquannet
             LoadForm(new frmMaintainance());
             ChangeColorMainBtn(btnMaintain, null);
         }
+        private void btnIntake_Click(object sender, EventArgs e)
+        {
+            LoadForm(new frmIntakeFood());
+            ChangeColorMainBtn(btnIntake, null);
+        }
         private void LoadForm(object Form)
         {
             if (this.pnlMain.Controls.Count > 0)
@@ -98,5 +103,6 @@ namespace QLquannet
                 login.Show();
             }
         }
+
     }
 }
