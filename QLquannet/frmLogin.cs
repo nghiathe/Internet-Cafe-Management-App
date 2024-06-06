@@ -14,7 +14,6 @@ namespace QLquannet
             InitializeComponent();
         }
 
-
         private void txtusername_Click(object sender, EventArgs e)
         {
             txtusername.SelectAll();

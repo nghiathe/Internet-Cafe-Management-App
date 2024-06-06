@@ -240,7 +240,7 @@ namespace QLquannet
         }
         private void cboFood_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cboFood.SelectedIndex != -1)
+            if (cboFood.SelectedIndex != -1 && cboCat.SelectedIndex != -1)
             {
                 DataRowView selectedRowCat = (DataRowView)cboCat.SelectedItem;
                 int categoryId = (int)selectedRowCat["categoryid"];
