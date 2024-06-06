@@ -91,20 +91,21 @@ namespace QLquannet
         {
             ucProduct clickedProduct = sender as ucProduct;
             bool productFound = false;
-            foreach (DataGridViewRow item in dgvFoodList.Rows)
+            foreach (DataGridViewRow row in dgvFoodList.Rows)
             {
-                if (Convert.ToInt32(item.Cells["ID"].Value) == clickedProduct.id)
+                if (Convert.ToInt32(row.Cells["ID"].Value) == clickedProduct.id)
                 {
-                    int quantity = int.Parse(item.Cells["Qty"].Value.ToString()) + 1;
-                    item.Cells["Qty"].Value = quantity;
-                    item.Cells["Amount"].Value = quantity * decimal.Parse(item.Cells["Price"].Value.ToString());
+                    int quantity = int.Parse(row.Cells["Qty"].Value.ToString()) + 1;
+                    row.Cells["Qty"].Value = quantity;
+                    row.Cells["Amount"].Value = quantity * decimal.Parse(row.Cells["Price"].Value.ToString());
                     productFound = true;
                     break;
                 }
             }
             if (!productFound)
             {
-                dgvFoodList.Rows.Add(new object[] { 0, clickedProduct.id, clickedProduct.PName, 1, clickedProduct.PPrice, clickedProduct.PPrice });
+                int index = dgvFoodList.Rows.Count; // Tăng số thứ tự dựa trên số lượng hàng hiện có
+                dgvFoodList.Rows.Add(new object[] { index, clickedProduct.id, clickedProduct.PName, 1, clickedProduct.PPrice, clickedProduct.PPrice });
             }
 
         }
