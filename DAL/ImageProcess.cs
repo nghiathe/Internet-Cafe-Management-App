@@ -11,7 +11,7 @@ namespace DAL
         {
             using (MemoryStream ms = new MemoryStream())
             {
-                image.Save(ms, ImageFormat.Jpeg);
+                image.Save(ms, image.RawFormat);
                 return ms.ToArray();
             }
         }

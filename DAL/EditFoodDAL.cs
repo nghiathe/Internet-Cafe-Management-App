@@ -22,7 +22,7 @@ namespace DAL
         public EditFoodDAL () { }
         public DataTable GetAllFood()
         {
-            string query = "SELECT * FROM Food";
+            string query = "SELECT foodid, foodname, price, intakeprice, inventory, categoryid, image FROM Food";
             return Database.Instance.ExecuteQuery(query);
         }
 
@@ -32,16 +32,20 @@ namespace DAL
             Database.Instance.ExecuteNonQuery(query, new object[] { foodID });
         }
 
-        public void UpdateFood(Food food)
+        public void UpdateFood(Food food, bool imageUpdated)
         {
-            string query = "UPDATE Food SET FoodName = @Name , Price = @Price , IntakePrice = @IntakePrice , Inventory = @Inventory , Image = @Image WHERE FoodID = @ID";
-            Database.Instance.ExecuteNonQuery(query, new object[] { food.FoodName, food.Price, food.IntakePrice, food.Inventory, ImageProcess.ImageToByteArray(food.Image), food.FoodID });
+            string query;
+            if (imageUpdated)
+            {
+                query = "UPDATE Food SET FoodName = @Name , Price = @Price , IntakePrice = @IntakePrice , Inventory = @Inventory , Image = @Image , CategoryId = @catID WHERE FoodID = @ID ";
+                Database.Instance.ExecuteNonQuery(query, new object[] { food.FoodName, food.Price, food.IntakePrice, food.Inventory, ImageProcess.ImageToByteArray(food.Image), food.CategoryID, food.FoodID });
+            }
+            else
+            {
+                query = "UPDATE Food SET FoodName = @Name , Price = @Price , IntakePrice = @IntakePrice , Inventory = @Inventory , CategoryId = @catID WHERE FoodID = @ID ";
+                Database.Instance.ExecuteNonQuery(query, new object[] { food.FoodName, food.Price, food.IntakePrice, food.Inventory, food.CategoryID, food.FoodID });
+            }
         }
 
-        public string GetCategoryName(int categoryID)
-        {
-            string query = "SELECT CategoryName FROM Category WHERE CategoryID = @CatID";
-            return Database.Instance.ExecuteScalar(query, new object[] { categoryID }).ToString();
-        }
     }
 }

@@ -11,10 +11,9 @@ namespace QLquannet.FoodModel
     public partial class frmEditFood : Form
     {
         public int CatID;
-        public string CatName;
         public int FoodID;
-        public string imagePath;
-        public byte[] imageBytes;
+        public bool imageUpdated = false;
+
         public frmEditFood()
         {
             InitializeComponent();
@@ -22,17 +21,25 @@ namespace QLquannet.FoodModel
         private void EditFood_Load(object sender, EventArgs e)
         {
             LoadDataGridView();
+            LoadCboCat();
+        }
+        private void LoadCboCat()
+        {
+            cboCategory.DataSource = CategoryDAL.Instance.GetCategories();
+            cboCategory.ValueMember = "categoryID";
+            cboCategory.DisplayMember = "CategoryName";
+            cboCategory.SelectedIndex = -1;
         }
         private void LoadDataGridView()
         {
             dgvFood.DataSource = EditFoodDAL.Instance.GetAllFood();
             dgvFood.Columns["FoodName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvFood.Columns["Fooid"].HeaderText = "Mã hàng";
+            dgvFood.Columns["Foodid"].HeaderText = "Mã hàng";
             dgvFood.Columns["FoodName"].HeaderText = "Tên hàng";
             dgvFood.Columns["Price"].HeaderText = "Đơn giá bán";
             dgvFood.Columns["Intakeprice"].HeaderText = "Đơn giá nhập";
             dgvFood.Columns["inventory"].HeaderText = "Tồn kho";
-            dgvFood.Columns["Categoryid"].HeaderText = "Mã hàng";
+            dgvFood.Columns["Categoryid"].HeaderText = "Mã loại hàng";
             dgvFood.Columns["image"].Visible = false;
             
         }
@@ -53,13 +60,11 @@ namespace QLquannet.FoodModel
                 txtIntakePrice.Text = row.Cells["IntakePrice"].Value.ToString();
                 txtInventory.Text = row.Cells["Inventory"].Value.ToString();
                 CatID = Convert.ToInt32(row.Cells["CategoryID"].Value.ToString());
-                CheckCboID();
+                cboCategory.SelectedValue = CatID;
                 // Lấy ảnh từ cơ sở dữ liệu
                 picFood.Image = ImageProcess.ByteArrayToImage((byte[])row.Cells["image"].Value);
             }
         }
-
-
 
         private void btnDlt_Click(object sender, EventArgs e)
         {
@@ -90,11 +95,11 @@ namespace QLquannet.FoodModel
                     Price = Convert.ToDecimal(txtPrice.Text),
                     IntakePrice = Convert.ToDecimal(txtIntakePrice.Text),
                     Inventory = Convert.ToInt32(txtInventory.Text),
-                    //CategoryID = CatID,
+                    CategoryID = Convert.ToInt32(cboCategory.SelectedValue),
                     Image = picFood.Image
                 };
 
-                EditFoodDAL.Instance.UpdateFood(food);
+                EditFoodDAL.Instance.UpdateFood(food, imageUpdated);
                 LoadDataGridView();
                 MessageBox.Show("Cập nhật món ăn thành công!");
             }
@@ -115,34 +120,17 @@ namespace QLquannet.FoodModel
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    imagePath = openFileDialog.FileName;
+                    string imagePath = openFileDialog.FileName;
                     if (imagePath != null)
                     {
                         picFood.Image = Image.FromFile(imagePath);
-                        imageBytes = ImageToByteArray(imagePath);
+                        imageUpdated = true;
                     }
                 }
             }
 
         }
-
-        private void CheckCboID()
-        {
-            CatName = EditFoodDAL.Instance.GetCategoryName(CatID);
-            cboCategory.Text = CatName;
-        }
-
-        public static byte[] ImageToByteArray(string imagePath)
-        {
-            using (Image image = Image.FromFile(imagePath))
-            {
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    image.Save(ms, image.RawFormat);
-                    return ms.ToArray();
-                }
-            }
-        }
+        
     }
 
 }

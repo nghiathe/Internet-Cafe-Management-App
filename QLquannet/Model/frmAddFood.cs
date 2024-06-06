@@ -10,7 +10,6 @@ namespace QLquannet.FoodModel
     public partial class frmAddFood : Form
     {
         public string imagePath;
-        public string CatID;
         public frmAddFood()
         {
             InitializeComponent();
@@ -38,7 +37,7 @@ namespace QLquannet.FoodModel
 
         private void btnConfirmAddFood_Click(object sender, EventArgs e)
         {
-            CheckCboID();
+            //CheckCboID();
 
             Food food = new Food
             {
@@ -46,7 +45,7 @@ namespace QLquannet.FoodModel
                 Price = Convert.ToDecimal(txtPrice.Text),
                 IntakePrice = Convert.ToDecimal(txtIntakePrice.Text),
                 Inventory = Convert.ToInt32(txtInventory.Text),
-                CategoryID = Convert.ToInt32(CatID),
+                CategoryID = Convert.ToInt32(cboCategory.SelectedValue),
                 Image = Image.FromFile(imagePath)
             };
 
@@ -69,9 +68,5 @@ namespace QLquannet.FoodModel
             this.Close();
         }
 
-        private void CheckCboID()
-        {
-            CatID = AddFoodDAL.Instance.GetCategoryID(cboCategory.SelectedItem.ToString()).ToString();
-        }
     }
 }
