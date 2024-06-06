@@ -88,22 +88,25 @@ namespace QLquannet
 
         private void UcProduct_Clicked(object sender, EventArgs e)
         {
+            int i = 0;
             ucProduct clickedProduct = sender as ucProduct;
             bool productFound = false;
             foreach (DataGridViewRow item in dgvFoodList.Rows)
             {
+                i++;
                 if (Convert.ToInt32(item.Cells["ID"].Value) == clickedProduct.id)
                 {
                     int quantity = int.Parse(item.Cells["Qty"].Value.ToString()) + 1;
                     item.Cells["Qty"].Value = quantity;
                     item.Cells["Amount"].Value = quantity * decimal.Parse(item.Cells["Price"].Value.ToString());
                     productFound = true;
+                    
                     break;
                 }
             }
             if (!productFound)
             {
-                dgvFoodList.Rows.Add(new object[] { 0, clickedProduct.id, clickedProduct.PName, 1, clickedProduct.PPrice, clickedProduct.PPrice });
+                dgvFoodList.Rows.Add(new object[] { i, clickedProduct.id, clickedProduct.PName, 1, clickedProduct.PPrice, clickedProduct.PPrice });
             }
 
         }
@@ -122,15 +125,15 @@ namespace QLquannet
             txtSearchFood.SelectAll();
         }
 
-        //private void dgvFoodList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        //{
-        //    int count = 0;
-        //    foreach (DataGridViewRow r in dgvFoodList.Rows)
-        //    {
-        //        count++;
-        //        r.Cells[0].Value = count;
-        //    }
-        //}
+        private void dgvFoodList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            int count = 0;
+            foreach (DataGridViewRow r in dgvFoodList.Rows)
+            {
+                count++;
+                r.Cells[0].Value = count;
+            }
+        }
 
         //private decimal TinhTongTien(DataGridView datagridView)
         //{
