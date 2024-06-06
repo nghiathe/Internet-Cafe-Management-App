@@ -26,6 +26,14 @@ namespace QLquannet.FoodModel
         private void LoadDataGridView()
         {
             dgvFood.DataSource = EditFoodDAL.Instance.GetAllFood();
+            dgvFood.Columns["FoodName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvFood.Columns["Fooid"].HeaderText = "Mã hàng";
+            dgvFood.Columns["FoodName"].HeaderText = "Tên hàng";
+            dgvFood.Columns["Price"].HeaderText = "Đơn giá bán";
+            dgvFood.Columns["Intakeprice"].HeaderText = "Đơn giá nhập";
+            dgvFood.Columns["inventory"].HeaderText = "Tồn kho";
+            dgvFood.Columns["Categoryid"].HeaderText = "Mã hàng";
+            dgvFood.Columns["image"].Visible = false;
             
         }
 
