@@ -52,7 +52,12 @@ namespace DAL
         }
         public int GetMaxBillingID()
         {
-            return (int)Database.Instance.ExecuteScalar("Select max(billingid) from billing");
+            try{
+                return (int)Database.Instance.ExecuteScalar("Select max(billingid) from billing");
+            }
+            catch{
+                return 1;
+            }
         }
         public void CheckOutFoodIntake(byte foodId, int count)
         {
