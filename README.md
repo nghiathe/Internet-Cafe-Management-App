@@ -1,2 +1,7 @@
 # Internet Cafe Management App (.NET)
 ![image](https://github.com/user-attachments/assets/78ff4dd2-0696-4a5c-9043-62a687534dd0)
+![image](https://github.com/user-attachments/assets/e30da513-3ee7-4d69-8bd7-87bd9252d6ce)
+![image](https://github.com/user-attachments/assets/5d96c370-0a95-49cb-bf88-6c5df09c1dce)
+![image](https://github.com/user-attachments/assets/4b6c20ab-7e9c-4216-94c5-632b1f2ddcff)
+![image](https://github.com/user-attachments/assets/16914e86-403c-4ebb-871c-b1d947be94ba)
+![image](https://github.com/user-attachments/assets/3baf3d22-7332-4784-a652-711072afc630)
