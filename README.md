@@ -1,1 +1,1 @@
-# QLquannet
+# Internet Cafe Management App (.NET)
